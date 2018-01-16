@@ -17,23 +17,23 @@ class User
      */
     private $id;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $identifiant;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $password;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $role;
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date",nullable=true)
      */
     private $dateConnexion;
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date",nullable=true)
      */
     private $dateDeconnexion;
     
