@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\SystemType;
 
 class SystemController extends Controller
 {
@@ -29,15 +30,7 @@ class SystemController extends Controller
     {
       // Création du formulaire d'ajout d'un système
         $systeme = new Systeme();
-        $systeme->setNom('Nom du système');
-        $systeme->setURL('URL du système');
-
-        $form = $this->createFormBuilder($systeme)
-            ->add('nom', TextType::class)
-            ->add('url', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Créer un système'))
-            ->getForm();
-
+        $form = $this->createForm(SystemType::class, $systeme);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,25 +41,33 @@ class SystemController extends Controller
             return $this->redirectToRoute('system_new');
           }
 
-        return $this->render('system/new.html.twig', array(
-            'form' => $form->createView(),
-        ));
-        // exit;
-        // replace this line with your own code!
-        return $this->render('system/new.html.twig');
+        return $this->render('system/new.html.twig', array('form' => $form->createView()));
     }
+
 
     /**
-     * @Route("/system/edit", name="system_edit")
+     * @Route("/system/edit/{id}", name="system_edit")
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
       // Création du formulaire d'édition d'un système
-      
+      $em = $this->getDoctrine()->getManager();
+      $systeme = $em->getRepository(Systeme::class)->find($id);
+      $form = $this->createForm(SystemType::class, $systeme);
+      $form->handleRequest($request);
 
-
-        // exit;
-        // replace this line with your own code!
-        return $this->render('system/edit.html.twig');
+      if($form->isSubmitted() && $form->isValid()){
+               $systeme = $form -> getData();
+               $em = $this->getDoctrine()->getManager();
+               $em -> persist($systeme);
+               $em->flush();
+               return $this->redirectToRoute('system');
+      }
+      return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
     }
+
+
+
+
+
 }
