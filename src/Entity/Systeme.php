@@ -32,14 +32,6 @@ class Systeme
      * @ORM\Column(type="text")
      */
     private $diagnostic;
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbErreur;
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbErreurGrave;
     // add your own fields
 
 

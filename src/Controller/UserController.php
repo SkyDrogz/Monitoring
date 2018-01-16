@@ -27,7 +27,7 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);            
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
@@ -58,12 +58,13 @@ class UserController extends Controller
     //     }
     //     return $this->render('user/edit.html.twig', array('form' =>$form->createView()));
     // }
-    // /**
+    //
+    /**
      * @Route("/user/consultation", name="user_consultation")
      */
     public function consultationAction()
     {
-        
+
     }
     /**
      * @Route("/user/suppression", name="user_suppression")
