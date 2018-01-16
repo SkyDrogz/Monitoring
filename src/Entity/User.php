@@ -36,10 +36,6 @@ class User
      * @ORM\Column(type="date")
      */
     private $dateDeconnexion;
-<<<<<<< HEAD
-
-    // add your own field
-=======
     
     public function getId()
     {
@@ -85,5 +81,4 @@ class User
     {
          $this->dateDeconnexion = $dateDeconnexion;
     }
->>>>>>> 56afdb0eab4f485fd7ea26c1c9d034d1dc356b1d
 }

@@ -27,10 +27,9 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        
         $form = $this->createForm(UserType::class, $user);            
         $form->handleRequest($request);
-
+        //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
             $em = $this->getDoctrine()->getManager();
@@ -45,7 +44,12 @@ class UserController extends Controller
      */
     public function editAction()
     {
-        exit;
+        $user = new User();
+        $em = $this -> getDoctrine()->getManager();
+        $user = $em -> getRepository('monitorigue')->get_current_user();
+        // Récupération info bdd
+         
+        $form = $this->createForm(UserType::class, $user); 
     }
     /**
      * @Route("/user/consultation", name="user_consultation")
