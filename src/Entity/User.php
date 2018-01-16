@@ -15,6 +15,26 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    // add your own fields
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $identifiant;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $password;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $role;
+    /**
+     * @ORM\Column(type="dateTime")
+     */
+    private $dateConnexion;
+    /**
+     * @ORM\Column(type="dateTime")
+     */
+    private $dateDeconnexion;
+    
+    // add your own field
 }
