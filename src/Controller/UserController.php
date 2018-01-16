@@ -42,21 +42,28 @@ class UserController extends Controller
     /**
      * @Route("/user/edit", name="user_edit")
      */
-    public function editAction()
-    {
-        $user = new User();
-        $em = $this -> getDoctrine()->getManager();
-        $user = $em -> getRepository('monitorigue')->get_current_user();
-        // Récupération info bdd
-         
-        $form = $this->createForm(UserType::class, $user); 
-    }
-    /**
+    // public function editAction(Request $request,User $user)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
+    //     $user= $em->getRepository('monitoring:User')->get_current_user();
+    //     $form = $this->createForm(UserType::class, $user);
+    //     $form->handleRequest($request);
+    //     //Submit
+    //     if($form->isSubmitted() && $form->isValid()){
+    //         $user = $form -> getData();
+    //         $em = $this->getDoctrine()->getManager();
+    //         $em -> persist($user);
+    //         $em->flush();
+    //         return $this->redirectToRoute('user_edit');
+    //     }
+    //     return $this->render('user/edit.html.twig', array('form' =>$form->createView()));
+    // }
+    // /**
      * @Route("/user/consultation", name="user_consultation")
      */
     public function consultationAction()
     {
-        exit;
+        
     }
     /**
      * @Route("/user/suppression", name="user_suppression")
