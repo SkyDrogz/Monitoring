@@ -1,4 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-#
+
+#Connexion
+     path: /
+     controller : App\Controller\DefaultController
