@@ -1,0 +1,28 @@
+
+
+<h1>Liste des utilisateurs</h1>
+
+<table>
+
+    
+    <tr>
+        <th>Identifiant</th>
+        <th>Role</th>
+        <th>Date connexion</th>
+        <th>Date deconnexion</th>
+    </tr>
+
+    {% for user in userListe %}
+
+        <tr>
+
+            <td>{{ user.identifiant}}</td>
+            <td>{{ user.role }}</td>
+            <td>{{user.dateConnexion|date("m/d/y")}}</td>
+            <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
+
+        </tr>
+
+    {% endfor %}
+
+</table>

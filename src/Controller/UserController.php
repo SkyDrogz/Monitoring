@@ -63,13 +63,18 @@ class UserController extends Controller
      */
     public function consultationAction()
     {
-        exit;
+        $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('user/consultation.html.twig', array(
+            'userListe' => $userListe
+        ));
+        
+    return new Response($user);
     }
     /**
      * @Route("/user/suppression", name="user_suppression")
      */
-    public function suppressionAction()
+    public function suppressionAction(Request $request, User $user)
     {
-        exit;
+        
     }
 }
