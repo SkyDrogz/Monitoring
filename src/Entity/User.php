@@ -28,13 +28,13 @@ class User
      */
     private $role;
     /**
-     * @ORM\Column(type="dateTime")
+     * @ORM\Column(type="date")
      */
     private $dateConnexion;
     /**
-     * @ORM\Column(type="dateTime")
+     * @ORM\Column(type="date")
      */
     private $dateDeconnexion;
-    
+
     // add your own field
 }
