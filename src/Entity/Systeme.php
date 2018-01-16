@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SystemeRepository")
@@ -40,4 +41,25 @@ class Systeme
      */
     private $nbErreurGrave;
     // add your own fields
+
+
+
+    //Getter
+    public function getNom()
+    {
+        return $this->nomSysteme;
+    }
+    public function getURL()
+    {
+        return $this->url;
+    }
+    //Setter
+    public function setNom($nomSysteme)
+    {
+        $this->nomSysteme = $nomSysteme;
+    }
+    public function setURL($url)
+    {
+        $this->url = $url;
+    }
 }
