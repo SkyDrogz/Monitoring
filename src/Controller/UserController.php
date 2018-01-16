@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\UserType;
 
 class UserController extends Controller
 {
@@ -31,13 +28,7 @@ class UserController extends Controller
     {
         $user = new User();
         
-        $form = $this->createFormBuilder($user)
-            -> add ('identifiant', TextType::class)
-            -> add ('password', TextType::class)
-            -> add ('role', TextType::class)
-            -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
-            -> getForm();
-
+        $form = $this->createForm(UserType::class, $user);            
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
