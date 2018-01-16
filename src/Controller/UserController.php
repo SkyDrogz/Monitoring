@@ -64,7 +64,7 @@ class UserController extends Controller
      */
     public function consultationAction()
     {
-
+      exit;
     }
     /**
      * @Route("/user/suppression", name="user_suppression")
