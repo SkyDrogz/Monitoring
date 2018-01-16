@@ -45,20 +45,29 @@ class SystemController extends Controller
     }
 
 
-
-
-
     /**
-     * @Route("/system/edit", name="system_edit")
+     * @Route("/system/edit/{id}", name="system_edit")
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
       // Création du formulaire d'édition d'un système
+      $em = $this->getDoctrine()->getManager();
+      $systeme = $em->getRepository(Systeme::class)->find($id);
+      $form = $this->createForm(SystemType::class, $systeme);
+      $form->handleRequest($request);
 
-
-
-        // exit;
-        // replace this line with your own code!
-        return $this->render('system/edit.html.twig');
+      if($form->isSubmitted() && $form->isValid()){
+               $systeme = $form -> getData();
+               $em = $this->getDoctrine()->getManager();
+               $em -> persist($systeme);
+               $em->flush();
+               return $this->redirectToRoute('system');
+      }
+      return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
     }
+
+
+
+
+
 }
