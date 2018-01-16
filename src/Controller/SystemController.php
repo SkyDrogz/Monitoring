@@ -53,17 +53,38 @@ class SystemController extends Controller
       // Création du formulaire d'édition d'un système
       $em = $this->getDoctrine()->getManager();
       $systeme = $em->getRepository(Systeme::class)->find($id);
-      $form = $this->createForm(SystemType::class, $systeme);
-      $form->handleRequest($request);
 
-      if($form->isSubmitted() && $form->isValid()){
-               $systeme = $form -> getData();
-               $em = $this->getDoctrine()->getManager();
-               $em -> persist($systeme);
-               $em->flush();
-               return $this->redirectToRoute('system');
+      if ($systeme) {
+        $form = $this->createForm(SystemType::class, $systeme);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+                 $systeme = $form -> getData();
+                 $em = $this->getDoctrine()->getManager();
+                 $em -> persist($systeme);
+                 $em->flush();
+                 return $this->redirectToRoute('system');
+        }
+        return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
       }
-      return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
+      else {
+        return $this->redirectToRoute('system');
+      }
+
+
+    }
+
+    /**
+     * @Route("/system/consultation", name="system_consultation")
+     */
+    public function consultation()
+    {
+        $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+        return $this->render('system/consultation.html.twig', array(
+            'systemListe' => $systemListe
+        ));
+
+    return new Response($system);
     }
 
 

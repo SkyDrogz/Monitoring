@@ -41,6 +41,10 @@ class Systeme
     {
         return $this->nomSysteme;
     }
+    public function getId()
+    {
+        return $this->id;
+    }
     public function getURL()
     {
         return $this->url;
