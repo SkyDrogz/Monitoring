@@ -19,5 +19,9 @@ class Entreprise
      * @ORM\Column(type="string")
      */
     private $libelle;
+    /**
+    * @ORM\ManyToMany(targetEntity="Systeme", cascade={"persist"})
+   */
+   private $systeme;
     // add your own fields
 }
