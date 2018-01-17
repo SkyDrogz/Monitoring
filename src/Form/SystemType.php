@@ -15,9 +15,9 @@ class SystemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('nom', TextType::class)
-        -> add ('url', TextType::class)
-        -> add ('save', SubmitType::class, array('label'=>'Créer le système'))
+        -> add ('nom', TextType::class, array('label'=>'Nom :'))
+        -> add ('url', TextType::class, array('label'=>'URL : '))
+        -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
         ;
     }
 

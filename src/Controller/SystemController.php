@@ -13,6 +13,15 @@ use App\Form\SystemType;
 
 class SystemController extends Controller
 {
+  /**
+   * @Route("/", name="index")
+   */
+  public function indexAccueil()
+  {
+      // exit;
+      // replace this line with your own code!
+      return $this->render('base.html.twig');
+  }
     /**
      * @Route("/system", name="system")
      */
