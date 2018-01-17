@@ -6,9 +6,12 @@
 
 
     <tr>
-        <th>Nom du Utilisateur</th>
-        <th></th>
-        <th>URL</th>
+        <th>Identifiant</th>
+        <th>Role</th>
+        <th>Téléphone</th>
+        <th>E-maill</th>
+        <th>Date connexion</th>
+        <th>Date deconnexion</th>
     </tr>
 
     {% for user in userListe %}
@@ -17,6 +20,8 @@
         <tr>
             <td>{{ user.identifiant}}</td>
             <td>{{ user.role }}</td>
+            <td>{{ user.Tel }}</td>
+            <td>{{ user.email }}</td>
             <td>{{user.dateConnexion|date("m/d/y")}}</td>
             <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
             <td><a href="{{ path('user_reactive', {'id' : user.id}) }}">réactiver l'utilisateur</a></td>
