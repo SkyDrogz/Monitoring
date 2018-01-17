@@ -19,13 +19,11 @@ class Entreprise
      * @ORM\Column(type="string")
      */
     private $libelle;
-<<<<<<< HEAD
     /**
     * @ORM\ManyToMany(targetEntity="Systeme", cascade={"persist"})
    */
    private $systeme;
     // add your own fields
-=======
      /**
      * @ORM\Column(type="boolean",options={"default"=true})
      */
@@ -61,5 +59,4 @@ class Entreprise
         $this->actif=$actif;
     }
     
->>>>>>> 9de9f34979f806c677804fc9e0dc942446aaf7a3
 }
