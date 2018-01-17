@@ -12,7 +12,7 @@
 
     {% for entreprise in entrepriseListe %}
 
-
+        {% if entreprise.actif == true %}
         <tr>
             <td>{{ entreprise.libelle}}</td>
             <td></td>
@@ -20,9 +20,9 @@
             <td><a href="{{path('entreprise_suppression',{'id' : entreprise.id}) }}"> Supprimer l'entreprise</a></td>
 
         </tr>
-
+        {%endif%}
     {% endfor %}
 
 </table>
 
-<a href="{{ path('entreprise_consultation') }}">Retour</a>
+<a href="{{ path('entreprise') }}">Retour</a>

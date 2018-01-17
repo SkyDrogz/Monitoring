@@ -18,6 +18,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{{ path('system_consultation') }}">Liste des systèmes</a></li>
                         <li><a href="{{ path('system_new') }}">Ajout d'un système</a></li>
+                        <li><a href="{{ path('system_active') }}">Réactivation d'un système</a></li>
                     </ul>
                 </div>
             </div>
@@ -27,6 +28,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{{ path('user_consultation') }}">Liste des utilisateurs</a></li>
                         <li><a href="{{ path('user_new') }}">Ajout d'un utilisateur</a></li>
+                        <li><a href="{{ path('user_active') }}">Réactivation d'un utilisateur</a></li>
                     </ul>
                 </div>
                 <div id="content" class=""col-md-9">
@@ -38,6 +40,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{{ path('entreprise_consultation') }}">Liste des entreprises</a></li>
                         <li><a href="{{ path('entreprise_new') }}">Ajout d'une entreprise</a></li>
+                        <li><a href="{{ path('entreprise_active') }}">Réactivation d'une entreprise</a></li>
                     </ul>
                 </div>
                 {% block body %}{% endblock %}

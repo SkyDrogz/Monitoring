@@ -95,6 +95,43 @@ class SystemController extends Controller
 
     return new Response($system);
     }
+      /**
+     * @Route("/system/suppression/{id}", name="system_suppression")
+     */
+    public function suppressionAction(Request $request,Systeme $systeme)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $systeme->setActif(false);
+        $em->persist($systeme);
+        $em->flush();
+  
+        return $this->redirectToRoute('system_consultation');
+
+    }
+    /**
+     * @Route("/system/active", name="system_active")
+     */
+    public function active()
+    {
+      $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+        return $this->render('system/reactivation.html.twig', array(
+            'systemListe' => $systemListe
+        ));
+
+    return new Response($system);
+    }
+    /**
+     * @Route("/system/reactive/{id}", name="system_reactive")
+     */
+    public function activeAction(Request $request,Systeme $systeme)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $systeme->setActif(true);
+      $em->persist($systeme);
+      $em->flush();
+
+      return $this->redirectToRoute('system_active');
+    }
 
 
 

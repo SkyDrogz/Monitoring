@@ -1,0 +1,31 @@
+
+<title>Liste des Utilisateurs</title>
+<h1>Liste des Utilisateurs</h1>
+
+<table>
+
+
+    <tr>
+        <th>Nom du Utilisateur</th>
+        <th></th>
+        <th>URL</th>
+    </tr>
+
+    {% for user in userListe %}
+
+        {% if user.actif == false %}
+        <tr>
+            <td>{{ user.identifiant}}</td>
+            <td>{{ user.role }}</td>
+            <td>{{user.dateConnexion|date("m/d/y")}}</td>
+            <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
+            <td><a href="{{ path('user_reactive', {'id' : user.id}) }}">réactiver l'utilisateur</a></td>
+            
+        </tr>
+        {%endif%}
+    {% endfor %}
+
+</table>
+
+<a href="{{ path('user') }}">Retour</a>
+
