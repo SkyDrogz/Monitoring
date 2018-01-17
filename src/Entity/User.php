@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Role;
 
@@ -29,6 +29,14 @@ class User
      */
     private $role;
     /**
+     * @ORM\Column(type="string")
+     */
+    private $email;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $tel;
+    /**
      * @ORM\Column(type="date",nullable=true)
      */
     private $dateConnexion;
@@ -40,6 +48,10 @@ class User
      * @ORM\Column(type="boolean",options={"default"=true})
      */
     private $actif;
+
+    public function __construct(){
+        $this->actif = true;
+    }
     
     public function getId()
     {
@@ -69,6 +81,14 @@ class User
     {
         return $this->actif;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getTel()
+    {
+        return $this->tel;
+    }
     public function setIdentifiant($identifiant)
     {
          $this->identifiant = $identifiant;
@@ -92,5 +112,13 @@ class User
     public function setActif ($actif)
     {
          $this->actif = $actif;
+    }
+    public function setEmail ($email)
+    {
+        $this->email=$email;
+    }
+    public function setTel ($tel)
+    {
+        $this->tel=$tel;
     }
 }
