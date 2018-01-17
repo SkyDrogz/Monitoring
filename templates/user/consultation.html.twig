@@ -13,15 +13,18 @@
     </tr>
 
     {% for user in userListe %}
+        {% if user.actif == true %}
+            <tr>
 
-        <tr>
+                <td>{{ user.identifiant}}</td>
+                <td>{{ user.role }}</td>
+                <td>{{user.dateConnexion|date("m/d/y")}}</td>
+                <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
+                <td><a href="{{path('user_edit',{'id' : user.id}) }}"> Modification des paramètre de l'utilisateur
+                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"> Supprimer l'utilisateur
 
-            <td>{{ user.identifiant}}</td>
-            <td>{{ user.role }}</td>
-            <td>{{user.dateConnexion|date("m/d/y")}}</td>
-            <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
-
-        </tr>
+            </tr>
+        {% endif %}
 
     {% endfor %}
 

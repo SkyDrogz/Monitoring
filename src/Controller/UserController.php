@@ -42,11 +42,11 @@ class UserController extends Controller
     /**
      * @Route("/user/edit/{id}", name="user_edit")
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, User $user)
     {
       // Création du formulaire d'édition d'un système
       $em = $this->getDoctrine()->getManager();
-      $user = $em->getRepository(User::class)->find($id);
+      //$user = $em->getRepository(User::class)->find($id);
       $form = $this->createForm(UserType::class, $user);
       $form->handleRequest($request);
 
@@ -72,10 +72,16 @@ class UserController extends Controller
     return new Response($user);
     }
     /**
-     * @Route("/user/suppression", name="user_suppression")
+     * @Route("/user/suppression/{id}", name="user_suppression")
      */
-    public function suppressionAction(Request $request, User $user)
+    public function suppressionAction(Request $request,User $user)
     {
-        
+        $em = $this->getDoctrine()->getManager();
+        $user->setActif(false);
+        $em->persist($user);
+        $em->flush();
+  
+        return $this->redirectToRoute('user_consultation');
+
     }
 }

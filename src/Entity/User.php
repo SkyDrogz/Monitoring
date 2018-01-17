@@ -36,6 +36,10 @@ class User
      * @ORM\Column(type="date",nullable=true)
      */
     private $dateDeconnexion;
+     /**
+     * @ORM\Column(type="boolean",options={"default"=true})
+     */
+    private $actif;
     
     public function getId()
     {
@@ -61,6 +65,10 @@ class User
     {
         return $this->dateDeconnexion;
     }
+    public function getActif()
+    {
+        return $this->actif;
+    }
     public function setIdentifiant($identifiant)
     {
          $this->identifiant = $identifiant;
@@ -80,5 +88,9 @@ class User
     public function setDateDeconnexion($dateDeconnexion)
     {
          $this->dateDeconnexion = $dateDeconnexion;
+    }
+    public function setActif ($actif)
+    {
+         $this->actif = $actif;
     }
 }
