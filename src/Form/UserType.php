@@ -20,15 +20,20 @@ class UserType extends AbstractType
         -> add ('password', TextType::class)
         -> add ('tel', TextType::class)
         -> add ('email',TextType::class)
+        -> add ('libelle', ChoiceType::class, [
+          'choice_label' => function($entreprise, $key, $index) {
+            /** @var Entreprise $entreprise */
+            return strtoupper($entreprise->Entreprise.getLibelle());
+          },
+        ])
         -> add ('role', ChoiceType::class,array('choices' => array(
             'Utilisateur'=>'User',
             'Administrateur'=> 'Admin'
-            
-        ),))     
+        ),))
         -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
         ;
-        
-        
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

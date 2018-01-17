@@ -40,7 +40,7 @@
                         <li><a href="{{ path('entreprise_new') }}">Ajout d'une entreprise</a></li>
                     </ul>
                 </div>
-                {% block body %}{% endblock %}
+                {% block body %}{%endblock%}
                 <div id="content" class=""col-md-9">
                 </div>
             </div>
@@ -48,6 +48,9 @@
                     <p>&copy; {{'now'|date('Y') }} Nexus Création</p>
                 </footer>
         </div>
+      </head>
+
+
                 {% block javascripts %}
                     {# lignes Javascript permettant d'utiliser des fonctionnalités du bootstrap twitter #}
                     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

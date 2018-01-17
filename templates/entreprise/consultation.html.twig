@@ -1,4 +1,8 @@
-<title>Liste des entreprise</title>
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Liste des entreprises
+{%endblock%}
+{%block body %}
 <h1>Liste des entreprise</h1>
 
 <table>
@@ -26,3 +30,4 @@
 </table>
 
 <a href="{{ path('entreprise_consultation') }}">Retour</a>
+{%endblock%}

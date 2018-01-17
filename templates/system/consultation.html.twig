@@ -1,4 +1,8 @@
-<title>Liste des systèmes</title>
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Liste des systèmes
+{%endblock%}
+{%block body %}
 <h1>Liste des systèmes</h1>
 
 <table>
@@ -25,3 +29,4 @@
 </table>
 
 <a href="{{ path('system') }}">Retour</a>
+{%endblock%}
