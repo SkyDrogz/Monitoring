@@ -82,6 +82,29 @@ class EntrepriseController extends Controller
         $em->flush();
   
         return $this->redirectToRoute('entreprise_consultation');
+    }
+      /**
+     * @Route("/entreprise/active", name="entreprise_active")
+     */
+    public function active()
+    {
+      $entrepriseListe = $this->getDoctrine()->getRepository(entreprise::class)->findAll();
+        return $this->render('entreprise/reactivation.html.twig', array(
+            'entrepriseListe' => $entrepriseListe
+        ));
 
+    return new Response($entreprise);
+    }
+    /**
+     * @Route("/entreprise/reactive/{id}", name="entreprise_reactive")
+     */
+    public function activeAction(Request $request,entreprise $entreprise)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entreprise->setActif(true);
+      $em->persist($entreprise);
+      $em->flush();
+
+      return $this->redirectToRoute('entreprise_active');
     }
 }

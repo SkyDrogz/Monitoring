@@ -16,17 +16,22 @@
 
     {% for system in systemListe %}
 
-
+        {% if system.actif == true %}
         <tr>
             <td>{{ system.nom}}</td>
             <td></td>
             <td>{{ system.url }}</td>
             <td><a href="{{ path('system_edit', {'id' : system.id}) }}">Modification du système</a></td>
+            <td><a href="{{ path('system_suppression', {'id' : system.id}) }}">Suppression du système</a></td>
         </tr>
-
+        {%endif%}
     {% endfor %}
 
 </table>
 
+<<<<<<< HEAD
 <a href="{{ path('system') }}">Retour</a>
 {%endblock%}
+=======
+<a href="{{ path('system') }}">Retour</a>
+>>>>>>> b199f38f3d29c4a43551a00005677a3ee732ab7d

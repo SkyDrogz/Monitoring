@@ -1,0 +1,27 @@
+
+<title>Liste des entreprises</title>
+<h1>Liste des entreprises</h1>
+
+<table>
+
+
+    <tr>
+        <th>Nom de l'entreprise</th>
+    </tr>
+
+    {% for entreprise in entrepriseListe %}
+
+        {% if entreprise.actif == false %}
+        <tr>
+            <td>{{ entreprise.libelle}}</td>
+            <td></td>
+            <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}">réactiver le système</a></td>
+            
+        </tr>
+        {%endif%}
+    {% endfor %}
+
+</table>
+
+<a href="{{ path('entreprise') }}">Retour</a>
+

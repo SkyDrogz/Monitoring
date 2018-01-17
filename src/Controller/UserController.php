@@ -84,4 +84,28 @@ class UserController extends Controller
         return $this->redirectToRoute('user_consultation');
 
     }
+       /**
+     * @Route("/user/active", name="user_active")
+     */
+    public function active()
+    {
+      $userListe = $this->getDoctrine()->getRepository(user::class)->findAll();
+        return $this->render('user/reactivation.html.twig', array(
+            'userListe' => $userListe
+        ));
+
+    return new Response($user);
+    }
+    /**
+     * @Route("/user/reactive/{id}", name="user_reactive")
+     */
+    public function activeAction(Request $request,user $user)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $user->setActif(true);
+      $em->persist($user);
+      $em->flush();
+
+      return $this->redirectToRoute('user_active');
+    }
 }

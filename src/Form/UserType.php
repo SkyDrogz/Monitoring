@@ -23,7 +23,7 @@ class UserType extends AbstractType
         -> add ('libelle', ChoiceType::class, [
           'choice_label' => function($entreprise, $key, $index) {
             /** @var Entreprise $entreprise */
-            return strtoupper($entreprise->Entreprise.getLibelle());
+            return strtoupper($entreprise->getLibelle());
           },
         ])
         -> add ('role', ChoiceType::class,array('choices' => array(

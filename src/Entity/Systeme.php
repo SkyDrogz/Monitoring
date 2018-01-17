@@ -21,7 +21,7 @@ class Systeme
      */
     private $nomSysteme;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text",nullable=true)
      */
     private $etat;
     /**
@@ -29,10 +29,17 @@ class Systeme
      */
     private $url;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text",nullable=true)
      */
     private $diagnostic;
-    // add your own fields
+    /**
+     * @ORM\Column(type="boolean",options={"default"=true})
+     */
+    private $actif;
+
+    public function __construct(){
+        $this->actif = true;
+    }
 
 
 
@@ -49,6 +56,10 @@ class Systeme
     {
         return $this->url;
     }
+    public function getActif()
+    {
+        return $this->actif;
+    }
     //Setter
     public function setNom($nomSysteme)
     {
@@ -57,5 +68,9 @@ class Systeme
     public function setURL($url)
     {
         $this->url = $url;
+    }
+    public function setActif($actif)
+    {
+        $this->actif=$actif;
     }
 }

@@ -1,0 +1,30 @@
+
+<title>Liste des systèmes</title>
+<h1>Liste des systèmes</h1>
+
+<table>
+
+
+    <tr>
+        <th>Nom du système</th>
+        <th></th>
+        <th>URL</th>
+    </tr>
+
+    {% for system in systemListe %}
+
+        {% if system.actif == false %}
+        <tr>
+            <td>{{ system.nom}}</td>
+            <td></td>
+            <td>{{ system.url }}</td>
+            <td><a href="{{ path('system_reactive', {'id' : system.id}) }}">réactiver le système</a></td>
+            
+        </tr>
+        {%endif%}
+    {% endfor %}
+
+</table>
+
+<a href="{{ path('system') }}">Retour</a>
+
