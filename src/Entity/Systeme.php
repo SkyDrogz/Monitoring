@@ -17,19 +17,19 @@ class Systeme
     */
     private $id;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $nomSysteme;
     /**
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="string",nullable=true)
      */
     private $etat;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $url;
     /**
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="string",nullable=true)
      */
     private $diagnostic;
     /**
@@ -37,6 +37,7 @@ class Systeme
      */
     private $actif;
 
+    
     public function __construct(){
         $this->actif = true;
     }

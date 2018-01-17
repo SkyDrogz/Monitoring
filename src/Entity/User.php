@@ -4,6 +4,7 @@ namespace App\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Role;
+use App\Entity\Entreprise;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -25,7 +26,8 @@ class User
      */
     private $password;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $role;
     /**
@@ -48,6 +50,11 @@ class User
      * @ORM\Column(type="boolean",options={"default"=true})
      */
     private $actif;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $entreprise;
 
     public function __construct(){
         $this->actif = true;
