@@ -19,8 +19,9 @@ class UserType extends AbstractType
         -> add ('identifiant', TextType::class)
         -> add ('password', TextType::class)
         -> add ('role', ChoiceType::class,array('choices' => array(
-            'Administrateur'=> 'Admin',
-            'Utilisateur'=>'User'
+            'Utilisateur'=>'User',
+            'Administrateur'=> 'Admin'
+            
         ),))     
         -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
         ;
