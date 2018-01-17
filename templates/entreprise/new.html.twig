@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Ajout d'un entreprise
+{%endblock%}
+{%block body %}
+<h2><b>Ajout d'un entreprise</b></h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+<a href="{{ path('entreprise') }}" class='btn btn-default'><i class="glyphicon glyphicon-chevron-left"> Retour</i></a>
+{%endblock%}

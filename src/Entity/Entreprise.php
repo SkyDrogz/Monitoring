@@ -19,5 +19,39 @@ class Entreprise
      * @ORM\Column(type="string")
      */
     private $libelle;
-    // add your own fields
+     /**
+     * @ORM\Column(type="boolean",options={"default"=true})
+     */
+    private $actif;
+
+    
+    public function __construct(){
+        $this->actif = true;
+    }
+
+    public function getId()
+    {
+       return $this ->id;
+    }
+    public function getLibelle()
+    {
+        return $this ->libelle;
+    }
+    public function getActif()
+    {
+        return $this ->actif;
+    }
+    public function setId ($id)
+    {
+        $this->id=$id;
+    }
+    public function setLibelle($libelle)
+    {
+        $this->libelle=$libelle;
+    }
+    public function setActif($actif)
+    {
+        $this->actif=$actif;
+    }
+    
 }

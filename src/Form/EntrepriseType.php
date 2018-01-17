@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Entreprise;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,31 +11,21 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class UserType extends AbstractType
+class EntrepriseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('identifiant', TextType::class)
-        -> add ('password', TextType::class)
-        -> add ('tel', TextType::class)
-        -> add ('email',TextType::class)
-        -> add ('role', ChoiceType::class,array('choices' => array(
-            'Utilisateur'=>'User',
-            'Administrateur'=> 'Admin'
-            
-        ),))     
-        -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
+        -> add ('libelle', TextType::class)
+        -> add ('save', SubmitType::class, array('label'=>"Création de l'entreprise"))
         ;
-        
-        
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             // uncomment if you want to bind to a class
-            'data_class' => User::class,
+            'data_class' => Entreprise::class,
         ]);
     }
 }
