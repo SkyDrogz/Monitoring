@@ -1,5 +1,12 @@
-Ajout d'un système
-
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Ajout d'un système
+{%endblock%}
+{%block body %}
+<h2><b>Ajout d'un système</b></h1>
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
+
+<a href="{{ path('system') }}" class='btn btn-default'><i class="glyphicon glyphicon-chevron-left"> Retour</i></a>
+{%endblock%}
