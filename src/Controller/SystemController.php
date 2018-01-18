@@ -88,10 +88,10 @@ class SystemController extends Controller
      */
     public function consultation()
     {
-      $command=null; 
+      // $command=null; 
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
-      $command = exec('ping '.$system->getUrl()." -t 1");
+      $command = exec('ping '.$system->getUrl()." -n 1");
       if (preg_match("#Minimum#",$command))
       {
         $system->setEtat('Online');
@@ -100,8 +100,25 @@ class SystemController extends Controller
       {
         $system->setEtat('Offline');
       }
-    }
-        return $this->render('system/consultation.html.twig', array(
+      // $homepage = file_get_contents($system->getUrl());
+      // if(preg_match("#!doctype html#",$homepage))
+      // {
+      //   $system->setEtat('Online');
+      // }
+      // else{
+      //   $system->setEtat('Offline');
+      // $ping = exec("ping -n 1".$system->getUrl());
+      // if(ereg("perte 100%", $ping))
+      // {
+      //   $system->setEtat('Offline');
+      // }
+      // else
+      // {
+      //   $system->setEtat('Online');
+      // }
+      }
+    
+       return $this->render('system/consultation.html.twig', array(
             'systemListe' => $systemListe
         ));
 
