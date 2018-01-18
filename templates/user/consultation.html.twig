@@ -10,11 +10,17 @@
 
     <tr>
         <th>Identifiant</th>
+        <th></th>
         <th>Role</th>
+        <th></th>
         <th>Téléphone</th>
+        <th></th>
         <th>E-maill</th>
+        <th></th>
         <th>Date connexion</th>
+        <th></th>
         <th>Date deconnexion</th>
+        <th></th>
     </tr>
 
     {% for user in userListe %}
@@ -22,13 +28,20 @@
             <tr>
 
                 <td>{{ user.identifiant}}</td>
-                <td>{{ user.role }}</td>
+                <td></td>
+                <td>{{ user.role.nomRole }}</td>
+                <td></td>
                 <td>{{ user.Tel }}</td>
+                <td></td>
                 <td>{{ user.email }}</td>
+                <td></td>
                 <td>{{user.dateConnexion|date("m/d/y")}}</td>
+                <td></td>
                 <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
-                <td><a href="{{path('user_edit',{'id' : user.id}) }}"> Modification des paramètre de l'utilisateur
-                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"> Supprimer l'utilisateur
+                <td></td>
+                <td><a href="{{path('user_edit',{'id' : user.id}) }}"> Modification des paramètre de l'utilisateur</a></td>
+                <td></td>
+                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"> Supprimer l'utilisateur</a></td>
 
             </tr>
         {% endif %}
