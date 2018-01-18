@@ -1,8 +1,11 @@
-
-<title>Liste des systèmes</title>
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Réactivation d'un système
+{%endblock%}
+{%block body %}
 <h1>Liste des systèmes</h1>
 
-<table>
+<table width="50%">
 
 
     <tr>
@@ -18,13 +21,13 @@
             <td>{{ system.nom}}</td>
             <td></td>
             <td>{{ system.url }}</td>
-            <td><a href="{{ path('system_reactive', {'id' : system.id}) }}">réactiver le système</a></td>
-            
+            <td><a href="{{ path('system_reactive', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a></td>
+
         </tr>
         {%endif%}
     {% endfor %}
 
 </table>
 
-<a href="{{ path('system') }}">Retour</a>
-
+<a href="{{ path('system') }}" class="btn btn-default">Retour</a>
+{% endblock %}

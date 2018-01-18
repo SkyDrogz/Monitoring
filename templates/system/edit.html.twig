@@ -1,9 +1,13 @@
-<title>Modification du système</title>
+{% extends "base.html.twig" %}
+{% block title %}
+    {{parent()}} - Modification du système
+{% endblock %}
+{% block body %}
 <h1><b>Modification d'un système</b></h1>
 
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
 
-<a href="{{ path('system_consultation') }}">Retour à la liste</a>
-<a href="{{ path('system') }}">Accueil</a>
+<a href="{{ path('system_consultation') }}" class="btn btn-warning">Retour à la liste</a>
+{% endblock %}

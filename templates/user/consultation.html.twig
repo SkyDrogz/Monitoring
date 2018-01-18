@@ -5,7 +5,7 @@
 {%block body %}
 <h1>Liste des utilisateurs</h1>
 
-<table>
+<table width="100%">
 
 
     <tr>
@@ -34,8 +34,8 @@
         {% endif %}
 
     {% endfor %}
-    
-<a href="{{ path('user') }}">Retour</a>
 
 </table>
+
+<a href="{{ path('user') }}" class="btn btn-default">Retour</a>
 {%endblock%}

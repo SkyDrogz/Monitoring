@@ -20,10 +20,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('identifiant', TextType::class)
-        -> add ('password', TextType::class)
-        -> add ('tel', TextType::class)
-        -> add ('email',TextType::class)
+        -> add ('identifiant', TextType::class, array('label'=>'Identifiant :'))
+        -> add ('password', TextType::class, array('label'=>'Mot de passe :'))
+        -> add ('tel', TextType::class, array('label'=>'Téléphone :'))
+        -> add ('email',TextType::class, array('label'=>'Email :'))
         // -> add ('libelle', ChoiceType::class, [
         //   'choice_label' => function($entreprise, $key, $index) {
         //     /** @var Entreprise $entreprise */
@@ -31,6 +31,7 @@ class UserType extends AbstractType
         //   },
         // ])
         ->add('entreprise', EntityType::class, array(
+            'label'=>'Entreprise :',
             'class' => Entreprise::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('e')
@@ -40,6 +41,7 @@ class UserType extends AbstractType
             'required' => false
         ))
         ->add('role', EntityType::class, array(
+            'label'=>'Rôle :',
             'class' => Role::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('r')

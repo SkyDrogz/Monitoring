@@ -8,7 +8,7 @@
 {{ form_widget(form) }}
 {{ form_end(form) }}
 
-<p class="text-primary">
+<p>
 {% for info in app.flashes('info') %}
     <div class="flash-notice">
         {{ info }}
