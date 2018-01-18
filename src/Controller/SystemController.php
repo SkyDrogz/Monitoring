@@ -141,18 +141,18 @@ class SystemController extends Controller
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
       $command = exec('ping '.$system->getUrl());
-      
-      if ($command == 'M%')
-      {
-        $system->setEtat('Offline');
-      }
-      else
+      if (preg_match("#Minimum#",$command))
       {
         $system->setEtat('Online');
       }
+      else
+      {
+        $system->setEtat('Offline');
+      }
+      dump($command);
+      dump($system);
     }
-     dump($command);
-     dump($system);
+
       exit;
 
       return $this->redirecToRoute('user');
