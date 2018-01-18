@@ -16,7 +16,6 @@ class CategSysteme
      */
     private $id;
     /**
-     * @ORM\categorie
      * @ORM\Column(type="string")
      */
     private $categorie;
