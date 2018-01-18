@@ -8,5 +8,13 @@
 {{ form_widget(form) }}
 {{ form_end(form) }}
 
-<a href="{{ path('entreprise') }}" class='btn btn-default'><i class="glyphicon glyphicon-chevron-left"> Retour</i></a>
+<p class="text-primary">
+{% for info in app.flashes('info') %}
+    <div class="flash-notice">
+        {{ info }}
+    </div>
+{% endfor %}
+</p>
+
+<a href="{{ path('entreprise') }}" class='btn btn-default'>Retour</a>
 {%endblock%}

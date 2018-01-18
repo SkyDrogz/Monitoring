@@ -1,6 +1,9 @@
-
-<title>Liste des entreprises</title>
-<h1>Liste des entreprises</h1>
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Réactivation d'une entreprise
+{%endblock%}
+{%block body %}
+<h1>Liste des entreprises supprimés</h1>
 
 <table>
 
@@ -15,13 +18,21 @@
         <tr>
             <td>{{ entreprise.libelle}}</td>
             <td></td>
-            <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}">réactiver le système</a></td>
-            
+            <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a></td>
+
         </tr>
         {%endif%}
     {% endfor %}
 
 </table>
 
-<a href="{{ path('entreprise') }}">Retour</a>
+<p>
+{% for info in app.flashes('info') %}
+    <div class="flash-notice">
+        {{ info }}
+    </div>
+{% endfor %}
+</p>
 
+<a href="{{ path('entreprise') }}" class="btn btn-default">Retour</a>
+{%endblock%}

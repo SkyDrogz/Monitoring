@@ -35,6 +35,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em -> persist($user);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enreigstré.');
             return $this->redirectToRoute('user_new');
         }
         return $this->render('user/new.html.twig', array('form' =>$form->createView()));
@@ -67,7 +68,7 @@ class UserController extends Controller
         return $this->render('user/consultation.html.twig', array(
             'userListe' => $userListe
         ));
-        
+
     return new Response($user);
     }
     /**
@@ -79,7 +80,7 @@ class UserController extends Controller
         $user->setActif(false);
         $em->persist($user);
         $em->flush();
-  
+
         return $this->redirectToRoute('user_consultation');
 
     }
