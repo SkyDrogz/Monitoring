@@ -9,9 +9,18 @@ label
 display: block;
 }
 </style>
-<h2><b>Créer un nouvel utilisateur :</b></h2>
+<h2><b>Ajout d'un nouvel utilisateur</b></h2>
 </br>
 {{ form_start(form)}}
 {{ form_widget(form)}}
 {{ form_end(form)}}
+
+<p>
+{% for info in app.flashes('info') %}
+    <div class="flash-notice">
+        {{ info }}
+    </div>
+{% endfor %}
+</p>
+
 {%endblock%}

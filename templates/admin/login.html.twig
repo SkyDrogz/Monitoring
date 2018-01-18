@@ -4,31 +4,35 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     {% endblock %}
 </head>
+<style>
+label
+{
+display: block;
+}
+</style>
 <title>
     Nexus Création - Connexion
 </title>
 <body>
-<div id="header" class="jumbotron">
+  <div id="header" class="jumbotron">
     <h2>Nexus Création</h2>
-</div>
-<div id="contenu">
+  </div>
+  <div id="contenu">
       <center><h3>Identification utilisateur</h3>
 
 
-<form method="POST" action="index.php?uc=connexion&action=valideConnexion">
-
-
-			<p>
-       <label for="nom">Login*</label>
-       <input id="login" type="text" name="login"  size="30" maxlength="45">
-      </p>
-			<p>
-				<label for="mdp">Mot de passe*</label>
-			  <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
-      </p>
-         <input type="submit" value="Connexion" name="valider">
-      </p>
-</form></center>
+      <form method="POST" action="">
+			   <p>
+            <label for="nom">Login :</label>
+            <input id="login" type="text" name="login"  size="30" maxlength="45">
+        </p>
+			  <p>
+				    <label for="mdp">Mot de passe :</label>
+			      <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
+        </p>
+            <input type="submit" value="Connexion" name="valider">
+        </p>
+      </form></center>
 
 </div>
 </body>

@@ -35,7 +35,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em -> persist($user);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enreigstré.');
+            $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été enregistré.");
             return $this->redirectToRoute('user_new');
         }
         return $this->render('user/new.html.twig', array('form' =>$form->createView()));
