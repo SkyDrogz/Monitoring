@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Entreprise;
+use App\Entity\Role;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UserType extends AbstractType
 {
@@ -21,16 +24,29 @@ class UserType extends AbstractType
         -> add ('password', TextType::class)
         -> add ('tel', TextType::class)
         -> add ('email',TextType::class)
-        -> add ('libelle', ChoiceType::class, [
-          'choice_label' => function($entreprise, $key, $index) {
-            /** @var Entreprise $entreprise */
-            return strtoupper($entreprise->getLibelle());
-          },
-        ])
-        -> add ('role', ChoiceType::class,array('choices' => array(
-            'Utilisateur'=>'User',
-            'Administrateur'=> 'Admin'
-        ),))
+        // -> add ('libelle', ChoiceType::class, [
+        //   'choice_label' => function($entreprise, $key, $index) {
+        //     /** @var Entreprise $entreprise */
+        //     return strtoupper($entreprise->getLibelle());
+        //   },
+        // ])
+        ->add('entreprise', EntityType::class, array(
+            'class' => Entreprise::class,
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('e')
+                    ->orderBy('e.libelle', 'ASC');
+            },
+            'choice_label' => 'libelle',
+            'required' => false
+        ))
+        ->add('role', EntityType::class, array(
+            'class' => Role::class,
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('r')
+                    ->orderBy('r.nomRole', 'ASC');
+            },
+            'choice_label' => 'nomRole',
+            ))
         -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
         ;
 

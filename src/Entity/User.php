@@ -3,8 +3,6 @@
 namespace App\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Role;
-use App\Entity\Entreprise;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -96,6 +94,14 @@ class User
     {
         return $this->tel;
     }
+    public function getEntreprise()
+    {
+        return $this->entreprise;
+    }
+    public function getNomRole ()
+    {
+        return $this->nomRole;
+    }
     public function setIdentifiant($identifiant)
     {
          $this->identifiant = $identifiant;
@@ -127,5 +133,9 @@ class User
     public function setTel ($tel)
     {
         $this->tel=$tel;
+    }
+    public function setEntreprise ($entreprise)
+    {
+        $this->entreprise=$entreprise;
     }
 }

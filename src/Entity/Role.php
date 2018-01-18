@@ -16,7 +16,7 @@ class Role
      */
     private $id;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $nomRole;
 
