@@ -35,6 +35,7 @@ class UserType extends AbstractType
             'class' => Entreprise::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('e')
+                    ->where ('e.actif = 1')
                     ->orderBy('e.libelle', 'ASC');
             },
             'choice_label' => 'libelle',

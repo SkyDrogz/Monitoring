@@ -132,6 +132,31 @@ class SystemController extends Controller
 
       return $this->redirectToRoute('system_active');
     }
+    /**
+     * @Route("/system/test", name="system_test")
+     */
+    public function statusAction(Request $request)
+    {
+      $command=null; 
+      $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+      foreach($systemListe as $system){
+      $command = exec('ping '.$system->getUrl());
+      
+      if ($command == 'M%')
+      {
+        $system->setEtat('Offline');
+      }
+      else
+      {
+        $system->setEtat('Online');
+      }
+    }
+     dump($command);
+     dump($system);
+      exit;
+
+      return $this->redirecToRoute('user');
+    }
 
 
 
