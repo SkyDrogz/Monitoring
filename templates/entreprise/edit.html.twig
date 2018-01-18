@@ -1,9 +1,22 @@
-<title>Modification du entreprise</title>
-<h1><b>Modification d'un entreprise</b></h1>
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Modification d'une entreprise
+{%endblock%}
+{%block body %}
+<h1><b>Modification de l'entreprise</b></h1>
 
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
 
-<a href="{{ path('entreprise_consultation') }}">Retour à la liste</a>
-<a href="{{ path('entreprise') }}">Accueil</a>
+<p class="text-primary">
+{% for info in app.flashes('info') %}
+    <div class="flash-notice">
+        {{ info }}
+    </div>
+{% endfor %}
+</p>
+
+<a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Retour à la liste</a>
+<a href="{{ path('entreprise') }}" class="btn btn-info">Accueil</a>
+{%endblock%}

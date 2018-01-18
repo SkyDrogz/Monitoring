@@ -35,6 +35,7 @@ class EntrepriseController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em -> persist($entreprise);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'Entreprise bien enreigstré.');
             return $this->redirectToRoute('entreprise_new');
         }
         return $this->render('entreprise/new.html.twig', array('form' =>$form->createView()));
@@ -55,7 +56,7 @@ class EntrepriseController extends Controller
                $em = $this->getDoctrine()->getManager();
                $em -> persist($entreprise);
                $em->flush();
-               return $this->redirectToRoute('entreprise');
+               return $this->redirectToRoute('entreprise_consultation');
       }
       return $this->render('entreprise/edit.html.twig', array('form' =>$form->createView()));
     }
@@ -68,7 +69,7 @@ class EntrepriseController extends Controller
         return $this->render('entreprise/consultation.html.twig', array(
             'entrepriseListe' => $entrepriseListe
         ));
-        
+
     return new Response($entreprise);
     }
     /**
@@ -80,13 +81,13 @@ class EntrepriseController extends Controller
         $entreprise->setActif(false);
         $em->persist($entreprise);
         $em->flush();
-  
+
         return $this->redirectToRoute('entreprise_consultation');
     }
       /**
      * @Route("/entreprise/active", name="entreprise_active")
      */
-    public function active()
+    public function active(Request $request)
     {
       $entrepriseListe = $this->getDoctrine()->getRepository(entreprise::class)->findAll();
         return $this->render('entreprise/reactivation.html.twig', array(
@@ -104,7 +105,7 @@ class EntrepriseController extends Controller
       $entreprise->setActif(true);
       $em->persist($entreprise);
       $em->flush();
-
+      $request->getSession()->getFlashBag()->add('info', "L'entreprise est réactivée.");
       return $this->redirectToRoute('entreprise_active');
     }
 }

@@ -3,13 +3,11 @@
     {{parent()}} - Liste des entreprises
 {%endblock%}
 {%block body %}
-<h1>Liste des entreprise</h1>
+<h1>Liste des entreprises</h1>
 
-<table>
-
-
+<table >
     <tr>
-        <th>Nom de l'entreprise</th>
+        <th>Nom des entreprises</th>
     </tr>
 
     {% for entreprise in entrepriseListe %}
@@ -17,15 +15,14 @@
         {% if entreprise.actif == true %}
         <tr>
             <td>{{ entreprise.libelle}}</td>
-            <td></td>
-            <td><a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}">Modification du entreprise</a></td>
-            <td><a href="{{path('entreprise_suppression',{'id' : entreprise.id}) }}"> Supprimer l'entreprise</a></td>
-
+            <td><a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}" class="btn btn-warning">Modifier</a></td>
+            <td><a href="{{path('entreprise_suppression',{'id' : entreprise.id}) }}" class="btn btn-danger"> Supprimer l'entreprise</a></td>
         </tr>
+        </br>
         {%endif%}
     {% endfor %}
 
 </table>
 
-<a href="{{ path('entreprise_consultation') }}">Retour</a>
+<a href="{{ path('index') }}" class="btn btn-default">Retour</a>
 {%endblock%}
