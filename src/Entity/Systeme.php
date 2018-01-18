@@ -36,6 +36,10 @@ class Systeme
      * @ORM\Column(type="boolean",options={"default"=true})
      */
     private $actif;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
+     */
+    private $categSysteme;
 
     
     public function __construct(){
@@ -61,6 +65,14 @@ class Systeme
     {
         return $this->actif;
     }
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+    public function getCategSysteme()
+    {
+        return $this->categSysteme;
+    }
     //Setter
     public function setNom($nomSysteme)
     {
@@ -77,5 +89,9 @@ class Systeme
     public function setActif($actif)
     {
         $this->actif=$actif;
+    }
+    public function setCategSysteme($categSysteme)
+    {
+        $this->categSyteme=$categSysteme;
     }
 }

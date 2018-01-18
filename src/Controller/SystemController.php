@@ -88,7 +88,19 @@ class SystemController extends Controller
      */
     public function consultation()
     {
-        $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+      $command=null; 
+      $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+      foreach($systemListe as $system){
+      $command = exec('ping '.$system->getUrl()." -t 1");
+      if (preg_match("#Minimum#",$command))
+      {
+        $system->setEtat('Online');
+      }
+      else
+      {
+        $system->setEtat('Offline');
+      }
+    }
         return $this->render('system/consultation.html.twig', array(
             'systemListe' => $systemListe
         ));
@@ -132,31 +144,7 @@ class SystemController extends Controller
 
       return $this->redirectToRoute('system_active');
     }
-    /**
-     * @Route("/system/test", name="system_test")
-     */
-    public function statusAction(Request $request)
-    {
-      $command=null; 
-      $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
-      foreach($systemListe as $system){
-      $command = exec('ping '.$system->getUrl());
-      if (preg_match("#Minimum#",$command))
-      {
-        $system->setEtat('Online');
-      }
-      else
-      {
-        $system->setEtat('Offline');
-      }
-      dump($command);
-      dump($system);
-    }
 
-      exit;
-
-      return $this->redirecToRoute('user');
-    }
 
 
 

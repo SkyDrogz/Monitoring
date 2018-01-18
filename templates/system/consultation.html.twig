@@ -12,6 +12,8 @@
         <th>Nom du système</th>
         <th></th>
         <th>URL</th>
+        <th></th>
+        <th>Etat</th>
     </tr>
 
     {% for system in systemListe %}
@@ -21,6 +23,9 @@
             <td>{{ system.nom}}</td>
             <td></td>
             <td>{{ system.url }}</td>
+            <td></td>
+            <td>{{ system.etat }}</td>
+            <td></td>
             <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning">Modification du système</a></td>
             <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger">Suppression du système</a></td>
         </tr>
