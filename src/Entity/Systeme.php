@@ -70,6 +70,10 @@ class Systeme
     {
         $this->url = $url;
     }
+    public function setEtat($etat)
+    {
+        $this->etat=$etat;
+    }
     public function setActif($actif)
     {
         $this->actif=$actif;
