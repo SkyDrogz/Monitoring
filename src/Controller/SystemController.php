@@ -83,6 +83,7 @@ class SystemController extends Controller
 
   }
 
+<<<<<<< HEAD
   /**
   * @Route("/system/consultation", name="system_consultation")
   */
@@ -101,6 +102,20 @@ class SystemController extends Controller
         {
           $system->setEtat('Offline');
         }
+=======
+    /**
+     * @Route("/system/consultation", name="system_consultation")
+     */
+    public function consultation()
+    {
+      // $command=null; 
+      $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+      foreach($systemListe as $system){
+      $command = exec('ping '.$system->getUrl()." -n 1");
+      if (preg_match("#Minimum#",$command))
+      {
+        $system->setEtat('Online');
+>>>>>>> 3297277e449a2c77a2891d3b51c0078b15b8781b
       }
       if($system->getCategSysteme()->getCategorie() == "API"){
 
@@ -135,10 +150,34 @@ class SystemController extends Controller
           $system->setEtat('Online');
         }
       }
+<<<<<<< HEAD
     }
     return $this->render('system/consultation.html.twig', array(
       'systemListe' => $systemListe
     ));
+=======
+      // $homepage = file_get_contents($system->getUrl());
+      // if(preg_match("#!doctype html#",$homepage))
+      // {
+      //   $system->setEtat('Online');
+      // }
+      // else{
+      //   $system->setEtat('Offline');
+      // $ping = exec("ping -n 1".$system->getUrl());
+      // if(ereg("perte 100%", $ping))
+      // {
+      //   $system->setEtat('Offline');
+      // }
+      // else
+      // {
+      //   $system->setEtat('Online');
+      // }
+      }
+    
+       return $this->render('system/consultation.html.twig', array(
+            'systemListe' => $systemListe
+        ));
+>>>>>>> 3297277e449a2c77a2891d3b51c0078b15b8781b
 
     return new Response($system);
   }
