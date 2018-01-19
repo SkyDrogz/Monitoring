@@ -90,6 +90,7 @@ class SystemController extends Controller
       // $command=null;
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
+        if($system->getActif()== 1){
         if($system->getCategSysteme()->getCategorie() == "Serveur"){
         $command = exec('ping '.$system->getUrl()." -n 1");
         if (preg_match("#Minimum#",$command))
@@ -109,13 +110,15 @@ class SystemController extends Controller
            CURLOPT_RETURNTRANSFER => true,
          ));
         // Récupération de l'URL et affichage sur le navigateur
-          if (curl_exec($curl)=== true)
+        $str =curl_exec($curl);
+       
+          if ($str === false)
         {
-          $system->setEtat('Online');
+          $system->setEtat('Offline');
         }
         else
         {
-          $system->setEtat('Offline');
+          $system->setEtat('Online');
         }
 
         // Fermeture de la session cURL
@@ -143,7 +146,7 @@ class SystemController extends Controller
           {
             curl_close($curl);
             $system->setEtat("Offline (Serveur)");
-            return new Response($system);
+            
           }
           else
           {
@@ -159,26 +162,25 @@ class SystemController extends Controller
               } else {
                 $system->setEtat('Online');
               }
-              return $this->render('system/consultation.html.twig', array(
-                'systemListe' => $systemListe
-              ));
-              return new Response($system);
             }
             else {
   
               $system->setEtat('Offline (Résultat attendu introuvable)');
-             
-              return new Response($response);
             }
-     
-           return $this->render('system/consultation.html.twig', array(
-              'systemListe' => $systemListe
-            ));
+            
           }
+          
         }
+        
       }
+      
     }
 
+      return $this->render('system/consultation.html.twig', array(
+        'systemListe' => $systemListe
+      ));
+      return new Response($system);
+  }
     
     
   
