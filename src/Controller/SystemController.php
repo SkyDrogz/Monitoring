@@ -82,41 +82,21 @@ class SystemController extends Controller
 
 
   }
-
-<<<<<<< HEAD
-  /**
-  * @Route("/system/consultation", name="system_consultation")
-  */
-  public function consultation()
-  {
-    $command=null;
-    $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
-    foreach($systemListe as $system){
-      if($system->getCategSysteme()->getCategorie() == "Serveur"){
-        $command = exec('ping '.$system->getUrl()." -t 1");
-        if (preg_match("#Minimum#",$command))
-        {
-          $system->setEtat('Online');
-        }
-        else
-        {
-          $system->setEtat('Offline');
-        }
-=======
     /**
      * @Route("/system/consultation", name="system_consultation")
      */
     public function consultation()
     {
-      // $command=null; 
+      // $command=null;
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
+        if($system->getCategSysteme()->getCategorie() == "Serveur"){
       $command = exec('ping '.$system->getUrl()." -n 1");
       if (preg_match("#Minimum#",$command))
       {
         $system->setEtat('Online');
->>>>>>> 3297277e449a2c77a2891d3b51c0078b15b8781b
       }
+    }
       if($system->getCategSysteme()->getCategorie() == "API"){
 
         $curl = curl_init();
@@ -137,49 +117,46 @@ class SystemController extends Controller
             "Postman-Token: a9414de1-6e95-fbc7-9c3c-94983fa42efb"
           ),
         ));
+        if(curl_exec($curl) === false)
+        {
+          curl_close($curl);
+          $system->setEtat("Offline (Serveur)");
+          return $this->render('system/consultation.html.twig', array(
+            'systemListe' => $systemListe
+          ));
+          return new Response($system);
+        }
+        else
+        {
+          $response = curl_exec($curl);
+          $err = curl_error($curl);
+          curl_close($curl);
+          //Test résultat attendu
+          if(preg_match("#".$system->getResultatAttendu()."#",$response))
+          {
+            //Test requete JSON
+            if (preg_match("#error#",$response)) {
+              $system->setEtat('Offline (Requête JSON incorrecte)');
+            } else {
+              $system->setEtat('Online');
+            }
+            return $this->render('system/consultation.html.twig', array(
+              'systemListe' => $systemListe
+            ));
+            return new Response($system);
+          }
+          else {
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+            $system->setEtat('Offline (Résultat attendu introuvable)');
+            return $this->render('system/consultation.html.twig', array(
+              'systemListe' => $systemListe
+            ));
+            return new Response($response);
+          }
 
-        curl_close($curl);
-        $system->setEtat($response);
-
-        if (preg_match("#error#",$response)) {
-          $system->setEtat('Offline');
-        } else {
-          $system->setEtat('Online');
         }
       }
-<<<<<<< HEAD
     }
-    return $this->render('system/consultation.html.twig', array(
-      'systemListe' => $systemListe
-    ));
-=======
-      // $homepage = file_get_contents($system->getUrl());
-      // if(preg_match("#!doctype html#",$homepage))
-      // {
-      //   $system->setEtat('Online');
-      // }
-      // else{
-      //   $system->setEtat('Offline');
-      // $ping = exec("ping -n 1".$system->getUrl());
-      // if(ereg("perte 100%", $ping))
-      // {
-      //   $system->setEtat('Offline');
-      // }
-      // else
-      // {
-      //   $system->setEtat('Online');
-      // }
-      }
-    
-       return $this->render('system/consultation.html.twig', array(
-            'systemListe' => $systemListe
-        ));
->>>>>>> 3297277e449a2c77a2891d3b51c0078b15b8781b
-
-    return new Response($system);
   }
   /**
   * @Route("/system/suppression/{id}", name="system_suppression")

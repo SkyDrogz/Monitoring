@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityRepository;
@@ -18,9 +19,10 @@ class SystemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('nom', TextType::class, array('label'=>'Nom :'))
-        -> add ('url', TextType::class, array('label'=>'URL : '))
-        ->add('categSysteme', EntityType::class, array(
+        -> add ('nom', TextType::class, array('required' => true, 'label'=>'Nom :'))
+        -> add ('url', TextType::class, array('required' => true, 'label'=>'URL : '))
+        -> add('categSysteme', EntityType::class, array(
+            'required' => true,
             'label'=>'Categorie :',
             'class' => categSysteme::class,
             'query_builder' => function (EntityRepository $er) {
@@ -28,9 +30,12 @@ class SystemType extends AbstractType
                     ->orderBy('cs.categorie', 'ASC');
             },
             'choice_label' => 'categorie',))
-            -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
+
+        -> add ('requete', TextareaType::class, array('required' => true, 'label'=>'Requête JSON : '))
+
+        -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
             ;
-        
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

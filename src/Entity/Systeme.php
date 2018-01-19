@@ -37,6 +37,10 @@ class Systeme
      */
     private $requete;
     /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $resultatAttendu;
+    /**
      * @ORM\Column(type="boolean",options={"default"=true})
      */
     private $actif;
@@ -56,6 +60,10 @@ class Systeme
     public function getRequete()
     {
       return $this->requete;
+    }
+    public function getResultatAttendu()
+    {
+      return $this->resultatAttendu;
     }
     public function getNom()
     {

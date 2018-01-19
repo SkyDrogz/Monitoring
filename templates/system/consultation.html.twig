@@ -24,7 +24,11 @@
             <td></td>
             <td>{{ system.url }}</td>
             <td></td>
-            <td>{{ system.etat }}</td>
+            {% if system.etat == "Online" %}
+            <td><font color="green"><b>{{ system.etat }}</b></color></td>
+            {%else%}
+            <td><font color="red"><b>{{ system.etat }}</b></color></td>
+            {%endif%}
             <td></td>
             <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning">Modification du système</a></td>
             <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger">Suppression du système</a></td>
@@ -33,8 +37,8 @@
     {% endfor %}
 
 </table>
-<SCRIPT language="JavaScript"> 
-window.location.reload() 
-</script> 
+<SCRIPT language="JavaScript">
+window.location.reload()
+</script>
 <a href="{{ path('system') }}" class="btn btn-default">Retour</a>
 {%endblock%}
