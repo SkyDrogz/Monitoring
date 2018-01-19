@@ -33,15 +33,23 @@ class Systeme
      */
     private $diagnostic;
     /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $requete;
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $resultatAttendu;
+    /**
      * @ORM\Column(type="boolean",options={"default"=true})
      */
     private $actif;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
+     * @ORM\ManyToOne(targetEntity="App\Entity\CategSysteme")
      */
     private $categSysteme;
 
-    
+
     public function __construct(){
         $this->actif = true;
     }
@@ -49,6 +57,14 @@ class Systeme
 
 
     //Getter
+    public function getRequete()
+    {
+      return $this->requete;
+    }
+    public function getResultatAttendu()
+    {
+      return $this->resultatAttendu;
+    }
     public function getNom()
     {
         return $this->nomSysteme;
@@ -74,6 +90,10 @@ class Systeme
         return $this->categSysteme;
     }
     //Setter
+    public function setRequete($requete)
+    {
+      $this->requete = $requete;
+    }
     public function setNom($nomSysteme)
     {
         $this->nomSysteme = $nomSysteme;
