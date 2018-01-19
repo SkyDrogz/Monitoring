@@ -48,6 +48,15 @@ class Systeme
      * @ORM\ManyToOne(targetEntity="App\Entity\CategSysteme")
      */
     private $categSysteme;
+     /**
+     * @ORM\Column(type="dateTime",nullable=true)
+     */
+    private $dateOffline;
+     /**
+     * @ORM\Column(type="integer",nullable=false)
+     */
+    private $repetition;
+
 
 
     public function __construct(){
