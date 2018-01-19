@@ -28,11 +28,13 @@ class CategSysteme
     {
         return $this->categorie;
     }
-    public function setId($id){
-        $this->id=$id;
+    public function setId($id)
+    {
+        $this->id = $id;
     }
-    public function setCategorie($categorie){
-        $this->categorie=$categorie;
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
     }
     // add your own fields
 }

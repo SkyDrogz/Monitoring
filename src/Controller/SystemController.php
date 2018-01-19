@@ -86,9 +86,10 @@ class SystemController extends Controller
     /**
      * @Route("/system/consultation", name="system_consultation")
      */
-    public function consultation()
+    public function consultation(\Swift_Mailer $mailer)
     {
       // $command=null; 
+      $name="ok";
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
       $command = exec('ping '.$system->getUrl()." -n 1");
@@ -100,22 +101,50 @@ class SystemController extends Controller
       {
         $system->setEtat('Offline');
       }
-      // $homepage = file_get_contents($system->getUrl());
-      // if(preg_match("#!doctype html#",$homepage))
-      // {
-      //   $system->setEtat('Online');
-      // }
-      // else{
-      //   $system->setEtat('Offline');
-      // $ping = exec("ping -n 1".$system->getUrl());
-      // if(ereg("perte 100%", $ping))
-      // {
-      //   $system->setEtat('Offline');
-      // }
+         // Création d'une nouvelle ressource cURL
+        $curl = curl_init();
+
+        // Configuration de l'URL et d'autres options
+        curl_setopt_array($curl,array(
+        CURLOPT_URL=> $system->getUrl(),
+         CURLOPT_RETURNTRANSFER=>true,
+        ));
+        // Récupération de l'URL et affichage sur le navigateur
+        curl_exec($curl);
+
+        // Fermeture de la session cURL
+        curl_close($curl);
+       
+        if ($curl=== true)
+        {
+          $system->setEtat('Online');
+        }
+        else
+        {
+          $system->setEtat('Offline');
+        }
+
+      
       // else
       // {
       //   $system->setEtat('Online');
       // }
+        // if ($system->getEtat()=='Offline')
+        // {
+        //   $message = (new \Swift_Message('Alerte'.$system->getNom()."Est down!"))
+        //   ->setFrom('noreply@nexus-creation.com')
+        //   ->setTo('timothee.nitharum@gmail.com')
+        //   ->setBody(
+        //       $this->renderView(
+        //           // templates/emails/registration.html.twig
+        //           'emails/registration.html.twig',
+        //           array('name' => $system->getNom())
+        //       ),
+        //       'text/html'
+              
+        //     );
+        //     $mailer->send($message);
+        // }
       }
     
        return $this->render('system/consultation.html.twig', array(
