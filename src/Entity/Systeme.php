@@ -98,6 +98,14 @@ class Systeme
     {
         return $this->categSysteme;
     }
+    public function getDateOffline()
+    {
+        return $this->dateOffline;
+    }
+    public function getRepetition()
+    {
+        return $this->repetition;
+    }
     //Setter
     public function setRequete($requete)
     {
@@ -122,5 +130,13 @@ class Systeme
     public function setCategSysteme($categSysteme)
     {
         $this->categSyteme=$categSysteme;
+    }
+    public function setDateOffline($dateOffline)
+    {
+        $this->dateOffline=$dateOffline;
+    }
+    public function setRepetion($repetition)
+    {
+        $this->repetition=$repetition;
     }
 }
