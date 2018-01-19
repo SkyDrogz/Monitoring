@@ -47,6 +47,7 @@ class SystemController extends Controller
       $em = $this->getDoctrine()->getManager();
       $em->persist($systeme);
       $em->flush();
+      $request->getSession()->getFlashBag()->add('info', "Le système à bien été rajouté.");
       return $this->redirectToRoute('system_new');
     }
 
@@ -96,6 +97,9 @@ class SystemController extends Controller
       {
         $system->setEtat('Online');
       }
+      else {
+      $system->setEtat('Offline');
+    }
     }
       if($system->getCategSysteme()->getCategorie() == "API"){
 
@@ -121,10 +125,6 @@ class SystemController extends Controller
         {
           curl_close($curl);
           $system->setEtat("Offline (Serveur)");
-          return $this->render('system/consultation.html.twig', array(
-            'systemListe' => $systemListe
-          ));
-          return new Response($system);
         }
         else
         {
@@ -140,22 +140,17 @@ class SystemController extends Controller
             } else {
               $system->setEtat('Online');
             }
-            return $this->render('system/consultation.html.twig', array(
-              'systemListe' => $systemListe
-            ));
-            return new Response($system);
           }
           else {
-
             $system->setEtat('Offline (Résultat attendu introuvable)');
-            return $this->render('system/consultation.html.twig', array(
-              'systemListe' => $systemListe
-            ));
-            return new Response($response);
           }
 
         }
       }
+      return $this->render('system/consultation.html.twig', array(
+        'systemListe' => $systemListe
+      ));
+      return new Response($system);
     }
   }
   /**
