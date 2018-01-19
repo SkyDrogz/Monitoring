@@ -86,7 +86,7 @@ class SystemController extends Controller
     /**
      * @Route("/system/consultation", name="system_consultation")
      */
-    public function consultation()
+    public function consultation(Request $request)
     {
       // $command=null;
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
@@ -174,6 +174,25 @@ class SystemController extends Controller
         }
         
       }
+      $today = new \Datetime();
+      $diff=$system->getDateOffline()->diff($today);
+      if($system->getEtat()=="Offline" && $diff->i>=$system->getRepetition()){
+        // $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+         $system->setDateOffline($date);
+         $curl = curl_init();
+
+         curl_setopt_array($curl, array(
+           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".$system->getCategSysteme()->getCategorie().$system->getNom()."estOffline&num=0612992129",
+           CURLOPT_RETURNTRANSFER => true,
+         ));
+        curl_exec($curl);
+
+  
+      }
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($system);
+      $em->flush();
       
     }
 
