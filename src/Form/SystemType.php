@@ -31,8 +31,7 @@ class SystemType extends AbstractType
             },
             'choice_label' => 'categorie',))
 
-        -> add ('requete', TextareaType::class, array('required' => true, 'label'=>'Requête JSON : '))
-
+        -> add ('requete', TextareaType::class, array('required' => false, 'label'=>'Requête JSON : '))
         -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
             ;
 
