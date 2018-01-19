@@ -49,11 +49,11 @@ class Systeme
      */
     private $categSysteme;
      /**
-     * @ORM\Column(type="dateTime",nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $dateOffline;
      /**
-     * @ORM\Column(type="integer",nullable=false)
+     * @ORM\Column(type="integer",nullable=true,options={"default"=5})
      */
     private $repetition;
 
