@@ -183,7 +183,7 @@ class SystemController extends Controller
          $curl = curl_init();
 
          curl_setopt_array($curl, array(
-           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".$system->getCategSysteme()->getCategorie().$system->getNom()."estOffline&num=0612992129",
+           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".urlencode($system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")."&num=0613710486",
            CURLOPT_RETURNTRANSFER => true,
          ));
         curl_exec($curl);

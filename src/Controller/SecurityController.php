@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Entity\User;
 
 class SecurityController extends Controller
 {
@@ -15,6 +16,9 @@ class SecurityController extends Controller
    */
   public function login()
   {
-      return $this->render('admin/login.html.twig');
+    $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('admin/login.html.twig', array(
+            'userListe' => $userListe
+        ));
   }
 }
