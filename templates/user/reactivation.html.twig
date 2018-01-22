@@ -14,6 +14,7 @@
         <th>Role</th>
         <th>Téléphone</th>
         <th>E-maill</th>
+        <th>Entreprise</th>
         <th>Date connexion</th>
         <th>Date deconnexion</th>
     </tr>
@@ -26,6 +27,7 @@
             <td>{{ user.role }}</td>
             <td>{{ user.Tel }}</td>
             <td>{{ user.email }}</td>
+            <td>{{ user.entreprise.libelle }}</td>
             <td>{{user.dateConnexion|date("m/d/y")}}</td>
             <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
             <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">réactiver l'utilisateur</a></td>

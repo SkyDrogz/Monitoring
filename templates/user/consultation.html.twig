@@ -17,6 +17,8 @@
         <th></th>
         <th>E-maill</th>
         <th></th>
+        <th>Entreprise</th>
+        <th></th>
         <th>Date connexion</th>
         <th></th>
         <th>Date deconnexion</th>
@@ -34,6 +36,8 @@
                 <td>{{ user.Tel }}</td>
                 <td></td>
                 <td>{{ user.email }}</td>
+                <td></td>
+                <td>{{ user.entreprise.libelle }}</td>
                 <td></td>
                 <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                 <td></td>
