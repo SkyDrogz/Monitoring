@@ -199,7 +199,7 @@ class SystemController extends Controller
         $message = (new \Swift_Message('Alerte serveur'))
         ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
         ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
-        ->setBody("Attention, ".$system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")
+        ->setBody($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le ".date_format($system->getDateOffline(),"Y-m-d H:i:s"))
         ;
 
         // Envoie du message
