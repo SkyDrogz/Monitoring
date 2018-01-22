@@ -176,14 +176,16 @@ class SystemController extends Controller
 
       $today = new \Datetime();
       $diff=$system->getDateOffline()->diff($today);
-      if($system->getEtat()=="Offline" && $diff->i>=$system->getRepetition()&& $system->getNiveauUrgence()== 1){
+      if($system->getEtat()!=="Online" && $diff->i>=$system->getRepetition()&& $system->getNiveauUrgence()== 1 ){
         $date = date_create(date("Y-m-d H:i:s"));
         $date = new \Datetime();
          $system->setDateOffline($date);
          $curl = curl_init();
         
          curl_setopt_array($curl, array(
-           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".urlencode($system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")."&num=0613710486",
+           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".
+           urlencode($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le "
+           .date_format($system->getDateOffline(),"Y-m-d H:i:s"))."&num=".$system->getUser()->getTel(),
            CURLOPT_RETURNTRANSFER => true,
          ));
         curl_exec($curl);
@@ -196,9 +198,9 @@ class SystemController extends Controller
         $mailer = new \Swift_Mailer($transport);
 
         // Creation du message
-        $message = (new \Swift_Message('Alerte serveur'))
-        ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
-        ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
+        $message = (new \Swift_Message('Alerte Offline'))
+          ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
+          ->setTo([$system->getUser()->getEmail() => $system->getUser()->getIdentifiant()])
         ->setBody($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le ".date_format($system->getDateOffline(),"Y-m-d H:i:s"))
         ;
 
@@ -216,10 +218,10 @@ class SystemController extends Controller
           $mailer = new \Swift_Mailer($transport);
   
           // Creation du message
-          $message = (new \Swift_Message('Alerte serveur'))
-          ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
-          ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
-          ->setBody("Attention, ".$system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")
+          $message = (new \Swift_Message('Alerte Offline'))
+          ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
+          ->setTo([$system->getUser()->getEmail() => $system->getUser()->getIdentifiant()])
+          ->setBody($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le ".date_format($system->getDateOffline(),"Y-m-d H:i:s"))
           ;
   
           // Envoie du message
