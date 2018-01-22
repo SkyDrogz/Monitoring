@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\SystemType;
 
 class SystemController extends Controller
 {
@@ -25,23 +24,8 @@ class SystemController extends Controller
   /**
   * @Route("/system", name="system")
   */
-  public function index(\Swift_Mailer $mailer)
+  public function index()
   {
-    // Récupération du service
-        $mailer = $this->get('mailer');
-
-        // Création de l'e-mail : le service mailer utilise SwiftMailer, donc nous créons une instance de Swift_Message
-        $message = (new \Swift_Message('Hello Email'))
-          ->setSubject('Email ALERTE')
-          ->setFrom('noreply@nexus-creation.com')
-          ->setTo('baptiste.rossignol@hotmail.fr')
-          ->setBody('Coucou, voici un email que vous venez de recevoir !');
-
-        // Retour au service mailer, nous utilisons sa méthode « send() » pour envoyer notre $message
-        $mailer->send($message);
-
-        // N'oublions pas de retourner une réponse, par exemple une page qui afficherait « L'e-mail a bien été envoyé »
-        return new Response('Email bien envoyé');
     // exit;
     // replace this line with your own code!
     return $this->render('system/index.html.twig');
@@ -183,21 +167,11 @@ class SystemController extends Controller
 
               $system->setEtat('Offline (Résultat attendu introuvable)');
             }
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> f5a6b2c9fe34108f62b13570ecd1d527dfa1d61c
           }
 
         }
 
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> f5a6b2c9fe34108f62b13570ecd1d527dfa1d61c
     }
 
       return $this->render('system/consultation.html.twig', array(
@@ -246,6 +220,26 @@ class SystemController extends Controller
     return $this->redirectToRoute('system_active');
   }
 
+  public function mailAlerte()
+  {
+    // Creation du transport
+    $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
+    ->setUsername('noreply@nexus-creation.com')
+    ->setPassword('noreply60')
+    ;
+
+    $mailer = new \Swift_Mailer($transport);
+
+    // Creation du message
+    $message = (new \Swift_Message('Alerte serveur'))
+    ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
+    ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
+    ->setBody("Attention, un de vos serveurs s'est retrouvé Offline.")
+    ;
+
+    // Envoie du message
+    $result = $mailer->send($message);
+    }
 
 
 

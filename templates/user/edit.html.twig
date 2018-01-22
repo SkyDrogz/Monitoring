@@ -1,4 +1,20 @@
-Modification utilisateur : 
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Modifier l'utilisateur
+{%endblock%}
+{%block body %}
+<style>
+label
+{
+display: block;
+}
+</style>
+<h1><b>Modification d'un utilisateur</b></h1>
 {{ form_start(form)}}
 {{ form_widget(form)}}
+</br>
 {{ form_end(form)}}
+
+<a href="{{ path('user_consultation') }}" class="btn btn-warning">Retour à la liste</a>
+
+{%endblock%}
