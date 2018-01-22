@@ -37,11 +37,11 @@ class User
      */
     private $tel;
     /**
-     * @ORM\Column(type="date",nullable=true)
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $dateConnexion;
     /**
-     * @ORM\Column(type="date",nullable=true)
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $dateDeconnexion;
      /**

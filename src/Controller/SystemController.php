@@ -183,13 +183,21 @@ class SystemController extends Controller
 
               $system->setEtat('Offline (Résultat attendu introuvable)');
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> f5a6b2c9fe34108f62b13570ecd1d527dfa1d61c
           }
 
         }
 
       }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> f5a6b2c9fe34108f62b13570ecd1d527dfa1d61c
     }
 
       return $this->render('system/consultation.html.twig', array(

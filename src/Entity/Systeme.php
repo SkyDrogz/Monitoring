@@ -48,6 +48,15 @@ class Systeme
      * @ORM\ManyToOne(targetEntity="App\Entity\CategSysteme")
      */
     private $categSysteme;
+     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateOffline;
+     /**
+     * @ORM\Column(type="integer",nullable=true,options={"default"=5})
+     */
+    private $repetition;
+
 
 
     public function __construct(){
@@ -89,6 +98,14 @@ class Systeme
     {
         return $this->categSysteme;
     }
+    public function getDateOffline()
+    {
+        return $this->dateOffline;
+    }
+    public function getRepetition()
+    {
+        return $this->repetition;
+    }
     //Setter
     public function setRequete($requete)
     {
@@ -113,5 +130,13 @@ class Systeme
     public function setCategSysteme($categSysteme)
     {
         $this->categSyteme=$categSysteme;
+    }
+    public function setDateOffline($dateOffline)
+    {
+        $this->dateOffline=$dateOffline;
+    }
+    public function setRepetion($repetition)
+    {
+        $this->repetition=$repetition;
     }
 }
