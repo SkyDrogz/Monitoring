@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\SystemType;
 
 class SystemController extends Controller
 {
@@ -85,7 +86,7 @@ class SystemController extends Controller
     /**
      * @Route("/system/consultation", name="system_consultation")
      */
-    public function consultation()
+    public function consultation(Request $request)
     {
       // $command=null;
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
@@ -172,6 +173,43 @@ class SystemController extends Controller
         }
 
       }
+
+      $today = new \Datetime();
+      $diff=$system->getDateOffline()->diff($today);
+      if($system->getEtat()=="Offline" && $diff->i>=$system->getRepetition()){
+        $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+         $system->setDateOffline($date);
+        //  $curl = curl_init();
+        //
+        //  //curl_setopt_array($curl, array(
+        //    CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".urlencode($system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")."&num=0613710486",
+        //    CURLOPT_RETURNTRANSFER => true,
+        //  ));
+        // curl_exec($curl);
+        // Creation du transport
+        $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
+        ->setUsername('noreply@nexus-creation.com')
+        ->setPassword('noreply60')
+        ;
+
+        $mailer = new \Swift_Mailer($transport);
+
+        // Creation du message
+        $message = (new \Swift_Message('Alerte serveur'))
+        ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
+        ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
+        ->setBody("Attention, ".$system->getCategSysteme()->getCategorie()." ".$system->getNom()." est Offline")
+        ;
+
+        // Envoie du message
+        $result = $mailer->send($message);
+
+
+      }
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($system);
+      $em->flush();
     }
 
       return $this->render('system/consultation.html.twig', array(
@@ -219,27 +257,6 @@ class SystemController extends Controller
 
     return $this->redirectToRoute('system_active');
   }
-
-  public function mailAlerte()
-  {
-    // Creation du transport
-    $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
-    ->setUsername('noreply@nexus-creation.com')
-    ->setPassword('noreply60')
-    ;
-
-    $mailer = new \Swift_Mailer($transport);
-
-    // Creation du message
-    $message = (new \Swift_Message('Alerte serveur'))
-    ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création - Alerte'])
-    ->setTo(['baptiste.rossignol@hotmail.fr' => 'Baptiste'])
-    ->setBody("Attention, un de vos serveurs s'est retrouvé Offline.")
-    ;
-
-    // Envoie du message
-    $result = $mailer->send($message);
-    }
 
 
 

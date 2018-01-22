@@ -49,14 +49,17 @@ class Systeme
      */
     private $categSysteme;
      /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",options={"default"="0000-00-00 00:00:00"})
      */
     private $dateOffline;
      /**
      * @ORM\Column(type="integer",nullable=true,options={"default"=5})
      */
     private $repetition;
-
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
 
 
     public function __construct(){
@@ -106,6 +109,10 @@ class Systeme
     {
         return $this->repetition;
     }
+    public function getUser()
+    {
+        return $this->user;
+    }
     //Setter
     public function setRequete($requete)
     {
@@ -138,5 +145,9 @@ class Systeme
     public function setRepetion($repetition)
     {
         $this->repetition=$repetition;
+    }
+    public function setUser($user)
+    {
+        $this->user=$user;
     }
 }

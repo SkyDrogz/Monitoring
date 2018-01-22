@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %}
 {%block title %}
+<<<<<<< HEAD
     {{parent()}} - Modifier l'utilisateur
 {%endblock%}
 {%block body %}
@@ -18,3 +19,18 @@ display: block;
 <a href="{{ path('user_consultation') }}" class="btn btn-warning">Retour à la liste</a>
 
 {%endblock%}
+=======
+    {{parent()}} - Modification utilisateur 
+{%endblock%}
+{%block body %}
+
+<h1><b>Modification utilisateur : </b></h1>
+
+{{ form_start(form)}}
+{{ form_widget(form)}}
+{{ form_end(form)}}
+
+<a href="{{ path('user_consultation') }}" class="btn btn-default">Retour à la liste</a>
+<a href="{{ path('user') }}" class="btn btn-info">Accueil</a>
+{%endblock%}
+>>>>>>> dde38df36184a36999ab53c95efaaff51a134a7a
