@@ -5,7 +5,7 @@
 {%block body %}
 <h1>Liste des utilisateurs</h1>
 
-<table width="120%">
+<table width="150%">
 
 
     <tr>
@@ -35,13 +35,13 @@
                 <td></td>
                 <td>{{ user.email }}</td>
                 <td></td>
-                <td>{{user.dateConnexion|date("m/d/y")}}</td>
+                <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                 <td></td>
-                <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
+                <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
                 <td></td>
-                <td><a href="{{path('user_edit',{'id' : user.id}) }}" class="btn btn-warning"> Modifier l'utilisateur</a></td>
+                <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"> Modification l'utilisateur</a></td>
                 <td></td>
-                <td><a href="{{path('user_suppression',{'id' : user.id}) }}" class="btn btn-danger"> Supprimer l'utilisateur</a></td>
+                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"class="btn btn-danger"> Supprimer l'utilisateur</a></td>
 
             </tr>
         {% endif %}
