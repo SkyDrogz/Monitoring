@@ -146,7 +146,7 @@ class Systeme
     }
     public function setCategSysteme($categSysteme)
     {
-        $this->categSyteme=$categSysteme;
+        $this->categSysteme=$categSysteme;
     }
     public function setDateOffline($dateOffline)
     {

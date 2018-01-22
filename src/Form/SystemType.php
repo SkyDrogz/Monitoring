@@ -25,7 +25,7 @@ class SystemType extends AbstractType
         -> add('categSysteme', EntityType::class, array(
             'required' => true,
             'label'=>'Categorie :',
-            'class' => categSysteme::class,
+            'class' => CategSysteme::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('cs')
                     ->orderBy('cs.categorie', 'ASC');
