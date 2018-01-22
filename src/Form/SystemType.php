@@ -30,6 +30,12 @@ class SystemType extends AbstractType
                     ->orderBy('cs.categorie', 'ASC');
             },
             'choice_label' => 'categorie',))
+            ->add('niveauUrgence', ChoiceType::class, array(
+                'choices' => array(
+                    'Urgent' => 1,
+                    'mineur' => 0,
+                    
+                )))
 
         -> add ('requete', TextareaType::class, array('required' => false, 'label'=>'Requête JSON : '))
         -> add ('save', SubmitType::class, array('label'=>'Ajouter'))

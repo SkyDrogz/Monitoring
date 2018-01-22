@@ -60,6 +60,10 @@ class Systeme
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
+     /**
+     * @ORM\Column(type="integer",nullable=true,options={"default"=1})
+     */
+    private $niveauUrgence;
 
 
     public function __construct(){
@@ -69,6 +73,10 @@ class Systeme
 
 
     //Getter
+    public function getNiveauUrgence()
+    {
+        return $this->niveauUrgence;
+    }
     public function getRequete()
     {
       return $this->requete;
@@ -149,5 +157,9 @@ class Systeme
     public function setUser($user)
     {
         $this->user=$user;
+    }
+    public function setNiveauUrgence($niveauUrgence)
+    {
+        $this->niveauUrgence=$niveauUrgence;
     }
 }
