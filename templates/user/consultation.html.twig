@@ -39,9 +39,9 @@
                 <td></td>
                 <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
                 <td></td>
-                <td><a href="{{path('user_edit',{'id' : user.id}) }}"> Modification des paramètre de l'utilisateur</a></td>
+                <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"> Modification des paramètre de l'utilisateur</a></td>
                 <td></td>
-                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"> Supprimer l'utilisateur</a></td>
+                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"class="btn btn-danger"> Supprimer l'utilisateur</a></td>
 
             </tr>
         {% endif %}

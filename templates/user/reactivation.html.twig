@@ -1,8 +1,12 @@
-
+{% extends "base.html.twig" %}
+{%block title %}
+    {{parent()}} - Liste des utilisateurs
+{%endblock%}
+{%block body %}
 <title>Liste des Utilisateurs</title>
 <h1>Liste des Utilisateurs</h1>
 
-<table>
+<table width="100%">
 
 
     <tr>
@@ -24,13 +28,13 @@
             <td>{{ user.email }}</td>
             <td>{{user.dateConnexion|date("m/d/y")}}</td>
             <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
-            <td><a href="{{ path('user_reactive', {'id' : user.id}) }}">réactiver l'utilisateur</a></td>
+            <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">réactiver l'utilisateur</a></td>
             
         </tr>
         {%endif%}
     {% endfor %}
 
 </table>
-
-<a href="{{ path('user') }}">Retour</a>
+<a href="{{ path('user') }}" class="btn btn-default">Retour</a>
+{%endblock%}
 
