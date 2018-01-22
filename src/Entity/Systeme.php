@@ -49,11 +49,11 @@ class Systeme
      */
     private $categSysteme;
      /**
-     * @ORM\Column(type="datetime",options={"default"="0000-00-00 00:00:00"})
+     * @ORM\Column(type="datetime")
      */
     private $dateOffline;
      /**
-     * @ORM\Column(type="integer",nullable=true,options={"default"=5})
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $repetition;
     /**
@@ -68,6 +68,8 @@ class Systeme
 
     public function __construct(){
         $this->actif = true;
+        $this->dateOffline = new \Datetime();
+        $this->repetition =5;
     }
 
 

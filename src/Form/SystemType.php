@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Systeme;
 use App\Entity\CategSysteme;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,14 +31,27 @@ class SystemType extends AbstractType
                     ->orderBy('cs.categorie', 'ASC');
             },
             'choice_label' => 'categorie',))
+
+            -> add('user', EntityType::class, array(
+                'required' => true,
+                'label'=>'Utilisateur référent (recevras les notifications de pannes) :',
+                'class' => User::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.identifiant', 'ASC');
+                },
+                'choice_label' => 'identifiant',))
+
+
             ->add('niveauUrgence', ChoiceType::class, array(
                 'choices' => array(
                     'Urgent' => 1,
-                    'mineur' => 0,
-                    
+                    'Mineur' => 0,
+
                 )))
 
-        -> add ('requete', TextareaType::class, array('required' => false, 'label'=>'Requête JSON : '))
+        -> add ('requete', TextareaType::class, array('required' => false, 'label'=>'Requête JSON (pour API): '))
+        -> add ('resultatAttendu', TextType::class, array('required' => false, 'label'=>'Résultat attendu à la requête (Pour API): '))
         -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
             ;
 
