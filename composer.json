@@ -14,11 +14,8 @@
         "symfony/lts": "^4@dev",
         "symfony/maker-bundle": "^1.0",
         "symfony/orm-pack": "^1.0",
-<<<<<<< HEAD
         "symfony/security-bundle": "^4.0",
-=======
         "symfony/swiftmailer-bundle": "^3.1",
->>>>>>> 6ea41a3191f61325b9f20da2fae09d6b13b118c6
         "symfony/validator": "^4.0",
         "symfony/yaml": "^4.0"
     },
