@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -58,12 +58,16 @@ class User
     public function __construct(){
         $this->actif = true;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
     public function getIdentifiant()
+    {
+        return $this->identifiant;
+    }
+    public function getUsername()
     {
         return $this->identifiant;
     }

@@ -14,13 +14,6 @@ use App\Form\SystemType;
 class SystemController extends Controller
 {
   /**
-     * @Route("/admin")
-     */
-    public function admin()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
-  /**
   * @Route("/", name="index")
   */
   public function indexAccueil()
