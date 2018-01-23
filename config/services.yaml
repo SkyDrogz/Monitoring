@@ -3,15 +3,6 @@
 parameters:
     locale: 'en'
 
-swiftmailer:
-    transport:  smtp
-    encryption: ssl
-    auth_mode:  login
-    host:       ssl0.ovh.net
-    port:       465
-    username:   noreply@nexus-creation.com
-    password:   noreply60
-
 services:
     # default configuration for services in *this* file
     _defaults:

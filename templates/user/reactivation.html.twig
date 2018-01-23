@@ -13,7 +13,7 @@
         <th>Identifiant</th>
         <th>Role</th>
         <th>Téléphone</th>
-        <th>E-maill</th>
+        <th>E-mail</th>
         <th>Entreprise</th>
         <th>Date connexion</th>
         <th>Date deconnexion</th>
@@ -24,14 +24,14 @@
         {% if user.actif == false %}
         <tr>
             <td>{{ user.identifiant}}</td>
-            <td>{{ user.role }}</td>
+            <td>{{ user.role.nomRole }}</td>
             <td>{{ user.Tel }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.entreprise.libelle }}</td>
             <td>{{user.dateConnexion|date("m/d/y")}}</td>
             <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
             <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">réactiver l'utilisateur</a></td>
-            
+
         </tr>
         {%endif%}
     {% endfor %}
@@ -39,4 +39,3 @@
 </table>
 <a href="{{ path('user') }}" class="btn btn-default">Retour</a>
 {%endblock%}
-

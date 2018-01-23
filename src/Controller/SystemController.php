@@ -14,6 +14,13 @@ use App\Form\SystemType;
 class SystemController extends Controller
 {
   /**
+     * @Route("/admin")
+     */
+    public function admin()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
+  /**
   * @Route("/", name="index")
   */
   public function indexAccueil()
@@ -181,7 +188,7 @@ class SystemController extends Controller
         $date = new \Datetime();
          $system->setDateOffline($date);
          $curl = curl_init();
-        
+
          curl_setopt_array($curl, array(
            CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".
            urlencode($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le "
@@ -214,16 +221,16 @@ class SystemController extends Controller
           ->setUsername('noreply@nexus-creation.com')
           ->setPassword('noreply60')
           ;
-  
+
           $mailer = new \Swift_Mailer($transport);
-  
+
           // Creation du message
           $message = (new \Swift_Message('Alerte Offline'))
           ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
           ->setTo([$system->getUser()->getEmail() => $system->getUser()->getIdentifiant()])
           ->setBody($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le ".date_format($system->getDateOffline(),"Y-m-d H:i:s"))
           ;
-  
+
           // Envoie du message
           $result = $mailer->send($message);
       }
