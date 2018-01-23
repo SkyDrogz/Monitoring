@@ -23,7 +23,7 @@ display: block;
 
     {% if error %}
         {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
-          <div>Mot de passe invalide.</div>
+          <div><font color="red"><b>Identifiant ou mot de passe invalide.</b></font></div>
           {%endif%}
     {% endif %}
 
