@@ -18,6 +18,7 @@ class UserController extends Controller
   {
     $user = $this->getUser();
     $roleuser = $user->getRole()->getNomRole();
+    dump($roleuser);
     if($roleuser == "ROLE_ADMIN")
     {
       $role = "administrateur";
@@ -33,6 +34,8 @@ class UserController extends Controller
   'message' => $message,
   'messageBis' => $messageBis,
   'roleuser' => $roleuser));
+
+  return new Response($roleuser);
   }
     /**
      * @Route("/user", name="user")
