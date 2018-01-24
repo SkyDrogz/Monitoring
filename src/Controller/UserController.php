@@ -15,7 +15,7 @@ class UserController extends Controller
   * @Route("/", name="index")
   */
   public function indexAccueil()
-  {
+{
     $user = $this->getUser();
     $roleuser = $user->getRole()->getNomRole();
     if($roleuser == "ROLE_ADMIN")
@@ -25,6 +25,15 @@ class UserController extends Controller
     else {
       $role = "utilisateur";
     }
+
+    $date = date_create(date("Y-m-d H:i:s"));
+    $date = new \Datetime();
+    $em = $this->getDoctrine()->getManager();
+    $user->setDateConnexion($date);
+    $em->persist($user);
+    $em->flush();
+
+    
     $message = "Bonjour " . $user->getIdentifiant() . ", vous êtes connecté en tant que ".$role." pour l'entreprise ".$user->getEntreprise()->getLibelle().".";
     $messageBis = "Cliquez ici pour visualiser la liste des systèmes.";
     // exit;
