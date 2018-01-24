@@ -200,7 +200,7 @@ class SystemController extends Controller
         $result = $mailer->send($message);
 
 
-      }elseif($system->getEtat()=="Offline" && $diff->i>=$system->getRepetition()){
+      }elseif($system->getEtat()!=="Online" && $diff->i>=$system->getRepetition()){
           // Creation du transport
           $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
           ->setUsername('noreply@nexus-creation.com')

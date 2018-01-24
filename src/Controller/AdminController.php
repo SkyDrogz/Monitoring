@@ -18,7 +18,6 @@ class AdminController extends Controller
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
-    $user = $this->getUser();
       // get the login error if there is one
     $error = $authUtils->getLastAuthenticationError();
 
@@ -75,7 +74,7 @@ class AdminController extends Controller
       }
     }
      session_destroy();
-      return $this->render('admin/login.html.twig');
+    return $this->redirectToRoute('login');
   }
 
 
