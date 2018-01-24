@@ -132,7 +132,7 @@ class User implements UserInterface, \Serializable
     {
          $this->role = $role;
     }
-    public function setdateConnexion($dateConnexion)
+    public function setDateConnexion($dateConnexion)
     {
          $this->dateConnexion = $dateConnexion;
     }

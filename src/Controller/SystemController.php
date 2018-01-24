@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Systeme;
+use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,15 +14,6 @@ use App\Form\SystemType;
 
 class SystemController extends Controller
 {
-  /**
-  * @Route("/", name="index")
-  */
-  public function indexAccueil()
-  {
-    // exit;
-    // replace this line with your own code!
-    return $this->render('base.html.twig');
-  }
   /**
   * @Route("/system", name="system")
   */

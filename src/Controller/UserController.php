@@ -11,7 +11,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
-
+  /**
+  * @Route("/", name="index")
+  */
+  public function indexAccueil()
+  {
+    // exit;
+    // replace this line with your own code!
+    return $this->render('base.html.twig');
+  }
     /**
      * @Route("/user", name="user")
      */
@@ -21,7 +29,6 @@ class UserController extends Controller
         // replace this line with your own code!
         return $this->render('user/index.html.twig');
     }
-
     /**
      * @Route("/user/new", name="user_new")
      */

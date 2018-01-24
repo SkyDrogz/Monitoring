@@ -15,7 +15,7 @@ security:
                 check_path: login
 
     encoders:
-        App\Entity\User: bcrypt
+        App\Entity\User: plaintext
 
     access_control:
     # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
