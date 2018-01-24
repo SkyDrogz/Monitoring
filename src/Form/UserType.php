@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -21,15 +22,9 @@ class UserType extends AbstractType
     {
         $builder
         -> add ('identifiant', TextType::class, array('label'=>'Identifiant :'))
-        -> add ('password', TextType::class, array('label'=>'Mot de passe :'))
+        -> add ('password', PasswordType::class, array('label'=>'Mot de passe :'))
         -> add ('tel', TextType::class, array('label'=>'Téléphone :'))
         -> add ('email',TextType::class, array('label'=>'Email :'))
-        // -> add ('libelle', ChoiceType::class, [
-        //   'choice_label' => function($entreprise, $key, $index) {
-        //     /** @var Entreprise $entreprise */
-        //     return strtoupper($entreprise->getLibelle());
-        //   },
-        // ])
         ->add('entreprise', EntityType::class, array(
             'label'=>'Entreprise :',
             'class' => Entreprise::class,

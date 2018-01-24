@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
@@ -24,7 +25,7 @@ class UserController extends Controller
     /**
      * @Route("/user/new", name="user_new")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -32,6 +33,8 @@ class UserController extends Controller
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em -> persist($user);
             $em->flush();

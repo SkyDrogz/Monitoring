@@ -5,6 +5,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -24,6 +26,10 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string")
      */
     private $password;
+    /**
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Role")
      * @ORM\JoinColumn(nullable=true)
@@ -58,7 +64,6 @@ class User implements UserInterface, \Serializable
     public function __construct(){
         $this->actif = true;
     }
-
     public function getId()
     {
         return $this->id;
@@ -74,6 +79,10 @@ class User implements UserInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
+    }
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
     public function getRole()
     {
@@ -114,6 +123,10 @@ class User implements UserInterface, \Serializable
     public function setPassword($password)
     {
          $this->password = $password;
+    }
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
     public function setRole($role)
     {
