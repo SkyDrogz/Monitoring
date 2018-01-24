@@ -21,20 +21,51 @@ class AdminController extends Controller
 
     // last username entered by the user
     $lastUsername = $authUtils->getLastUsername();
-
+    $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+    foreach($userListe as $user)
+    {
+      if($user->getUsername()==$lastUsername)
+      {
+        $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+        $em = $this->getDoctrine()->getManager();
+        $user->setDateConnexion($date);
+        $em->persist($user);
+        $em->flush();
+      }
+      
+    }
+    
     return $this->render('admin/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
     ));
+    
     }
   /**
      * @Route("/deconnexion", name="deconnexion")
      */
-    public function deconnexion()
+    public function deconnexion(AuthenticationUtils $authUtils,Request $request)
     {
-      session_destroy();
-      return $this->render('admin/login.html.twig');
+      
+    // last username entered by the user
+    $lastUsername = $authUtils->getLastUsername();
+    $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+    foreach($userListe as $user)
+    {
+      if($user->getUsername()==$lastUsername)
+      {
+        $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+        $em = $this->getDoctrine()->getManager();
+        $user->setDateDeconnexion($date);
+        $em->persist($user);
+        $em->flush();
+      }
     }
+     session_destroy();
+      return $this->render('admin/login.html.twig');
+  }
 
 
 }
