@@ -17,12 +17,13 @@ class UserController extends Controller
   public function indexAccueil()
   {
     $user = $this->getUser();
-    if($user->getRole()->getNomRole() == "ROLE_ADMIN")
+    $roleuser = $user->getRole()->getNomRole();
+    if($roleuser == "ROLE_ADMIN")
     {
-      $role = "Administrateur";
+      $role = "administrateur";
     }
     else {
-      $role = "Utilisateur";
+      $role = "utilisateur";
     }
     $message = "Bonjour " . $user->getIdentifiant() . ", vous êtes connecté en tant que ".$role." pour l'entreprise ".$user->getEntreprise()->getLibelle().".";
     $messageBis = "Cliquez ici pour visualiser la liste des systèmes.";
@@ -30,7 +31,8 @@ class UserController extends Controller
     // replace this line with your own code!
     return $this->render('base.html.twig', array(
   'message' => $message,
-  'messageBis' => $messageBis));
+  'messageBis' => $messageBis,
+  'roleuser' => $roleuser));
   }
     /**
      * @Route("/user", name="user")

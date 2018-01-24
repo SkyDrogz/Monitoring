@@ -18,5 +18,6 @@ security:
         App\Entity\User: plaintext
 
     access_control:
-    # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/, roles: ROLE_ADMIN }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/ roles: ROLE_ADMIN }
+    - { path: ^/system roles: ROLE_USER }
