@@ -80,7 +80,6 @@ class SystemController extends Controller
      */
     public function consultation(Request $request)
     {
-      // $command=null;
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
         if($system->getActif()== 1){
@@ -201,6 +200,9 @@ class SystemController extends Controller
 
 
       }elseif($system->getEtat()!=="Online" && $diff->i>=$system->getRepetition()){
+        $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+         $system->setDateOffline($date);
           // Creation du transport
           $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
           ->setUsername('noreply@nexus-creation.com')
