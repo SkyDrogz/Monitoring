@@ -22,7 +22,7 @@ class AdminController extends Controller
     // last username entered by the user
     $lastUsername = $authUtils->getLastUsername();
     $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-    return $this->render('admin/login.html.twig', array(
+    return $this->render('admin/logintest.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
     ));
