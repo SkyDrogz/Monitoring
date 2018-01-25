@@ -6,17 +6,17 @@ security:
                 property: identifiant
     firewalls:
         
-              dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: ~
-            form_login:
-                login_path: login
-                check_path: login
-        login:
-            pattern: ^/login$
-            security: false
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+            main:
+                anonymous: ~
+                form_login:
+                    login_path: login
+                    check_path: login
+            login:
+                pattern: ^/login$
+                security: false
 
     encoders:
         App\Entity\User:
