@@ -34,7 +34,7 @@ class UserController extends Controller
     $em->persist($user);
     $em->flush();
 
-    
+
     $message = "Bonjour " . $user->getIdentifiant() . ", vous êtes connecté en tant que ".$role." pour l'entreprise ".$user->getEntreprise()->getLibelle().".";
     $messageBis = "Cliquez ici pour visualiser la liste des systèmes.";
     // exit;
@@ -58,21 +58,35 @@ class UserController extends Controller
     /**
      * @Route("/user/new", name="user_new")
      */
-    public function newAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function newAction(Request $request)
     {
         $user = new User();
+        $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-            $em = $this->getDoctrine()->getManager();
-            $em -> persist($user);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été enregistré.");
-            return $this->redirectToRoute('user_new');
+            $check = false;
+            foreach($userListe as $unUser)
+            {
+              if($user->getIdentifiant() == $unUser->getIdentifiant())
+              {
+                $check = true;
+              }
+            }
+            if($check == false)
+            {
+              $em = $this->getDoctrine()->getManager();
+              $em -> persist($user);
+              $em->flush();
+              $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été enregistré.");
+              return $this->redirectToRoute('user_new');
+            }
+            else {
+              $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
+              return $this->redirectToRoute('user_new');
+            }
         }
         return $this->render('user/new.html.twig', array('form' =>$form->createView()));
     }
