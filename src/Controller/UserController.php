@@ -33,7 +33,7 @@ class UserController extends Controller
     $em->flush();
 
 
-    $message = "Bonjour " . $user->getIdentifiant() . ", vous êtes connecté en tant que ".$role." pour l'entreprise ".$user->getEntreprise()->getLibelle().".";
+    $message = "Bonjour " . $user->getIdentifiant() . ", vous êtes connecté(e) en tant que ".$role." pour l'entreprise ".$user->getEntreprise()->getLibelle().".";
     $messageBis = "Cliquez ici pour visualiser la liste des systèmes.";
     // exit;
     // replace this line with your own code!

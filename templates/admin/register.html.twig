@@ -1,0 +1,48 @@
+<head>
+    <meta charset="UTF-8" />
+    {% block stylesheets %}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% endblock %}
+</head>
+<style>
+label
+{
+display: block;
+}
+</style>
+<title>
+    
+    Nexus Création - Demande d'enregistement
+</title>
+<body>
+  <div id="header" class="jumbotron">
+    <h2>Nexus Création</h2>
+  </div>
+  <div id="contenu">
+      <center><h3>Identification utilisateur</h3>
+
+
+    {% if error %}
+        {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
+          <div><font color="red"><b>Identifiant ou mot de passe invalide.</b></font></div>
+          {%endif%}
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Identifiant :</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="_password" />
+        
+        <label for="Email">Email :</label>
+        <input type="email" id="email" name="_email" />
+        
+        <label for="Tel">Téléphone :</label>
+        <input type="tel" id="tel" name="_tel" />
+        </br>
+        <button type="submit">Enregistement</button>
+    </form></center>
+
+</div>
+</body>
