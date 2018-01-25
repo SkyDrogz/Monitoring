@@ -23,7 +23,7 @@ class AdminController extends Controller
     // last username entered by the user
     $lastUsername = $authUtils->getLastUsername();
     $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-    return $this->render('admin/logintest.html.twig', array(
+    return $this->render('admin/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
     ));
@@ -48,7 +48,7 @@ class AdminController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function newAction(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();

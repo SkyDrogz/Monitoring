@@ -11,7 +11,7 @@ display: block;
 }
 </style>
 <title>
-    
+
     Nexus Création - Demande d'enregistement
 </title>
 <body>
@@ -28,21 +28,12 @@ display: block;
           {%endif%}
     {% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Identifiant :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
-        
-        <label for="Email">Email :</label>
-        <input type="email" id="email" name="_email" />
-        
-        <label for="Tel">Téléphone :</label>
-        <input type="tel" id="tel" name="_tel" />
-        </br>
-        <button type="submit">Enregistement</button>
-    </form></center>
+    {{ form_start(form) }}
+    {{ form_widget(form.identifiant) }}
+    {{ form_widget(form.password) }}
+    {{ form_widget(form.email) }}
+    {{ form_widget(form.tel) }}
+    {{ form_end(form) }}
 
 </div>
 </body>
