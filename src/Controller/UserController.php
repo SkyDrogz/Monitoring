@@ -58,7 +58,7 @@ class UserController extends Controller
     /**
      * @Route("/user/new", name="user_new")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -75,6 +75,10 @@ class UserController extends Controller
                 $check = true;
               }
             }
+            $plainPassword = $user->getPassword();
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encoded);
+
             if($check == false)
             {
               $em = $this->getDoctrine()->getManager();
