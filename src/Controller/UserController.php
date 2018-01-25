@@ -24,7 +24,7 @@ class UserController extends Controller
     else {
       $role = "utilisateur";
     }
-    
+
     $date = date_create(date("Y-m-d H:i:s"));
     $date = new \Datetime();
     $em = $this->getDoctrine()->getManager();
@@ -94,8 +94,9 @@ class UserController extends Controller
     /**
      * @Route("/user/edit/{id}", name="user_edit")
      */
-    public function edit(Request $request, User $user)
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder)
     {
+      $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
       // Création du formulaire d'édition d'un système
       $em = $this->getDoctrine()->getManager();
       //$user = $em->getRepository(User::class)->find($id);
@@ -104,9 +105,15 @@ class UserController extends Controller
 
       if($form->isSubmitted() && $form->isValid()){
                $user = $form -> getData();
+               $check = false;
+               $plainPassword = $user->getPassword();
+               $encoded = $encoder->encodePassword($user, $plainPassword);
+               $user->setPassword($encoded);
                $em = $this->getDoctrine()->getManager();
                $em -> persist($user);
                $em->flush();
+               $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été modifié.");
+               return $this->redirectToRoute('user_consultation');
       }
       return $this->render('user/edit.html.twig', array('form' =>$form->createView()));
     }

@@ -45,7 +45,7 @@ class UserType extends AbstractType
             },
             'choice_label' => 'nomRole',
             ))
-        -> add ('save', SubmitType::class, array('label'=>'Création utilisateur'))
+        -> add ('save', SubmitType::class, array('label'=>'Confirmer'))
         ;
 
 
