@@ -52,12 +52,12 @@ class AdminController extends Controller
     {
         $user = new User();
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-        $user->setIdentifiant("_username");
-        $user->setPassword("_password");
-        $user->setEmail("_email");
-        $user->setTel("_tel");
-        $user->setActif(0);
-        $check = false;
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        //Submit
+        if($form->isSubmitted() && $form->isValid()){
+            $user = $form -> getData();
+            $check = false;
             foreach($userListe as $unUser)
             {
               if($user->getIdentifiant() == $unUser->getIdentifiant())
@@ -81,7 +81,6 @@ class AdminController extends Controller
               $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
               return $this->redirectToRoute('login');
             }
-    }
-
-
+          }
+        }
 }
