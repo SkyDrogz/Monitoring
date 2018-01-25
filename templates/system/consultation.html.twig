@@ -17,23 +17,24 @@
     </tr>
 
     {% for system in systemListe %}
-
-        {% if system.actif == true %}
-        <tr>
-            <td>{{ system.nom}}</td>
-            <td></td>
-            <td>{{ system.url }}</td>
-            <td></td>
-            {% if system.etat == "Online" %}
-            <td><font color="green"><b>{{ system.etat }}</b></color></td>
-            {%else%}
-            <td><font color="red"><b>{{ system.etat }}</b></color></td>
+        {% if (app.user.entreprise.libelle == system.user.entreprise.libelle) or  (app.user.role =='ROLE_SUPER_ADMIN') %}
+            {% if system.actif == true %}
+            <tr>
+                <td>{{ system.nom}}</td>
+                <td></td>
+                <td>{{ system.url }}</td>
+                <td></td>
+                {% if system.etat == "Online" %}
+                <td><font color="green"><b>{{ system.etat }}</b></color></td>
+                {%else%}
+                <td><font color="red"><b>{{ system.etat }}</b></color></td>
+                {%endif%}
+                <td></td>
+                <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning">Modification du système</a></td>
+                <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger">Suppression du système</a></td>
+            </tr>
             {%endif%}
-            <td></td>
-            <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning">Modification du système</a></td>
-            <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger">Suppression du système</a></td>
-        </tr>
-        {%endif%}
+            {%endif%}
     {% endfor %}
 
 </table>
