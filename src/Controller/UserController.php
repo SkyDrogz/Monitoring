@@ -18,14 +18,14 @@ class UserController extends Controller
 {
     $user = $this->getUser();
     $roleuser = $user->getRole()->getNomRole();
-    if($roleuser == "ROLE_ADMIN")
+    if($roleuser == "ROLE_SUPER_ADMIN")
     {
       $role = "administrateur";
     }
     else {
       $role = "utilisateur";
     }
-
+    
     $date = date_create(date("Y-m-d H:i:s"));
     $date = new \Datetime();
     $em = $this->getDoctrine()->getManager();
