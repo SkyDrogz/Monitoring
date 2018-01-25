@@ -25,5 +25,6 @@ security:
 
     access_control:
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/system ,roles: ROLE_ADMIN }
     - { path: ^/admin ,roles: ROLE_SUPERADMIN }
