@@ -17,7 +17,6 @@
     </tr>
 
     {% for system in systemListe %}
-        {% if (app.user.entreprise.libelle == system.user.entreprise.libelle) or  (app.user.role =='ROLE_SUPER_ADMIN') %}
             {% if system.actif == true %}
             <tr>
                 <td>{{ system.nom}}</td>
