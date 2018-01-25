@@ -10,44 +10,44 @@
     <body>
         <div class="container">
             <div id="header" class="jumbotron">
-                <h2>Nexus Création</h2>
-                <a href="{{path('deconnexion')}}" class="btn btn-danger">Deconnexion</a>
+                <h2><a href="{{path('index')}}"><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
+                <a href="{{path('deconnexion')}}" class="btn btn-danger">Deconnexion <span class="glyphicon glyphicon-off" /></a>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3>Systèmes</h3>
+                            <h3><span class="glyphicon glyphicon-cog"></span> Systèmes</h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('system_consultation') }}">Liste des systèmes</a></li>
-                                <li><a href="{{ path('system_new') }}">Ajout d'un système</a></li>
-                                <li><a href="{{ path('system_active') }}">Réactivation d'un système</a></li>
+                                <li><a href="{{ path('system_consultation') }}" class="btn btn-default">Liste des systèmes</a></li>
+                                <li><a href="{{ path('system_new') }}" class="btn btn-default">Ajout d'un système</a></li>
+                                <li><a href="{{ path('system_active') }}" class="btn btn-default">Réactivation d'un système</a></li>
                             </ul>
                         </div>
                     </div>
                     {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%}
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3>Utilisateurs</h3>
+                            <h3><span class="glyphicon glyphicon-user"></span> Utilisateurs</h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('user_consultation') }}">Liste des utilisateurs</a></li>
-                                <li><a href="{{ path('user_new') }}">Ajout d'un utilisateur</a></li>
-                                <li><a href="{{ path('user_active') }}">Réactivation d'un utilisateur</a></li>
+                                <li><a href="{{ path('user_consultation') }}" class="btn btn-default">Liste des utilisateurs</a></li>
+                                <li><a href="{{ path('user_new') }}" class="btn btn-default">Ajout d'un utilisateur</a></li>
+                                <li><a href="{{ path('user_active') }}" class="btn btn-default">Réactivation d'un utilisateur</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3>Entreprises</h3>
+                            <h3><span class="glyphicon glyphicon-briefcase"></span> Entreprises</h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('entreprise_consultation') }}">Liste des entreprises</a></li>
-                                <li><a href="{{ path('entreprise_new') }}">Ajout d'une entreprise</a></li>
-                                <li><a href="{{ path('entreprise_active') }}">Réactivation d'une entreprise</a></li>
+                                <li><a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Liste des entreprises</a></li>
+                                <li><a href="{{ path('entreprise_new') }}" class="btn btn-default">Ajout d'une entreprise</a></li>
+                                <li><a href="{{ path('entreprise_active') }}" class="btn btn-default">Réactivation d'une entreprise</a></li>
                             </ul>
                         </div>
                     </div>
+                    {%endif%}
                 </div>
-                {%endif%}
                 <div class="col-md-9">
                     {% block body %}
                         <h4><b>{{ message }}</b></h4>
