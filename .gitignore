@@ -10,13 +10,7 @@
 .web-server-pid
 ###< symfony/web-server-bundle ###
 
-<<<<<<< HEAD
 ###> phpunit/phpunit ###
 /phpunit.xml
 ###< phpunit/phpunit ###
-=======
-###> symfony/phpunit-bridge ###
-.phpunit
-/phpunit.xml
-###< symfony/phpunit-bridge ###
->>>>>>> 1f961ab9701e4113179096a8f26567b998c8a593
+>>>>>>> 3c827df28cd4865a8fa86a7c50c4b2f349c83073
