@@ -73,6 +73,7 @@ class AdminController extends Controller
             if($check == false)
             {
               $em = $this->getDoctrine()->getManager();
+              $user->setActif(0);
               $em -> persist($user);
               $em->flush();
               $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");

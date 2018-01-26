@@ -16,9 +16,10 @@ class EntrepriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('libelle', TextType::class, array('label'=>'Libellé : '))
-        -> add ('save', SubmitType::class, array('label'=>"Création"))
-        ;
+        -> add ('libelle', TextType::class, array('label'=>false,
+        'attr' => array(
+            'placeholder' => 'Libelle',
+       ),));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -6,10 +6,24 @@
 {%block body %}
 <h1><b>Modification de l'entreprise</b></h1>
 
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+<body>
+                  <section class="login-form">
+                    {{form_start(form,{ 'attr': {'role': 'login'} })}}
+                    {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
+                    <a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Retour à la liste</a>
+                    <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Inscription</button>
+                    <p>
+                        {% for info in app.flashes('info') %}
+                            <div class="flash-notice">
+                                {{ info }}
+                            </div>
+                        {% endfor %}
+                     </p>
+                        
+                    {{form_end(form)}}
+                    </section>
+      </body>
+       
 
-<a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Retour à la liste</a>
-<a href="{{ path('entreprise') }}" class="btn btn-info">Accueil</a>
+
 {%endblock%}

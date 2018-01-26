@@ -18,18 +18,26 @@ display: block;
           <div class="col-md-4"></div>
           <div class="col-md-4">
             <section class="login-form">
-              <form method="post" action="{{path('register')}}" role="login">
-                      <h2><a href="https://www.nexus-creation.com"/><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
-                      <h6>Ce formulaire envoi une demande de compte. Si elle a été approuvée par l'administrateur, <a href="{{path('login')}}">veuillez cliquer ici.</a></h6>
-                   <input type="text" id="form_identifiant" name="form[identifiant]" placeholder="Identifiant" required class="form-control input-lg"/>
-                   <input type="password" id="form_password"  name="form[password]" placeholder="Mot de passe" required class="form-control input-lg"/>
-                   <input type="text" id="form_email"  name="form[email]" placeholder="Email" required class="form-control input-lg"/>
-                   <input type="integer" id="form_tel"  name="form[tel]" placeholder="Téléphone" required class="form-control input-lg"/>
-                   <div class="pwstrength_viewport_progress"></div>
-                <button type="submit" id="form_save"  name="form[save]" class="btn btn-lg btn-primary btn-block">Inscription</button>
-              </form>
+              {{form_start(form,{ 'attr': {'role': 'login'} })}}
+              <h2><a href="https://www.nexus-creation.com"/><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
+              <h6>Ce formulaire envoi une demande de compte. Si elle a été approuvée par l'administrateur, <a href="{{path('login')}}">veuillez cliquer ici.</a></h6>
+              {{form_row(form.identifiant,{ 'attr': {'class': 'form-control input-lg'} })}}
+              {{form_row(form.password,{ 'attr': {'class': 'form-control input-lg'} })}}
+              {{form_row(form.email,{ 'attr': {'class': 'form-control input-lg'} })}}
+              {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
+              <button type="submit" id="form_save"  name="form[save]" class="btn btn-lg btn-primary btn-block">Inscription</button>
+              <p>
+                  {% for info in app.flashes('info') %}
+                      <div class="flash-notice">
+                          {{ info }}
+                      </div>
+                  {% endfor %}
+               </p>
+                  
+              {{form_end(form)}}
             </section>
             </div>
             <div class="col-md-4"></div>
         </div>
 </body>
+ 
