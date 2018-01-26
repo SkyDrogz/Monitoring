@@ -3,37 +3,37 @@
     {{parent()}} - Liste des systèmes
 {%endblock%}
 {%block body %}
+<link rel="stylesheet" href="{{ asset('css/test.css') }}">
 <h1>Liste des systèmes</h1>
 
-<table width="100%">
+<div class="widget stacked widget-table action-table">
+				<div class="widget-content">
 
-
-    <tr>
-        <th>Nom du système</th>
-        <th></th>
-        <th>URL</th>
-        <th></th>
-        <th>Etat</th>
-    </tr>
-
+					<table class="table table-striped table-bordered">
+						<thead>
+              <tr>
+                <th>Nom du système</th>
+                <th>URL</th>
+                <th>Etat</th>
+              </tr>
+           </thead>
+    <tbody>
     {% for system in systemListe %}
             {% if system.actif == true %}
             <tr>
                 <td>{{ system.nom}}</td>
-                <td></td>
                 <td>{{ system.url }}</td>
-                <td></td>
                 {% if system.etat == "Online" %}
                 <td><font color="green"><b>{{ system.etat }}</b></color></td>
                 {%else%}
                 <td><font color="red"><b>{{ system.etat }}</b></color></td>
                 {%endif%}
-                <td></td>
-                <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning">Modification du système</a></td>
-                <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger">Suppression du système</a></td>
+                <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>
             {%endif%}
     {% endfor %}
+    </tbody>
 
 </table>
 <SCRIPT language="JavaScript">
