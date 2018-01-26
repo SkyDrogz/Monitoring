@@ -8,9 +8,16 @@
         <title>{% block title %}Nexus Création{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
-    </head>
-    <body>
+</head>
+<body>
+<script src="{{ asset('js/script.js') }}"></script>
+<div class="container">
+
+<div class="row" id="pwd-container">
+<div class="col-md-4"></div>
+                      <div class="col-md-4"></div>
         <div class="container">
             <div id="header" class="jumbotron">
                 <h2><a href="{{path('index')}}"><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
@@ -58,6 +65,7 @@
                     {%endblock%}
                 </div>
             </div>
+            
 
 
 

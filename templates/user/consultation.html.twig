@@ -2,6 +2,10 @@
 {%block title %}
     {{parent()}} - Liste des utilisateurs
 {%endblock%}
+{% block stylesheets %}
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
 {%block body %}
 <h1>Liste des utilisateurs</h1>
 
