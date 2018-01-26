@@ -14,3 +14,8 @@
 /phpunit.xml
 ###< phpunit/phpunit ###
 >>>>>>> 3c827df28cd4865a8fa86a7c50c4b2f349c83073
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+###< symfony/webpack-encore-pack ###
