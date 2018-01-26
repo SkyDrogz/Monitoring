@@ -3,26 +3,34 @@
     {{parent()}} - Liste des entreprises
 {%endblock%}
 {%block body %}
-<h1>Liste des entreprises</h1>
+<link rel="stylesheet" href="{{ asset('css/test.css') }}">
+<h1><font color="white">Liste des entreprises</font></h1>
 
-<table width="50%">
-    <tr>
-        <th>Nom des entreprises</th>
-    </tr>
+<div class="widget stacked widget-table action-table">
+				<div class="widget-content">
 
+					<table class="table table-striped table-bordered">
+						<thead>
+              <tr>
+                <th>Nom de l'entreprise</th>
+                <th></th>
+                <th></th>
+              </tr>
+           </thead>
+    <tbody>
     {% for entreprise in entrepriseListe %}
 
         {% if entreprise.actif == true %}
         <tr>
             <td>{{ entreprise.libelle}}</td>
-            <td><a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}" class="btn btn-warning">Modifier</a></td>
-            <td><a href="{{path('entreprise_suppression',{'id' : entreprise.id}) }}" class="btn btn-danger"> Supprimer l'entreprise</a></td>
+            <td><a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            <td><a href="{{path('entreprise_suppression',{'id' : entreprise.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
         </tr>
-        </br>
-        {%endif%}
+            {%endif%}
     {% endfor %}
+    </tbody>
 
 </table>
+<a href="{{ path('system') }}" class="btn btn-default">Retour</a>
 
-<a href="{{ path('index') }}" class="btn btn-default">Retour</a>
 {%endblock%}
