@@ -56,7 +56,7 @@ class UserType extends AbstractType
                 return $er->createQueryBuilder('r')
                     ->orderBy('r.nomRole', 'ASC');
             },
-            'placeholder' => 'Selectionner une role',
+            'placeholder' => 'Selectionner un role',
             'choice_label' => 'nomRole',
             ))
         ;
