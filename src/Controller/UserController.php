@@ -118,12 +118,12 @@ class UserController extends Controller
       return $this->render('user/edit.html.twig', array('form' =>$form->createView()));
     }
     /**
-     * @Route("/user/consultation", name="user_consultation")
+     * @Route("/user/consultationTest", name="user_consultation")
      */
     public function consultationAction()
     {
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('user/consultation.html.twig', array(
+        return $this->render('user/consultationTest.html.twig', array(
             'userListe' => $userListe
         ));
 
