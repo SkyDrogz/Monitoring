@@ -1,5 +1,5 @@
 {% if app.user == null %}
-  {{path('login')}}
+  {{path("login")}}
 {% else %}
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3><span class="glyphicon glyphicon-cog"></span> Systèmes</h3>
+                            <h3><font color="white"><span class="glyphicon glyphicon-cog"></span> Systèmes</font></h3>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{ path('system_consultation') }}" class="btn btn-default">Liste des systèmes</a></li>
                                 <li><a href="{{ path('system_new') }}" class="btn btn-default">Ajout d'un système</a></li>
@@ -38,7 +38,7 @@
                     {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%}
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3><span class="glyphicon glyphicon-user"></span> Utilisateurs</h3>
+                            <h3><font color="white"><span class="glyphicon glyphicon-user"></span> Utilisateurs</font></h3>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{ path('user_consultation') }}" class="btn btn-default">Liste des utilisateurs</a></li>
                                 <li><a href="{{ path('user_new') }}" class="btn btn-default">Ajout d'un utilisateur</a></li>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="row">
                         <div id="menu" class="col-md-12">
-                            <h3><span class="glyphicon glyphicon-briefcase"></span> Entreprises</h3>
+                            <h3><font color="white"><span class="glyphicon glyphicon-briefcase"></span> Entreprises</font></h3>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Liste des entreprises</a></li>
                                 <li><a href="{{ path('entreprise_new') }}" class="btn btn-default">Ajout d'une entreprise</a></li>
@@ -60,12 +60,14 @@
                 </div>
                 <div class="col-md-9">
                     {% block body %}
+                    <font color="white">
                         <h4><b>{{ message }}</b></h4>
                         <a href="{{ path('system_consultation') }}">{{ messageBis }}</a>
+                    </font>
                     {%endblock%}
                 </div>
             </div>
-            
+
 
 
 

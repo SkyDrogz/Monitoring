@@ -48,8 +48,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // exit;
-        // replace this line with your own code!
         return $this->render('user/index.html.twig');
     }
     /**

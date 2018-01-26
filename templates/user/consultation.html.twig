@@ -2,61 +2,58 @@
 {%block title %}
     {{parent()}} - Liste des utilisateurs
 {%endblock%}
-{% block stylesheets %}
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {% endblock %}
-{%block body %}
-<h1>Liste des utilisateurs</h1>
+{%block body%}
+<link rel="stylesheet" href="{{ asset('css/test.css') }}">
+<div class="span7">
 
-<table width="150%">
+<h1><font color="white">Liste des utilisateurs</font></h1>
 
+<div class="widget stacked widget-table action-table">
+				<div class="widget-content">
 
-    <tr>
-        <th>Identifiant</th>
-        <th></th>
-        <th>Role</th>
-        <th></th>
-        <th>Téléphone</th>
-        <th></th>
-        <th>E-maill</th>
-        <th></th>
-        <th>Entreprise</th>
-        <th></th>
-        <th>Date connexion</th>
-        <th></th>
-        <th>Date deconnexion</th>
-        <th></th>
-    </tr>
-
-    {% for user in userListe %}
-        {% if user.actif == true %}
+					<table class="table table-striped table-bordered">
+						<thead>
             <tr>
-
-                <td>{{ user.identifiant}}</td>
-                <td></td>
-                <td>{{ user.role.nomRole }}</td>
-                <td></td>
-                <td>{{ user.Tel }}</td>
-                <td></td>
-                <td>{{ user.email }}</td>
-                <td></td>
-                <td>{{ user.entreprise.libelle }}</td>
-                <td></td>
-                <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
-                <td></td>
-                <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
-                <td></td>
-                <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"> Modification l'utilisateur</a></td>
-                <td></td>
-                <td><a href="{{path('user_suppression',{'id' : user.id}) }}"class="btn btn-danger"> Supprimer l'utilisateur</a></td>
-
+                <th>Identifiant</th>
+                <th>Role</th>
+                <th>Téléphone</th>
+                <th>E-maill</th>
+                <th>Entreprise</th>
+                <th>Date connexion</th>
+                <th>Date deconnexion</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-        {% endif %}
+						</thead>
+						<tbody>
 
-    {% endfor %}
+            {% for user in userListe %}
+                {% if user.actif == true %}
+                    <tr>
 
-</table>
+                        <td>{{ user.identifiant}}</td>
+                        {% if user.role.nomRole == "ROLE_SUPER_ADMIN" %}
+                        <td>ADMIN</td>
+                        {%else%}
+                        <td>USER</td>
+                        {%endif%}
+                        <td>{{ user.Tel }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.entreprise.libelle }}</td>
+                        <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
+                        <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
+                        <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="{{path('user_suppression',{'id' : user.id}) }}"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
 
-<a href="{{ path('user') }}" class="btn btn-default">Retour</a>
-{%endblock%}
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+							</tbody>
+						</table>
+
+				</div> <!-- /widget-content -->
+
+			</div> <!-- /widget -->
+            </div>
+            {%endblock%}
