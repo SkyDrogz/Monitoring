@@ -29,6 +29,7 @@ display: block;
     {% endif %}
 
     <form action="{{ path('register') }}" method="post">
+        {{form_row(username)}}
         <label for="username">Identifiant :</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
