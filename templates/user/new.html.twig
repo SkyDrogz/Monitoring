@@ -12,10 +12,28 @@ display: block;
 </style>
 <h2><b>Ajout d'un nouvel utilisateur</b></h2>
 </br>
-{{ form_start(form)}}
-{{ form_widget(form)}}
-{{ form_end(form)}}
-
+<body>
+        <section class="login-form">
+                {{form_start(form,{ 'attr': {'role': 'login'} })}}
+                {{form_row(form.identifiant,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.password,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.email,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.entreprise,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.role,{ 'attr': {'class': 'form-control input-lg'} })}}
+                <a href="{{ path('user_consultation') }}" class="btn btn-default">Retour à la liste</a>
+                <button type="submit" id="form_save"  name="form[save]" class="btn btn-info">Confirmer la modification</button>
+                <p>
+                    {% for info in app.flashes('info') %}
+                        <div class="flash-notice">
+                            {{ info }}
+                        </div>
+                    {% endfor %}
+                 </p>
+                    
+                {{form_end(form)}}
+              </section>
+            </body>
 <p>
 {% for info in app.flashes('info') %}
     <div class="flash-notice">
