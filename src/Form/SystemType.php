@@ -20,39 +20,55 @@ class SystemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        -> add ('nom', TextType::class, array('required' => true, 'label'=>'Nom :'))
-        -> add ('url', TextType::class, array('required' => true, 'label'=>'URL : '))
+        -> add ('nom', TextType::class, array('label'=>false,
+        'attr' => array(
+            'placeholder' => 'Nom du système',
+       ),))
+        -> add ('url', TextType::class, array('label'=>false,
+        'attr' => array(
+            'placeholder' => 'URL du système',
+       ),))
         -> add('categSysteme', EntityType::class, array(
             'required' => true,
-            'label'=>'Categorie :',
+            'label'=>false,
             'class' => CategSysteme::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('cs')
                     ->orderBy('cs.categorie', 'ASC');
             },
+            'placeholder' => 'Selectionner une catégorie système',
             'choice_label' => 'categorie',))
 
             -> add('user', EntityType::class, array(
                 'required' => true,
-                'label'=>'Utilisateur référent (recevras les notifications de pannes) :',
+                'label'=>false,
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.identifiant', 'ASC');
                 },
+                'placeholder' => 'Selectionner un utilisateur référent',
                 'choice_label' => 'identifiant',))
 
 
             ->add('niveauUrgence', ChoiceType::class, array(
+                'label'=>false,
                 'choices' => array(
                     'Urgent' => 1,
                     'Mineur' => 0,
 
-                )))
+                ),
+                'placeholder' => "Selectionner un nivau d'urgence",
+                ))
 
-        -> add ('requete', TextareaType::class, array('required' => false, 'label'=>'Requête JSON (pour API): '))
-        -> add ('resultatAttendu', TextType::class, array('required' => false, 'label'=>'Résultat attendu à la requête (Pour API): '))
-        -> add ('save', SubmitType::class, array('label'=>'Ajouter'))
+        -> add ('requete', TextareaType::class, array('required' => false, 'label'=>false,
+        'attr' => array(
+            'placeholder' => 'Rêquete JSON (pour API)',
+       ),))
+        -> add ('resultatAttendu', TextType::class, array('required' => false, 'label'=>false,
+        'attr' => array(
+            'placeholder' => 'Resultat attendu',
+       ),))
             ;
 
     }
