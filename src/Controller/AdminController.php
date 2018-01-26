@@ -9,6 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\RegisterType;
 
 class AdminController extends Controller
 {
@@ -48,11 +49,11 @@ class AdminController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function newAction(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
@@ -82,5 +83,6 @@ class AdminController extends Controller
               return $this->redirectToRoute('login');
             }
           }
+          return $this->render('admin/register.html.twig', array('form' =>$form->createView()));
         }
 }
