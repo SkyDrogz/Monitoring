@@ -171,6 +171,11 @@ class UserController extends Controller
      */
     public function consultationTest()
     {
-      return $this->render('user/consultationTest.html.twig');
+      $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+      return $this->render('user/consultationTest.html.twig', array(
+          'userListe' => $userListe
+      ));
+
+  return new Response($user);
     }
 }

@@ -20,7 +20,7 @@
 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
     				<thead>
 						<tr>
-							
+
                                 <th>Identifiant</th
                                 <th>Role</th
                                 <th>Téléphone</th
@@ -45,12 +45,12 @@
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
-                     </tfoot>   
-                     <tbody>  
+                     </tfoot>
+                     <tbody>
                                 {% for user in userListe %}
                                     {% if user.actif == true %}
                                         <tr>
-                            
+
                                             <td>{{ user.identifiant}}</td>
                                             <td></td>
                                             <td>{{ user.role.nomRole }}</td>
@@ -71,7 +71,8 @@
 
 					</tbody>
 				</table>
-
+{% endif %}
+{% endfor %}
 
 	</div>
 	</div>
