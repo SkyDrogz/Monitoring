@@ -166,4 +166,11 @@ class UserController extends Controller
 
       return $this->redirectToRoute('user_active');
     }
+    /**
+     * @Route("/user/consultationTest", name="user_consultationTest")
+     */
+    public function consultationTest()
+    {
+      return $this->render('user/consultationTest.html.twig');
+    }
 }
