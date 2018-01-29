@@ -1,34 +1,32 @@
 <?php
-
-namespace Tests\Controller;
+namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HTTPFoundation\Response;
 
-class ApplicationAvailabilityFunctionalTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
-    public function testPageIsSuccessful($url)
+    public function testUserConsultation()
     {
-        $client = self::createClient();
-        $client->request('GET', $url);
+      $client = static::createClient();
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+      $crawler = $client->request('GET', '/user/consultation');
+
+      $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
-
-    public function urlProvider()
+    public function testLoginPage()
     {
-        yield ['/'];
-        yield ['/user'];
-        yield ['/user/new'];
-        yield ['/user/edit/1'];
-        yield ['/user/consultation'];
-        yield ['/system'];
-        yield ['/system/new'];
-        yield ['/system/edit/1'];
-        yield ['/system/consultation'];
-        yield ['/entreprise'];
-        yield ['/entreprise/new'];
-        yield ['/entreprise/edit/1'];
-        yield ['/entreprise/consultation'];
+      $client = static::createClient();
+
+      $crawler = $client->request('GET', '/login');
+
+      $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+    public function testIndex()
+    {
+      $client = static::createClient();
+
+      $crawler = $client->request('GET', '/');
+
+      $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }
