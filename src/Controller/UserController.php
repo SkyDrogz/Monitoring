@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\User;
+use App\Entity\Role;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -155,7 +156,7 @@ class UserController extends Controller
     /**
      * @Route("/user/reactive/{id}", name="user_reactive")
      */
-    public function activeAction(Request $request,user $user)
+    public function activeAction(Request $request,User $user)
     {
       $em = $this->getDoctrine()->getManager();
       $user->setActif(true);
@@ -163,5 +164,49 @@ class UserController extends Controller
       $em->flush();
 
       return $this->redirectToRoute('user_active');
+    }
+        /**
+     * @Route("/user/approuve/", name="user_approuve")
+     */
+    public function approuveAction()
+    {
+      $userListe = $this->getDoctrine()->getRepository(user::class)->findAll();
+      return $this->render('user/approuve.html.twig', array(
+          'userListe' => $userListe
+      ));
+
+  return new Response($user);
+    }
+        /**
+     * @Route("/user/actApprouve/{id}", name="user_actApprouve")
+     */
+    public function activationApprouveAction(Request $request,user $user)
+    {
+      $today = new \DateTime();
+      $em = $this->getDoctrine()->getManager();
+      $user->setActif(true);
+      $user -> setDateDeconnexion($today);
+      $user -> setDateConnexion($today);
+
+      $role=$em->getRepository(Role::class)->findById(1);
+     
+      $user -> setRole($role[0]);
+      $em->persist($user);
+      $em->flush();
+
+      return $this->redirectToRoute('user_approuve');
+    }
+     /**
+     * @Route("/user/suppressionDef/{id}", name="user_suppressionDef")
+     */
+    public function suppressionDefAction(Request $request,User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user->setActif(false);
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('user_consultation');
+
     }
 }

@@ -72,6 +72,7 @@ class AdminController extends Controller
 
             if($check == false)
             {
+              $today =new \datetime();
               $em = $this->getDoctrine()->getManager();
               $user->setActif(0);
               $em -> persist($user);
@@ -90,7 +91,8 @@ class AdminController extends Controller
         $message = (new \Swift_Message('Alerte enregistrement'))
           ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
           ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
-        ->setBody('Un utilisateur à fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuer ou désapprouver cette demande.')
+        ->setBody('Un utilisateur à fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuer ou désapprouver cette demande.
+        http://localhost:8070/my-project/public/index.php/user/approuve/')
         ;
         // Envoie du message
         $result = $mailer->send($message);

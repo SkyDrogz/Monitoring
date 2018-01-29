@@ -28,7 +28,7 @@
 						<tbody>
 
             {% for user in userListe %}
-                {% if user.actif == true %}
+                {% if user.actif == true and user.role != null%}
                     <tr>
 
                         <td>{{ user.identifiant}}</td>
@@ -39,7 +39,11 @@
                         {%endif%}
                         <td>{{ user.Tel }}</td>
                         <td>{{ user.email }}</td>
+                        {% if user.entreprise == null %}
+                        <td>{{ "Pas d'entreprise associée" }}</td>
+                        {% else %}
                         <td>{{ user.entreprise.libelle }}</td>
+                        {% endif %}
                         <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                         <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
                         <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>

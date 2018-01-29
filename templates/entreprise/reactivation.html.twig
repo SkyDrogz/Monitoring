@@ -20,10 +20,11 @@
     <tbody>
     {% for entreprise in entrepriseListe %}
 
-        {% if entreprise.actif == true %}
+        {% if entreprise.actif == false %}
         <tr>
             <td>{{ entreprise.libelle}}</td>
               <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a></td>
+              <td><a href="{{ path('entreprise_suppressionDef', {'id' : entreprise.id}) }}" class="btn btn-danger">Supprimer définitivement l'entreprise</a></td>
         </tr>
             {%endif%}
     {% endfor %}

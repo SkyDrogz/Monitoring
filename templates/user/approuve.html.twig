@@ -15,39 +15,28 @@
 						<thead>
             <tr>
                 <th>Identifiant</th>
-                <th>Role</th>
+                
                 <th>Téléphone</th>
                 <th>E-maill</th>
-                <th>Entreprise</th>
+                
                 <th>Date connexion</th>
                 <th>Date deconnexion</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
 						</thead>
 						<tbody>
 
             {% for user in userListe %}
-                {% if user.actif == false and user.role != null %}
+                {% if user.actif == false and user.dateConnexion == null and user.dateDeconnexion == null %}
                     <tr>
 
                         <td>{{ user.identifiant}}</td>
-                        {% if user.role.nomRole == "ROLE_SUPER_ADMIN" %}
-                        <td>ADMIN</td>
-                        {%else%}
-                        <td>USER</td>
-                        {%endif%}
                         <td>{{ user.Tel }}</td>
                         <td>{{ user.email }}</td>
-                        {% if user.entreprise == null %}
-                        <td>{{ "Pas d'entreprise associée" }}</td>
-                        {% else %}
-                        <td>{{ user.entreprise.libelle }}</td>
-                        {% endif %}
                         <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                         <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
-                        <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">Réactiver l'utilisateur</a></td>
-                        <td><a href="{{ path('user_suppressionDef', {'id' : user.id}) }}" class="btn btn-danger">Supprimer définitivement l'utilisateur</a></td>
+                        <td><a href="{{ path('user_actApprouve', {'id' : user.id}) }}" class="btn btn-success">Activer</a></td>
+                        <td><a href="{{ path('user_suppressionDef', {'id' : user.id}) }}" class="btn btn-danger">Décliner</a></td>
+
                     </tr>
                 {% endif %}
 

@@ -273,7 +273,18 @@ class SystemController extends Controller
     return $this->redirectToRoute('system_active');
   }
 
+/**
+  * @Route("/system/suppressionDef/{id}", name="system_suppressionDef")
+  */
+  public function suppressionDefAction(Request $request,Systeme $systeme)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $em->remove($systeme);
+    $em->flush();
 
+    return $this->redirectToRoute('system_consultation');
+
+  }
 
 
 

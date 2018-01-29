@@ -108,4 +108,15 @@ class EntrepriseController extends Controller
       $request->getSession()->getFlashBag()->add('info', "L'entreprise est réactivée.");
       return $this->redirectToRoute('entreprise_active');
     }
+     /**
+     * @Route("/entreprise/suppressionDef/{id}", name="entreprise_suppressionDef")
+     */
+    public function suppressionDefAction(Request $request,Entreprise $entreprise)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($entreprise);
+        $em->flush();
+
+        return $this->redirectToRoute('entreprise_consultation');
+    }
 }

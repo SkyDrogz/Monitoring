@@ -19,13 +19,17 @@
            </thead>
     <tbody>
     {% for system in systemListe %}
-            {% if system.actif == true %}
+            {% if system.actif == false %}
             <tr>
                 <td>{{ system.nom}}</td>
                 <td>{{ system.url }}</td>
+                {% if app.user.role.nomRole =="ROLE_SUPER_ADMIN" %}
+                
                 <td><a href="{{ path('system_reactive', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a></td>
-                </tr>
-            {%endif%}
+                <td><a href="{{ path('system_suppressionDef', {'id' : system.id}) }}" class="btn btn-danger">Supprimer définitivement le système</a></td>
+            {% endif %}                
+            </tr>
+            {% endif %}
     {% endfor %}
     </tbody>
 
