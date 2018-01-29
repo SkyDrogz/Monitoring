@@ -11,7 +11,7 @@
                     {{form_start(form,{ 'attr': {'role': 'login'} })}}
                     {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
                     <a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Retour à la liste</a>
-                    <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Inscription</button>
+                    <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Modification</button>
                     <p>
                         {% for info in app.flashes('info') %}
                             <div class="flash-notice">
@@ -19,11 +19,11 @@
                             </div>
                         {% endfor %}
                      </p>
-                        
+
                     {{form_end(form)}}
                     </section>
       </body>
-       
+
 
 
 {%endblock%}

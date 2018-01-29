@@ -19,21 +19,12 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-<<<<<<< HEAD
-            <directory>tests</directory>
-=======
             <directory>tests/</directory>
->>>>>>> 1f961ab9701e4113179096a8f26567b998c8a593
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-<<<<<<< HEAD
-            <directory>src</directory>
-        </whitelist>
-    </filter>
-=======
             <directory>./src/</directory>
         </whitelist>
     </filter>
@@ -41,5 +32,4 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
->>>>>>> 1f961ab9701e4113179096a8f26567b998c8a593
 </phpunit>

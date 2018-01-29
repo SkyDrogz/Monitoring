@@ -11,16 +11,42 @@ label
 display: block;
 }
 </style>
+<script language= "javascript">
+$('categSysteme').click(function(){
+  $('requete').fadeToggle();
+});
+</script>
 <h2><b>Ajout d'un système</b></h1>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+    <section class="login-form">
+            {{form_start(form,{ 'attr': {'role': 'login'} })}}
+            {{form_row(form.nom,{ 'attr': {'class': 'form-control input-lg'} })}}
+            {{form_row(form.url,{ 'attr': {'class': 'form-control input-lg'} })}}
+            {{form_row(form.categSysteme,{ 'attr': {'class': 'form-control input-lg'} })}}
+            {{form_row(form.user,{ 'attr': {'class': 'form-control input-lg'} })}}
+            {{form_row(form.niveauUrgence,{ 'attr': {'class': 'form-control input-lg'} })}}
+            <script language="JavaScript">
+            function afficherAutre() {
 
-<p>
-{% for info in app.flashes('info') %}
-    <div class="flash-notice">
-        {{ info }}
-    </div>
-{% endfor %}
-</p>
+              if (form.categSysteme == 1)
+              {
+              display.{{form_row(form.requete,{ 'attr': {'class': 'form-control input-lg'} })}}
+              display.{{form_row(form.resultatAttendu,{ 'attr': {'class': 'form-control input-lg'} })}}
+              }
+            }
+            </script>
+
+
+            <a href="{{ path('system_consultation') }}" class="btn btn-default">Retour à la liste</a>
+            <button type="submit" id="form_save"  name="form[save]" class="btn btn-info">Confirmer l'ajout</button>
+            <p>
+                {% for info in app.flashes('info') %}
+                    <div class="flash-notice">
+                        {{ info }}
+                    </div>
+                {% endfor %}
+             </p>
+
+            {{form_end(form)}}
+          </section>
+        </body>
 {%endblock%}
