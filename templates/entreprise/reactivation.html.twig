@@ -3,29 +3,33 @@
     {{parent()}} - Réactivation d'une entreprise
 {%endblock%}
 {%block body %}
-<font color="white"><h1>Liste des entreprises supprimés</h1></font>
+<link rel="stylesheet" href="{{ asset('css/test.css') }}">
+<h1><font color="white">Liste des entreprises</font></h1>
 
-<table width="50%">
+<div class="widget stacked widget-table action-table">
+				<div class="widget-content">
 
-
-    <tr>
-        <th>Nom de l'entreprise</th>
-    </tr>
-
+					<table class="table table-striped table-bordered">
+						<thead>
+              <tr>
+                <th>Nom de l'entreprise</th>
+                <th></th>
+                <th></th>
+              </tr>
+           </thead>
+    <tbody>
     {% for entreprise in entrepriseListe %}
 
-        {% if entreprise.actif == false %}
+        {% if entreprise.actif == true %}
         <tr>
             <td>{{ entreprise.libelle}}</td>
-            <td></td>
-            <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a></td>
-
+              <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a></td>
         </tr>
-        {%endif%}
+            {%endif%}
     {% endfor %}
+    </tbody>
 
 </table>
-
 <p>
 {% for info in app.flashes('info') %}
     <div class="flash-notice">

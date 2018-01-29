@@ -77,7 +77,24 @@ class AdminController extends Controller
               $em -> persist($user);
               $em->flush();
               $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
-              return $this->redirectToRoute('login');
+              
+                // Creation du transport
+        $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
+        ->setUsername('noreply@nexus-creation.com')
+        ->setPassword('noreply60')
+        ;
+
+        $mailer = new \Swift_Mailer($transport);
+
+        // Creation du message
+        $message = (new \Swift_Message('Alerte enregistrement'))
+          ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
+          ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
+        ->setBody('Un utilisateur à fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuer ou désapprouver cette demande.')
+        ;
+        // Envoie du message
+        $result = $mailer->send($message);
+        return $this->redirectToRoute('login');
             }
             else {
               $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");

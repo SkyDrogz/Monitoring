@@ -3,39 +3,52 @@
     {{parent()}} - Liste des utilisateurs
 {%endblock%}
 {%block body %}
-<title>Liste des Utilisateurs</title>
-<font color="white">h1>Liste des Utilisateurs</h1></font>
+<link rel="stylesheet" href="{{ asset('css/test.css') }}">
+<div class="span7">
 
-<table width="100%">
+<h1><font color="white">Liste des utilisateurs</font></h1>
 
+<div class="widget stacked widget-table action-table">
+				<div class="widget-content">
 
-    <tr>
-        <th>Identifiant</th>
-        <th>Role</th>
-        <th>Téléphone</th>
-        <th>E-mail</th>
-        <th>Entreprise</th>
-        <th>Date connexion</th>
-        <th>Date deconnexion</th>
-    </tr>
+					<table class="table table-striped table-bordered">
+						<thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Role</th>
+                <th>Téléphone</th>
+                <th>E-maill</th>
+                <th>Entreprise</th>
+                <th>Date connexion</th>
+                <th>Date deconnexion</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+						</thead>
+						<tbody>
 
-    {% for user in userListe %}
+            {% for user in userListe %}
+                {% if user.actif == true %}
+                    <tr>
 
-        {% if user.actif == false %}
-        <tr>
-            <td>{{ user.identifiant}}</td>
-            <td>{{ user.role.nomRole }}</td>
-            <td>{{ user.Tel }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.entreprise.libelle }}</td>
-            <td>{{user.dateConnexion|date("m/d/y")}}</td>
-            <td>{{user.dateDeconnexion|date("m/d/y")}}</td>
-            <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">réactiver l'utilisateur</a></td>
+                        <td>{{ user.identifiant}}</td>
+                        {% if user.role.nomRole == "ROLE_SUPER_ADMIN" %}
+                        <td>ADMIN</td>
+                        {%else%}
+                        <td>USER</td>
+                        {%endif%}
+                        <td>{{ user.Tel }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.entreprise.libelle }}</td>
+                        <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
+                        <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
+                        <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">réactiver l'utilisateur</a></td>
+                    </tr>
+                {% endif %}
 
-        </tr>
-        {%endif%}
     {% endfor %}
 
 </table>
 <a href="{{ path('user') }}" class="btn btn-default">Retour</a>
 {%endblock%}
+
