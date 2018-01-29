@@ -1,5 +1,5 @@
 {% if app.user == null %}
-  {{path("login")}}
+<script> window.location.pathname = "/my-project/public/index.php/login" </script>
 {% else %}
 <!DOCTYPE html>
 <html>
