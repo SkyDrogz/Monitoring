@@ -18,14 +18,15 @@ class UserController extends Controller
   public function indexAccueil()
 {
     $user = $this->getUser();
-    if($user->getRole()->getNomRole() == "ROLE_SUPER_ADMIN")
+    if ($user!= null)
+    {
+      if($user->getRole()->getNomRole() == "ROLE_SUPER_ADMIN")
     {
       $role = "administrateur";
     }
     else {
       $role = "utilisateur";
     }
-
     $date = date_create(date("Y-m-d H:i:s"));
     $date = new \Datetime();
     $em = $this->getDoctrine()->getManager();
@@ -41,8 +42,10 @@ class UserController extends Controller
     return $this->render('base.html.twig', array(
   'message' => $message,
   'messageBis' => $messageBis));
-
   return new Response($roleuser);
+    }else{
+      return $this->redirectToRoute('login');
+    }
   }
     /**
      * @Route("/user", name="user")

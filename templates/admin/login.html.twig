@@ -18,7 +18,7 @@
                 {% if error %}
                 {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
                 <div><font color="red"><b>Identifiant ou mot de passe invalide.</b></font></div>
-                {%endif%}
+                {% endif %}
                  {% endif %}
              <input type="text" id="username" value="{{last_username}}" name="_username" placeholder="Identifiant" required class="form-control input-lg"/>
 
