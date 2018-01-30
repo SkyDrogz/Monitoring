@@ -71,7 +71,7 @@ class SystemController extends Controller
       return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
     }
     else {
-      return $this->redirectToRoute('system');
+      return $this->redirectToRoute('system_consultation');
     }
 
 

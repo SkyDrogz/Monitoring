@@ -20,11 +20,10 @@ class AdminControllerTest extends WebTestCase
               'PHP_AUTH_PW' => 'admin',
           ]);
 
-         $client->request('GET', '/admin/login');
+         $client->request('GET', '^/login');
          $client->request($httpMethod, $url);
-         // $this->assertEquals($statusCode, $client->getResponse()->getStatusCode());
+         $this->assertEquals($statusCode, $client->getResponse()->getStatusCode());
      }
 
-         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+        //  $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
   }
-}
