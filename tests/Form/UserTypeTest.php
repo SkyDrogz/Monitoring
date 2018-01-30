@@ -22,32 +22,5 @@ class UserTypeTest extends TypeTestCase
       //
       // $crawler = $client->submit($form);
       // $this->assertEquals('src\Controller\UserController::createAction', $client->getRequest()->attributes->get('_controller'));
-      $formData = array(
-            'identifiant' => 'UserTest',
-            'password' => 'UserTest',
-            'tel' => '0600000000',
-            'email' => 'usertest@gmail.com',
-            'entreprise' => '1',
-            'role' => '1',
-        );
-
-        $form = $this->factory->create(UserType::class);
-
-        $object = new TestObject();
-        // ...populate $object properties with the data stored in $formData
-
-        // submit the data to the form directly
-        $form->submit($formData);
-
-        $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($object, $form->getData());
-
-        $view = $form->createView();
-        $children = $view->children;
-
-        foreach (array_keys($formData) as $key) {
-            $this->assertArrayHasKey($key, $children);
-        }
-
     }
 }

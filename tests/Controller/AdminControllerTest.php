@@ -13,4 +13,18 @@ class AdminControllerTest extends WebTestCase
 
     $this->assertEquals(200, $client->getResponse()->getStatusCode());
   }
+  public function testConnexion()
+  {
+    $client = static::createClient([], [
+              'PHP_AUTH_USER' => 'Baptiste',
+              'PHP_AUTH_PW' => 'admin',
+          ]);
+
+         $client->request('GET', '/admin/login');
+         $client->request($httpMethod, $url);
+         // $this->assertEquals($statusCode, $client->getResponse()->getStatusCode());
+     }
+
+         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+  }
 }
