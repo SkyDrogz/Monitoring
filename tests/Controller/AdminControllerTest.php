@@ -31,7 +31,6 @@ class AdminControllerTest extends WebTestCase
   }
   public function testConnexionAdmin()
   {
-
     $client = static::createClient();
 
     $crawler = $client->request('GET','/login');
@@ -42,7 +41,21 @@ class AdminControllerTest extends WebTestCase
 
     $crawler =$client->submit($form);
     $crawler =$client->followRedirect();
-    $this->assertEquals(1, $crawler->filter('html:contains("Ajout")')->count());
+    $this->assertSame(1, $crawler->filter('div.97TIM98BAT')->count());
+  }
+  public function testConnexionUser()
+  {
+    $client = static::createClient();
+
+    $crawler = $client->request('GET','/login');
+
+    $form = $crawler->selectButton('Connexion')->form();
+    $form['_username'] = 'Timothee';
+    $form['_password'] = 'admin';
+
+    $crawler =$client->submit($form);
+    $crawler =$client->followRedirect();
+    $this->assertSame(1, $crawler->filter('div.USER')->count());
   }
 
   // public function testDeconnexion()
