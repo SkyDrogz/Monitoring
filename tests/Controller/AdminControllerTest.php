@@ -12,22 +12,67 @@ class AdminControllerTest extends WebTestCase
   public function testLoginPage()
   {
     $client = static::createClient();
-
-    $crawler = $client->request('GET', '/login');
+    $client->request('GET', '/login');
 
     $this->assertEquals(200, $client->getResponse()->getStatusCode());
   }
+
+
   public function testConnexion()
   {
-    $test_user = 'admin';
-    $test_password = 'admin';
 
-        $this->client = static::createClient(array(), array(
-            'PHP_AUTH_USER' => $test_user,
-            'PHP_AUTH_PW'   => $test_password,
-        ));
+    $client = static::createClient();
 
-        $this->call('POST','login',$credentials);
-        $this->assertResponseOk();
+    $crawler = $client->request('GET','/login');
+
+    $form = $crawler->selectButton('Connexion')->form();
+    $form['_username'] = 'Baptiste';
+    $form['_password'] = 'admin';
+
+    $client->submit($form);
+    $client->followRedirect();
+    $this->assertEquals(200, $client->getResponse()->getStatusCode());
      }
+
+     // public function testConnexion()
+     // {
+     //
+     //   $client = static::createClient();
+     //
+     //   $crawler = $client->request('GET','/login');
+     //
+     //   $form = $crawler->selectButton('Connexion')->form();
+     //   $form['_username'] = 'Baptiste';
+     //   $form['_password'] = 'admin';
+     //
+     //   $client->submit($form);
+     //   $client->followRedirect();
+     //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
+     //  }
+
+      public function testDeconnexion()
+      {
+
+        $client = static::createClient();
+
+        $crawler = $client->request('GET','/deconnexion');
+        $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+       }
+
+      public function testRedirectLogin()
+      {
+
+        $client = static::createClient();
+
+        $crawler = $client->request('GET','/login');
+
+        $form = $crawler->selectButton('Connexion')->form();
+        $form['_username'] = 'Baptiste';
+        $form['_password'] = 'admin';
+
+        $client->submit($form);
+        $client->followRedirect();
+        $this->assertSame(1, $crawler->filter('pwd-container')->count());
+       }
 }
