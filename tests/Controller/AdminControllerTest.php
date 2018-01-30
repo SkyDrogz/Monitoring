@@ -60,11 +60,16 @@ class AdminControllerTest extends WebTestCase
 
   // public function testDeconnexion()
   //     {
+  //       $user = $this->getUser();
+  //       $date = date_create(date("Y-m-d H:i:s"));
+  //       $date = new \Datetime();
+  //       $em = $this->getDoctrine()->getManager();
+  //       $user->setDateDeconnexion($date);
+  //       $em->persist($user);
   //       $client = static::createClient();
   //       $crawler = $client->request('GET','/deconnexion');
-  //
-  //       $client->followRedirect();
-  //       $this->assertGreaterThan(
+  //       $crawler = $client->followRedirect();
+  //       $this->assertSame(
   //           1,
   //           $crawler->filter('html:contains("Connexion")')->count()
   //       );
