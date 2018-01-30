@@ -78,7 +78,7 @@ class AdminController extends Controller
               $em -> persist($user);
               $em->flush();
               $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
-              
+
                 // Creation du transport
         $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
         ->setUsername('noreply@nexus-creation.com')
