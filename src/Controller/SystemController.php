@@ -322,12 +322,14 @@ class SystemController extends Controller
         $date = new \Datetime();
          $system->setDateOffline($date);
          $curl = curl_init();
+         
 
          curl_setopt_array($curl, array(
            CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".
            urlencode($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le "
            .date_format($system->getDateOffline(),"Y-m-d H:i:s"))."&num=".$system->getUser()->getTel(),
            CURLOPT_RETURNTRANSFER => true,
+           CURLOPT_TIMEOUT => 60,
          ));
         curl_exec($curl);
         // Creation du transport
@@ -376,10 +378,7 @@ class SystemController extends Controller
       $em->flush();
     }
 
-      return $this->render('system/consultationCron.html.twig', array(
-        'systemListe' => $systemListe
-      ));
-      return new Response($system);
+      return new Response("");
   }
 
 
