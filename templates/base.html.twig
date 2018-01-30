@@ -35,7 +35,13 @@
                             </ul>
                         </div>
                     </div>
+                    {% if app.user.role.nomRole =='ROLE_ADMIN'%}
+                      <div class="USER">
+                      </div>
+                    {%endif%}
                     {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%}
+                        <div class="97TIM98BAT">
+                        </div>
                     <div class="row">
                         <div id="menu" class="col-md-12">
                             <h3><font color="white"><span class="glyphicon glyphicon-user"></span> Utilisateurs</font></h3>
