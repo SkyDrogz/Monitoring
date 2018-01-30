@@ -1,8 +1,5 @@
-{% extends "base.html.twig" %}
-{%block title %}
-    {{parent()}} - Liste des systèmes
-{%endblock%}
-{%block body %}
+
+{% block body %}
 <link rel="stylesheet" href="{{ asset('css/test.css') }}">
 <font color="white"><h1>Liste des systèmes</h1></font>
 
@@ -28,14 +25,11 @@
                 {%else%}
                 <td><font color="red"><b>{{ system.etat }}</b></color></td>
                 {%endif%}
-                <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>
             {%endif%}
     {% endfor %}
     </tbody>
 
 </table>
-<a href="{{ path('system') }}" class="btn btn-default">Retour</a>
+{% endblock %}
 
-{%endblock%}

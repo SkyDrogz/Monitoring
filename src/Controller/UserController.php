@@ -209,7 +209,7 @@ class UserController extends Controller
         $em->remove($user);
         $em->flush();
 
-        return $this->redirectToRoute('user_consultation');
+        return $this->redirectToRoute('user_approuve');
 
     }
 }
