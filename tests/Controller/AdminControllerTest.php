@@ -15,15 +15,15 @@ class AdminControllerTest extends WebTestCase
   }
   public function testConnexion()
   {
-    $client = static::createClient([], [
-              'PHP_AUTH_USER' => 'Baptiste',
-              'PHP_AUTH_PW' => 'admin',
-          ]);
+    $test_user = 'admin';
+    $test_password = 'admin';
 
-         $client->request('GET', '^/login');
-         $client->request($httpMethod, $url);
-         $this->assertEquals($statusCode, $client->getResponse()->getStatusCode());
+        $this->client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => $test_user,
+            'PHP_AUTH_PW'   => $test_password,
+        ));
+
+        $this->call('POST','login',$credentials);
+        $this->assertResponseOk();
      }
-
-        //  $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
-  }
+}
