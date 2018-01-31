@@ -58,7 +58,7 @@ class SystemType extends AbstractType
                     'Mineur' => 0,
 
                 ),
-                'placeholder' => "Selectionner un nivau d'urgence",
+                'placeholder' => "Selectionner un niveau d'urgence",
                 ))
 
         -> add ('requete', TextareaType::class, array('required' => false, 'label'=>false,
