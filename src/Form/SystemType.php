@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,12 +23,20 @@ class SystemType extends AbstractType
         $builder
         -> add ('nom', TextType::class, array('label'=>false,
         'attr' => array(
+            'required' => true,
             'placeholder' => 'Nom du système',
        ),))
         -> add ('url', TextType::class, array('label'=>false,
         'attr' => array(
+            'required' => true,
             'placeholder' => 'URL du système',
        ),))
+       -> add ('repetition', IntegerType::class, array('label'=>false,
+       'attr' => array(
+         'required' => true,
+           'value' => null,
+           'placeholder' => 'Répétition (temps en minutes)',
+      ),))
         -> add('categSysteme', EntityType::class, array(
             'required' => true,
             'label'=>false,
@@ -58,7 +67,7 @@ class SystemType extends AbstractType
                     'Mineur' => 0,
 
                 ),
-                'placeholder' => "Selectionner un nivau d'urgence",
+                'placeholder' => "Selectionner un niveau d'urgence",
                 ))
 
         -> add ('requete', TextareaType::class, array('required' => false, 'label'=>false,
@@ -67,7 +76,7 @@ class SystemType extends AbstractType
        ),))
         -> add ('resultatAttendu', TextType::class, array('required' => false, 'label'=>false,
         'attr' => array(
-            'placeholder' => 'Resultat attendu',
+            'placeholder' => 'Resultat attendu (pour API)',
        ),))
             ;
 

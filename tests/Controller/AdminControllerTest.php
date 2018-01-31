@@ -26,7 +26,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Baptiste';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $client->submit($form);
@@ -40,7 +40,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Baptiste';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
@@ -54,7 +54,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Timothee';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);

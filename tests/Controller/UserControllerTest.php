@@ -2,7 +2,7 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
+use App\Tests\Controller\AdminControllerTest;
 class UserControllerTest extends WebTestCase
 {
     public function testUserConsultation()
@@ -16,17 +16,19 @@ class UserControllerTest extends WebTestCase
     public function testCreation()
     {
       $client = static::createClient();
-    
-      $crawler = $client->request('GET','/user/new');
 
-      $form = $crawler->selectButton("form[save]")->form();
      
-      $form['identifiant'] = 'Richard';
-      $form['password'] = 'admin';
-      $form['email'] = 'richard.bod60@gmail.com';
-      $form['tel'] = '0680543004';
-      $form['entreprise'] = 1;
-      $form['role'] = 2;
+      
+      $crawler = $client->request('GET','/user/new');
+      echo $crawler -> html();
+      $form = $crawler->selectButton("Confirmer l'ajout")->form();
+     
+      $form['user[identifiant]'] = 'Richard';
+      $form['user[password]'] = 'admin';
+      $form['user[email]'] = 'richard.bod60@gmail.com';
+      $form['user[tel]'] = '0680543004';
+      $form['user[entreprise]'] = "EDF";
+      $form['user[role]'] = 2;
       
 
      $crawler=$client->submit($form);
