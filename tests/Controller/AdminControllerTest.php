@@ -61,24 +61,25 @@ class AdminControllerTest extends WebTestCase
     $crawler =$client->followRedirect();
     $this->assertSame(1, $crawler->filter('div.USER')->count());
   }
+  public function testDeconnexion()
+      {
+        $client = static::createClient();
 
-  // public function testDeconnexion()
-  //     {
-  //       $user = $this->getUser();
-  //       $date = date_create(date("Y-m-d H:i:s"));
-  //       $date = new \Datetime();
-  //       $em = $this->getDoctrine()->getManager();
-  //       $user->setDateDeconnexion($date);
-  //       $em->persist($user);
-  //       $client = static::createClient();
-  //       $crawler = $client->request('GET','/deconnexion');
-  //       $crawler = $client->followRedirect();
-  //       $this->assertSame(
-  //           1,
-  //           $crawler->filter('html:contains("Connexion")')->count()
-  //       );
-  //      }
+        $crawler = $client->request('GET','/login');
 
+        $form = $crawler->selectButton('Connexion')->form();
+        $form['_username'] = 'Timothee';
+        $form['_password'] = 'admin';
+        $crawler =$client->submit($form);
+
+        $crawler = $client->request('GET','/deconnexion');
+        dump($crawler);
+        $crawler = $client->followRedirect();
+        $this->assertSame(
+            1,
+            $crawler->filter('html:contains("Connexion")')->count()
+        );
+       }
       // public function testRedirectLogin()
       // {
       //
