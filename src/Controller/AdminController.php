@@ -53,20 +53,24 @@ class AdminController extends Controller
     public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-        $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+       
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
+            $userTest = $this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant());
             $check = false;
-            foreach($userListe as $unUser)
-            {
-              if($user->getIdentifiant() == $unUser->getIdentifiant())
+            // dump($userTest);
+            // dump($user);
+            // exit;
+           
+              if($user->getIdentifiant() == $userTest->getIdentifiant())
               {
                 $check = true;
+                $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
+                return $this->redirectToRoute('register');
               }
-            }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encoded);
@@ -101,11 +105,9 @@ class AdminController extends Controller
         $result = $mailer->send($message);
         return $this->redirectToRoute('login');
             }
-            else {
-              $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
-              return $this->redirectToRoute('login');
+             
             }
-          }
+          
           return $this->render('admin/register.html.twig', array('form' =>$form->createView()));
         }
 }
