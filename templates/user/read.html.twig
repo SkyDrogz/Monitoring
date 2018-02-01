@@ -47,7 +47,7 @@
                         <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                         <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
                         <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                        <td><a href="{{path('user_suppression',{'id' : user.id}) }}"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a href="{{path('user_delete',{'id' : user.id}) }}"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
 
                     </tr>
                 {% endif %}

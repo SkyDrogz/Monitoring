@@ -1,5 +1,5 @@
-{# {% if app.user == null %} #}
-{# <script> window.location.pathname = "/my-project/public/index.php/login" </script> #}
+ {# {% if app.user == null %} #}
+ {# <script> window.location.pathname = "/my-project/public/index.php/login" </script> #}
 {# {% else %} #}
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@
                         <div id="menu" class="col-md-12">
                             <h3><font color="white"><span class="glyphicon glyphicon-cog"></span> Systèmes</font></h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('system_consultation') }}" class="btn btn-default">Liste des systèmes</a></li>
+                                <li><a href="{{ path('system_read') }}" class="btn btn-default">Liste des systèmes</a></li>
                                 <li><a href="{{ path('system_new') }}" class="btn btn-default">Ajout d'un système</a></li>
                                 <li><a href="{{ path('system_active') }}" class="btn btn-default">Réactivation d'un système</a></li>
                             </ul>
@@ -46,7 +46,7 @@
                         <div id="menu" class="col-md-12">
                             <h3><font color="white"><span class="glyphicon glyphicon-user"></span> Utilisateurs</font></h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('user_consultation') }}" class="btn btn-default">Liste des utilisateurs</a></li>
+                                <li><a href="{{ path('user_read') }}" class="btn btn-default">Liste des utilisateurs</a></li>
                                 <li><a href="{{ path('user_new') }}" class="btn btn-default">Ajout d'un utilisateur</a></li>
                                 <li><a href="{{ path('user_active') }}" class="btn btn-default">Réactivation d'un utilisateur</a></li>
                                 <li><a href="{{ path('user_approuve') }}" class="btn btn-default">Liste des utilisateur à approuver</a></li>
@@ -57,7 +57,7 @@
                         <div id="menu" class="col-md-12">
                             <h3><font color="white"><span class="glyphicon glyphicon-briefcase"></span> Entreprises</font></h3>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Liste des entreprises</a></li>
+                                <li><a href="{{ path('entreprise_read') }}" class="btn btn-default">Liste des entreprises</a></li>
                                 <li><a href="{{ path('entreprise_new') }}" class="btn btn-default">Ajout d'une entreprise</a></li>
                                 <li><a href="{{ path('entreprise_active') }}" class="btn btn-default">Réactivation d'une entreprise</a></li>
                             </ul>
@@ -69,7 +69,7 @@
                     {% block body %}
                     <font color="white">
                         <h4><b>{{ message }}</b></h4>
-                        <a href="{{ path('system_consultation') }}">{{ messageBis }}</a>
+                        <a href="{{ path('system_read') }}">{{ messageBis }}</a>
                     </font>
                     {%endblock%}
                 </div>

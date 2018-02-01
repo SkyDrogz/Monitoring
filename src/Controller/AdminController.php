@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\infoProtect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -23,7 +24,7 @@ class AdminController extends Controller
 
     // last username entered by the user
     $lastUsername = $authUtils->getLastUsername();
-    $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+    // $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
     return $this->render('admin/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -72,7 +73,6 @@ class AdminController extends Controller
 
             if($check == false)
             {
-              $today =new \datetime();
               $em = $this->getDoctrine()->getManager();
               $user->setActif(0);
               $em -> persist($user);
@@ -80,9 +80,11 @@ class AdminController extends Controller
               $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
 
                 // Creation du transport
+                $infoProtect = new InfoProtect();
+                $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
         $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
-        ->setUsername('noreply@nexus-creation.com')
-        ->setPassword('noreply60')
+        ->setUsername($infoProtect->getEmail())
+        ->setPassword($infoProtect->getIdentifiant())
         ;
 
         $mailer = new \Swift_Mailer($transport);
@@ -90,8 +92,9 @@ class AdminController extends Controller
         // Creation du message
         $message = (new \Swift_Message('Alerte enregistrement'))
           ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
-          ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
-        ->setBody('Un utilisateur à fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuer ou désapprouver cette demande.
+          // ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
+          ->setTo(['timothee.nitharum@gmail.com' => 'Timothée'])
+        ->setBody('Un utilisateur a fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuver ou désapprouver cette demande.
         http://localhost:8070/my-project/public/index.php/user/approuve/')
         ;
         // Envoie du message

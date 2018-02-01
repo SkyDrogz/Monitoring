@@ -17,8 +17,6 @@ class UserControllerTest extends WebTestCase
     {
       $client = static::createClient();
 
-     
-      
       $crawler = $client->request('GET','/user/new');
       echo $crawler -> html();
       $form = $crawler->selectButton("Confirmer l'ajout")->form();
@@ -27,7 +25,7 @@ class UserControllerTest extends WebTestCase
       $form['user[password]'] = 'admin';
       $form['user[email]'] = 'richard.bod60@gmail.com';
       $form['user[tel]'] = '0680543004';
-      $form['user[entreprise]'] = "EDF";
+      $form['user[entreprise]'] = 2;
       $form['user[role]'] = 2;
       
 

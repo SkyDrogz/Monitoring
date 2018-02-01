@@ -115,33 +115,33 @@ class UserController extends Controller
                $em -> persist($user);
                $em->flush();
                $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été modifié.");
-               return $this->redirectToRoute('user_consultation');
+               return $this->redirectToRoute('user_read');
       }
       return $this->render('user/edit.html.twig', array('form' =>$form->createView()));
     }
     /**
-     * @Route("/user/consultation", name="user_consultation")
+     * @Route("/user/read", name="user_read")
      */
-    public function consultationAction()
+    public function readAction()
     {
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('user/consultation.html.twig', array(
+        return $this->render('user/read.html.twig', array(
             'userListe' => $userListe
         ));
 
     return new Response($user);
     }
     /**
-     * @Route("/user/suppression/{id}", name="user_suppression")
+     * @Route("/user/delete/{id}", name="user_delete")
      */
-    public function suppressionAction(Request $request,User $user)
+    public function deleteAction(Request $request,User $user)
     {
         $em = $this->getDoctrine()->getManager();
         $user->setActif(false);
         $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('user_consultation');
+        return $this->redirectToRoute('user_read');
 
     }
        /**
@@ -200,9 +200,9 @@ class UserController extends Controller
       return $this->redirectToRoute('user_approuve');
     }
      /**
-     * @Route("/user/suppressionDef/{id}", name="user_suppressionDef")
+     * @Route("/user/deleteDef/{id}", name="user_deleteDef")
      */
-    public function suppressionDefAction(Request $request,User $user)
+    public function deleteDefAction(Request $request,User $user)
     {
         $em = $this->getDoctrine()->getManager();
         $user->setActif(false);
