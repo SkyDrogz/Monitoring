@@ -46,14 +46,13 @@
                         {% endif %}
                         <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                         <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
-                        <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">Réactiver l'utilisateur</a></td>
-                        <td><a href="{{ path('user_suppressionDef', {'id' : user.id}) }}" class="btn btn-danger">Supprimer définitivement l'utilisateur</a></td>
+                        <td><a href="{{ path('user_reactive', {'id' : user.id}) }}" class="btn btn-success">Réactiver</a></td>
+                        <td><a href="{{ path('user_suppressionDef', {'id' : user.id}) }}" class="btn btn-danger">Supprimer définitivement</a></td>
                     </tr>
                 {% endif %}
 
     {% endfor %}
 
 </table>
-<a href="{{ path('user') }}" class="btn btn-default">Retour</a>
+<a href="{{ path('index') }}" class="btn btn-default">Retour</a>
 {%endblock%}
-
