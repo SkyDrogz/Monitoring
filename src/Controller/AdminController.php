@@ -58,19 +58,26 @@ class AdminController extends Controller
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
-            $check = false;
+            $erreur = 0;
             foreach($userListe as $unUser)
             {
               if($user->getIdentifiant() == $unUser->getIdentifiant())
               {
-                $check = true;
+                $erreur = 1;
+              }
+            }
+            foreach($userListe as $unUser)
+            {
+              if($user->getEmail() == $unUser->getEmail())
+              {
+                $erreur = $erreur + 2;
               }
             }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encoded);
 
-            if($check == false)
+            if($erreur == 0)
             {
               $today =new \datetime();
               $em = $this->getDoctrine()->getManager();
@@ -99,8 +106,21 @@ class AdminController extends Controller
         return $this->redirectToRoute('login');
             }
             else {
-              $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
-              return $this->redirectToRoute('login');
+              if($erreur == 1)
+              {
+                $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
+                return $this->redirectToRoute('login');
+              }
+              if($erreur == 2)
+              {
+                $request->getSession()->getFlashBag()->add('info', "L'email' est déjà utilisé. Connectez-vous !");
+                return $this->redirectToRoute('login');
+              }
+              if($erreur == 3)
+              {
+                $request->getSession()->getFlashBag()->add('info', "Le pseudo et l'email sont déjà utilisés. Connectez-vous !");
+                return $this->redirectToRoute('login');
+              }
             }
           }
           return $this->render('admin/register.html.twig', array('form' =>$form->createView()));
