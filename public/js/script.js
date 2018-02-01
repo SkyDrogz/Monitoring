@@ -1,4 +1,4 @@
-  /*
+/*
  * jQuery Password Strength plugin for Twitter Bootstrap
  *
  * Copyright (c) 2008-2013 Tane Piper
@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
   options.common = {
     debug: true,
     onLoad: function() {
-      $('#messages').text('Start typing password');
+      $('#messages').text('Commencez à saisir votre mot de passe');
     }
   };
   $(':password').pwstrength(options);
@@ -263,14 +263,14 @@ defaultOptions.ui.popoverError = function (errors) {
     return message;
 };
 defaultOptions.ui.errorMessages = {
-    wordLength: "Your password is too short",
-    wordNotEmail: "Do not use your email as your password",
-    wordSimilarToUsername: "Your password cannot contain your username",
-    wordTwoCharacterClasses: "Use different character classes",
-    wordRepetitions: "Too many repetitions",
-    wordSequences: "Your password contains sequences"
+    wordLength: "Votre mot de passe est trop court",
+    wordNotEmail: "N'utiliser pas votre email comme mot de passe",
+    wordSimilarToUsername: "Votre mot de passe ne peut pas contenir votre identifiant",
+    wordTwoCharacterClasses: "Utiliser différentes classes de caractères",
+    wordRepetitions: "Trop de répétitions",
+    wordSequences: "Votre mot de passe contient des séquences"
 };
-defaultOptions.ui.verdicts = ["Weak", "Normal", "Medium", "Strong", "Very Strong"];
+defaultOptions.ui.verdicts = ["Faible", "Normal", "Moyen", "Fort", "Très fort"];
 defaultOptions.ui.showVerdicts = true;
 defaultOptions.ui.showVerdictsInsideProgressBar = false;
 defaultOptions.ui.showErrors = true;

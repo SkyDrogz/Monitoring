@@ -3,6 +3,8 @@ namespace App\Tests\Controller;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Link;
+use Symfony\Component\DomCrawler\Crawler;
 
 class AdminControllerTest extends WebTestCase
 {
@@ -66,10 +68,10 @@ class AdminControllerTest extends WebTestCase
         $form = $crawler->selectButton('Connexion')->form();
         $form['_username'] = 'Timothee';
         $form['_password'] = 'admin';
-        $crawler =$client->submit($form);
 
-        $crawler = $client->request('GET','/deconnexion');
+        $crawler =$client->submit($form);
         dump($crawler);
+        $crawler = $client->click('deconnexion');
         $crawler = $client->followRedirect();
         $this->assertSame(
             1,

@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
 <style>
@@ -13,6 +13,9 @@ display: block;
     Nexus Création - Demande d'enregistement
 </title>
 <body>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <div class="container">
         <div class="row" id="pwd-container">
           <div class="col-md-4"></div>
@@ -23,6 +26,7 @@ display: block;
               <h6>Ce formulaire envoi une demande de compte. Si elle a été approuvée par l'administrateur, <a href="{{path('login')}}">veuillez cliquer ici.</a></h6>
               {{form_row(form.identifiant,{ 'attr': {'class': 'form-control input-lg'} })}}
               {{form_row(form.password,{ 'attr': {'class': 'form-control input-lg'} })}}
+              <div class="pwstrength_viewport_progress"> </div>
               {{form_row(form.email,{ 'attr': {'class': 'form-control input-lg'} })}}
               {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
               <button type="submit" id="form_save"  name="form[save]" class="btn btn-lg btn-primary btn-block">Inscription</button>
@@ -33,11 +37,10 @@ display: block;
                       </div>
                   {% endfor %}
                </p>
-                  
+
               {{form_end(form)}}
             </section>
             </div>
             <div class="col-md-4"></div>
         </div>
 </body>
- 
