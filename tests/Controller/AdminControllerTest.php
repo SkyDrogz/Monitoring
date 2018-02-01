@@ -5,6 +5,10 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Link;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+
 
 class AdminControllerTest extends WebTestCase
 {
@@ -24,7 +28,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Baptiste';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $client->submit($form);
@@ -38,7 +42,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Baptiste';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
@@ -52,7 +56,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Timothee';
+    $form['_username'] = 'admin';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);

@@ -1,6 +1,6 @@
-{% if app.user == null %}
-<script> window.location.pathname = "/my-project/public/index.php/login" </script>
-{% else %}
+{# {% if app.user == null %} #}
+{# <script> window.location.pathname = "/my-project/public/index.php/login" </script> #}
+{# {% else %} #}
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,11 +35,11 @@
                             </ul>
                         </div>
                     </div>
-                    {% if app.user.role.nomRole =='ROLE_ADMIN'%}
+                    {# {% if app.user.role.nomRole =='ROLE_ADMIN'%} #}
                       <div class="USER">
                       </div>
-                    {%endif%}
-                    {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%}
+                    {# {%endif%} #}
+                    {# {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%} #}
                         <div class="97TIM98BAT">
                         </div>
                     <div class="row">
@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    {%endif%}
+                    {# {%endif%} #}
                 </div>
                 <div class="col-md-9">
                     {% block body %}
@@ -92,4 +92,4 @@
                     {%endblock%}
     </body>
 </html>
-{%endif%}
+{# {%endif%} #}
