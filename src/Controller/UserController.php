@@ -169,18 +169,6 @@ class UserController extends Controller
       return $this->redirectToRoute('user_active');
     }
         /**
-     * @Route("/user/approuve/", name="user_approuve")
-     */
-    public function approuveAction()
-    {
-      $userListe = $this->getDoctrine()->getRepository(user::class)->findAll();
-      return $this->render('user/approuve.html.twig', array(
-          'userListe' => $userListe
-      ));
-
-  return new Response($user);
-    }
-        /**
      * @Route("/user/actApprouve/{id}", name="user_actApprouve")
      */
     public function activationApprouveAction(Request $request,user $user)
@@ -192,12 +180,12 @@ class UserController extends Controller
       $user -> setDateConnexion($today);
 
       $role=$em->getRepository(Role::class)->findById(1);
-     
+
       $user -> setRole($role[0]);
       $em->persist($user);
       $em->flush();
 
-      return $this->redirectToRoute('user_approuve');
+      return $this->redirectToRoute('user_consultation');
     }
      /**
      * @Route("/user/deleteDef/{id}", name="user_deleteDef")
@@ -209,7 +197,7 @@ class UserController extends Controller
         $em->remove($user);
         $em->flush();
 
-        return $this->redirectToRoute('user_approuve');
+        return $this->redirectToRoute('user_consultation');
 
     }
 }
