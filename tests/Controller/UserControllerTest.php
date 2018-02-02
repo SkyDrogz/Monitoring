@@ -38,8 +38,11 @@ class UserControllerTest extends WebTestCase
 
      $crawler=$client->submit($form);
      
-    if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard') !== null )  {
+    // if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard') !== null )
+    //   {
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
+
+    // }
+
     }
 }
