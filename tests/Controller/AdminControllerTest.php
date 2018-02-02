@@ -74,7 +74,7 @@ class AdminControllerTest extends WebTestCase
         $form['_password'] = 'admin';
 
         $crawler =$client->submit($form);
-        dump($crawler);
+        // dump($crawler);
         $crawler = $client->click('deconnexion');
         $crawler = $client->followRedirect();
         $this->assertSame(

@@ -3,13 +3,20 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Controller\AdminControllerTest;
+use App\Entity\User;
+use Symfony\Component\DomCrawler\Link;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+
 class UserControllerTest extends WebTestCase
 {
-    public function testUserConsultation()
+    public function testUserRead()
     {
       $client = static::createClient();
 
-      $crawler = $client->request('GET', '/user/consultation');
+      $crawler = $client->request('GET', '/user/read');
 
       $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -18,7 +25,7 @@ class UserControllerTest extends WebTestCase
       $client = static::createClient();
 
       $crawler = $client->request('GET','/user/new');
-      echo $crawler -> html();
+      // echo $crawler -> html();
       $form = $crawler->selectButton("Confirmer l'ajout")->form();
      
       $form['user[identifiant]'] = 'Richard';
@@ -32,6 +39,6 @@ class UserControllerTest extends WebTestCase
      $crawler=$client->submit($form);
       
 
-      $this->assertEquals(200, $crawler->getResponse()->getStatusCode());
+      $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }

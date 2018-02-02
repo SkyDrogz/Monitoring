@@ -152,7 +152,7 @@ class Systeme
     {
         $this->dateOffline=$dateOffline;
     }
-    public function setRepetion($repetition)
+    public function setRepetition($repetition)
     {
         $this->repetition=$repetition;
     }

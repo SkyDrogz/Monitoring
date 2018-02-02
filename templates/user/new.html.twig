@@ -21,7 +21,7 @@ display: block;
                 {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
                 {{form_row(form.entreprise,{ 'attr': {'class': 'form-control input-lg'} })}}
                 {{form_row(form.role,{ 'attr': {'class': 'form-control input-lg'} })}}
-                <a href="{{ path('user_consultation') }}" class="btn btn-default">Retour à la liste</a>
+                <a href="{{ path('user_read') }}" class="btn btn-default">Retour à la liste</a>
                 <button type="submit" id="form_save"  name="form[save]" class="btn btn-info">Confirmer l'ajout</button>
                 <p>
                     {% for info in app.flashes('info') %}
