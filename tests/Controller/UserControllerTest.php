@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserControllerTest extends WebTestCase
-{
+  {
     public function testUserRead()
     {
       $client = static::createClient();
@@ -22,7 +22,6 @@ class UserControllerTest extends WebTestCase
     }
     public function testCreation()
     {
-      $this->logIn();
       $client = static::createClient();
 
       $crawler = $client->request('GET','/user/new');
@@ -39,7 +38,9 @@ class UserControllerTest extends WebTestCase
 
      $crawler=$client->submit($form);
 
-
-      $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
+     if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard')!== null)
+     {
+       $this->assertEquals(302, $client->getResponse()->getStatusCode());
+     }
+  }
 }

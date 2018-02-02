@@ -186,7 +186,7 @@ class UserController extends Controller
       $em->persist($user);
       $em->flush();
 
-      return $this->redirectToRoute('user_consultation');
+      return $this->redirectToRoute('user_read');
     }
      /**
      * @Route("/user/deleteDef/{id}", name="user_deleteDef")
@@ -198,7 +198,7 @@ class UserController extends Controller
         $em->remove($user);
         $em->flush();
 
-        return $this->redirectToRoute('user_consultation');
+        return $this->redirectToRoute('user_read');
 
     }
 }

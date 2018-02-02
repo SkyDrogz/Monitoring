@@ -23,11 +23,11 @@
             <tr>
                 <td>{{ system.nom}}</td>
                 <td>{{ system.url }}</td>
-                {% if app.user.role.nomRole =="ROLE_SUPER_ADMIN" %}
+                {# {% if app.user.role.nomRole =="ROLE_SUPER_ADMIN" %} #}
                 
-                <td><a href="{{ path('system_reactive', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a></td>
-                <td><a href="{{ path('system_suppressionDef', {'id' : system.id}) }}" class="btn btn-danger">Supprimer définitivement le système</a></td>
-            {% endif %}                
+                <td><a href="{{ path('system_active', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a></td>
+                <td><a href="{{ path('system_deleteDef', {'id' : system.id}) }}" class="btn btn-danger">Supprimer définitivement le système</a></td>
+            {# {% endif %} #}
             </tr>
             {% endif %}
     {% endfor %}
