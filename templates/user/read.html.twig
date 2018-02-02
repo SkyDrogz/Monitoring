@@ -89,7 +89,7 @@
                                     <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
                                     <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
                                     <td><a href="{{ path('user_actApprouve', {'id' : user.id}) }}" class="btn btn-success">Activer</a></td>
-                                    <td><a href="{{ path('user_suppressionDef', {'id' : user.id}) }}" class="btn btn-danger">Décliner</a></td>
+                                    <td><a href="{{ path('user_deleteDef', {'id' : user.id}) }}" class="btn btn-danger">Décliner</a></td>
 
                                 </tr>
                             {% endif %}

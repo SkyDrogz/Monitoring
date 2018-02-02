@@ -137,7 +137,7 @@ class SystemController extends Controller
     $em->remove($systeme);
     $em->flush();
 
-    return $this->redirectToRoute('system_read');
+    return $this->redirectToRoute('system_active');
 
   }
 /**
