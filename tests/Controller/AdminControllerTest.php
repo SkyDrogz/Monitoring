@@ -12,76 +12,77 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdminControllerTest extends WebTestCase
 {
-  public function testLoginPage()
-  {
-    $client = static::createClient();
-    $client->request('GET', '/login');
 
-    $this->assertEquals(200, $client->getResponse()->getStatusCode());
-  }
+  // public function testLoginPage()
+  // {
+  //   $client = static::createClient();
+  //   $client->request('GET', '/login');
+
+  //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
+  // }
 
 
-  public function testConnexion()
-  {
-    $client = static::createClient();
+  // public function testConnexion()
+  // {
+  //   $client = static::createClient();
 
-    $crawler = $client->request('GET','/login');
+  //   $crawler = $client->request('GET','/login');
 
-    $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
-    $form['_password'] = 'admin';
+  //   $form = $crawler->selectButton('Connexion')->form();
+  //   $form['_username'] = 'admin';
+  //   $form['_password'] = 'admin';
 
-    $client->submit($form);
-    $client->followRedirect();
-    $this->assertEquals(200, $client->getResponse()->getStatusCode());
-  }
-  public function testConnexionAdmin()
-  {
-    $client = static::createClient();
+  //   $client->submit($form);
+  //   $client->followRedirect();
+  //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
+  // }
+  // public function testConnexionAdmin()
+  // {
+  //   $client = static::createClient();
 
-    $crawler = $client->request('GET','/login');
+  //   $crawler = $client->request('GET','/login');
 
-    $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
-    $form['_password'] = 'admin';
+  //   $form = $crawler->selectButton('Connexion')->form();
+  //   $form['_username'] = 'Baptiste';
+  //   $form['_password'] = 'admin';
 
-    $crawler =$client->submit($form);
-    $crawler =$client->followRedirect();
-    $this->assertSame(1, $crawler->filter('div.97TIM98BAT')->count());
-  }
-  public function testConnexionUser()
-  {
-    $client = static::createClient();
+  //   $crawler =$client->submit($form);
+  //   $crawler =$client->followRedirect();
+  //   $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
+  // }
+  // public function testConnexionUser()
+  // {
+  //   $client = static::createClient();
 
-    $crawler = $client->request('GET','/login');
+  //   $crawler = $client->request('GET','/login');
 
-    $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
-    $form['_password'] = 'admin';
+  //   $form = $crawler->selectButton('Connexion')->form();
+  //   $form['_username'] = 'Baptiste';
+  //   $form['_password'] = 'admin';
 
-    $crawler =$client->submit($form);
-    $crawler =$client->followRedirect();
-    $this->assertSame(1, $crawler->filter('div.USER')->count());
-  }
-  public function testDeconnexion()
-      {
-        $client = static::createClient();
+  //   $crawler =$client->submit($form);
+  //   $crawler =$client->followRedirect();
+  //   $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
+  // }
+  // public function testDeconnexion()
+  //     {
+  //       $client = static::createClient();
 
-        $crawler = $client->request('GET','/login');
+  //       $crawler = $client->request('GET','/login');
 
-        $form = $crawler->selectButton('Connexion')->form();
-        $form['_username'] = 'Timothee';
-        $form['_password'] = 'admin';
+  //       $form = $crawler->selectButton('Connexion')->form();
+  //       $form['_username'] = 'Timothee';
+  //       $form['_password'] = 'admin';
 
-        $crawler =$client->submit($form);
-        // dump($crawler);
-        $crawler = $client->click('deconnexion');
-        $crawler = $client->followRedirect();
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Connexion")')->count()
-        );
-       }
+  //       $crawler =$client->submit($form);
+  //       // dump($crawler);
+  //       $crawler = $client->click('deconnexion');
+  //       $crawler = $client->followRedirect();
+  //       $this->assertSame(
+  //           1,
+  //           $crawler->filter('html:contains("Connexion")')->count()
+  //       );
+  //      }
       // public function testRedirectLogin()
       // {
       //

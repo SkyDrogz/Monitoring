@@ -15,7 +15,7 @@ class UserController extends Controller
   /**
   * @Route("/", name="index")
   */
-  public function indexAccueil()
+  public function indexAccueil(Request $request)
 {
     $user = $this->getUser();
     if ($user!= null)
@@ -27,6 +27,7 @@ class UserController extends Controller
     else {
       $role = "utilisateur";
     }
+    $request->getSession()->getFlashBag()->add('info', $role);
     $date = date_create(date("Y-m-d H:i:s"));
     $date = new \Datetime();
     $em = $this->getDoctrine()->getManager();

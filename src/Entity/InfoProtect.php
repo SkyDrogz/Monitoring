@@ -36,7 +36,8 @@ class InfoProtect
     public function getEmail()
     {
         return $this->email;
-    }public function getUrl()
+    }
+    public function getUrl()
     {
         return $this->URL;
     }
