@@ -65,14 +65,15 @@ class UserController extends Controller
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
-            $user = $form -> getData();
-            $check = false;
-            foreach($userListe as $unUser)
+          $user = $form -> getData();
+          $userTest = $this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant());
+          $check = false;
+         
+            if($user->getIdentifiant() == $userTest->getIdentifiant())
             {
-              if($user->getIdentifiant() == $unUser->getIdentifiant())
-              {
-                $check = true;
-              }
+              $check = true;
+              $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
+              return $this->redirectToRoute('register');
             }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);

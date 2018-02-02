@@ -4,14 +4,19 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Controller\AdminControllerTest;
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager; 
 use Symfony\Component\DomCrawler\Link;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class UserControllerTest extends WebTestCase
 {
+  
+
     public function testUserRead()
     {
       $client = static::createClient();
@@ -38,11 +43,11 @@ class UserControllerTest extends WebTestCase
 
      $crawler=$client->submit($form);
      
-    // if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard') !== null )
-    //   {
+    if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard') !== null )
+      {
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-    // }
+    }
 
     }
 }
