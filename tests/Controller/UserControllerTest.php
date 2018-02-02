@@ -12,32 +12,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserControllerTest extends WebTestCase
 {
-   private $client = null;
-
-   public function setUp()
-   {
-     $client = static::createClient(array(), array(
-       'PHP_AUTH_USER' => 'Baptiste',
-       'PHP_AUTH_PW'   => 'admin',
-     ));
-   }
-   private function logIn()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        // the firewall context defaults to the firewall name
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('Baptiste', 'admin', $firewallContext, array('ROLE_SUPER_ADMIN'));
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
     public function testUserRead()
     {
-      $this->logIn();
+      $client = static::createClient();
 
       $crawler = $client->request('GET', '/user/read');
 
@@ -46,6 +23,7 @@ class UserControllerTest extends WebTestCase
     public function testCreation()
     {
       $this->logIn();
+      $client = static::createClient();
 
       $crawler = $client->request('GET','/user/new');
       // echo $crawler -> html();
