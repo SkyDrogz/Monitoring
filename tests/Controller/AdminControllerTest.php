@@ -12,9 +12,15 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdminControllerTest extends WebTestCase
 {
+<<<<<<< HEAD
   // public function testLoginPage()
   // {
   //   exit;
+=======
+
+  // public function testLoginPage()
+  // {
+>>>>>>> 5a11a30f2f5217a64f01f4927ce9941aa5b7ad6f
   //   $client = static::createClient();
   //   $client->request('GET', '/login');
 
@@ -48,23 +54,22 @@ class AdminControllerTest extends WebTestCase
 
   //   $crawler =$client->submit($form);
   //   $crawler =$client->followRedirect();
-  //   $this->assertSame(1, $crawler->filter('div.97TIM98BAT')->count());
-
+  //   $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
   // }
-  public function testConnexionUser()
-  {
-    $client = static::createClient();
+  // public function testConnexionUser()
+  // {
+  //   $client = static::createClient();
 
-    $crawler = $client->request('GET','/login');
+  //   $crawler = $client->request('GET','/login');
 
-    $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
-    $form['_password'] = 'admin';
+  //   $form = $crawler->selectButton('Connexion')->form();
+  //   $form['_username'] = 'Baptiste';
+  //   $form['_password'] = 'admin';
 
-    $crawler =$client->submit($form);
-    $crawler =$client->followRedirect();
-    $this->assertSame(1, $crawler->filter('div.USER')->count());
-  }
+  //   $crawler =$client->submit($form);
+  //   $crawler =$client->followRedirect();
+  //   $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
+  // }
   // public function testDeconnexion()
   //     {
   //       $client = static::createClient();

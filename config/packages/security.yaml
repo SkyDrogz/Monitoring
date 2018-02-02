@@ -30,3 +30,5 @@ security:
     # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     # - { path: ^/admin/system ,roles: ROLE_ADMIN }
     # - { path: ^/admin ,roles: ROLE_SUPERADMIN }
+    # - { path: ^/user ,roles: ROLE_SUPERADMIN }
+    # - { path: ^/entreprise ,roles: ROLE_SUPERADMIN }

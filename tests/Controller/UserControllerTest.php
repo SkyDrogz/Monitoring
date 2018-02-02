@@ -14,9 +14,13 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class UserControllerTest extends WebTestCase
+<<<<<<< HEAD
 {
   
 
+=======
+  {
+>>>>>>> 5a11a30f2f5217a64f01f4927ce9941aa5b7ad6f
     public function testUserRead()
     {
       $client = static::createClient();
@@ -32,22 +36,20 @@ class UserControllerTest extends WebTestCase
       $crawler = $client->request('GET','/user/new');
       // echo $crawler -> html();
       $form = $crawler->selectButton("Confirmer l'ajout")->form();
-     
+
       $form['user[identifiant]'] = 'Richard';
       $form['user[password]'] = 'admin';
       $form['user[email]'] = 'richard.bod60@gmail.com';
       $form['user[tel]'] = '0680543004';
       $form['user[entreprise]'] = 2;
       $form['user[role]'] = 2;
-      
+
 
      $crawler=$client->submit($form);
-     
-    if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard') !== null )
-      {
-    $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-    }
-
-    }
+     if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard')!== null)
+     {
+       $this->assertEquals(302, $client->getResponse()->getStatusCode());
+     }
+  }
 }
