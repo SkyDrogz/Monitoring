@@ -71,103 +71,18 @@ class SystemController extends Controller
       return $this->render('system/edit.html.twig', array('form' =>$form->createView()));
     }
     else {
-      return $this->redirectToRoute('system_consultation');
+      return $this->redirectToRoute('system_read');
     }
 
 
   }
     /**
-     * @Route("/system/consultation", name="system_consultation")
+     * @Route("/system/read", name="system_read")
      */
-    public function consultation(Request $request)
+    public function read(Request $request)
     {
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
-      foreach($systemListe as $system){
-        if($system->getActif()== 1){
-        if($system->getCategSysteme()->getCategorie() == "Serveur"){
-        $command = exec('ping '.$system->getUrl()." -n 1");
-        if (preg_match("#Minimum#",$command))
-        {
-          $system->setEtat('Online');
-        }
-        else
-        {
-          $system->setEtat('Offline');
-        }
-      }elseif($system->getCategSysteme()->getCategorie() == "Site internet"){
-         // Création d'une nouvelle ressource cURL
-         $curl = curl_init();
-
-         curl_setopt_array($curl, array(
-           CURLOPT_URL => $system->getUrl(),
-           CURLOPT_RETURNTRANSFER => true,
-         ));
-        // Récupération de l'URL et affichage sur le navigateur
-        $str =curl_exec($curl);
-
-          if ($str === false)
-        {
-          $system->setEtat('Offline');
-        }
-        else
-        {
-          $system->setEtat('Online');
-        }
-
-        // Fermeture de la session cURL
-        curl_close($curl);
-      }elseif($system->getCategSysteme()->getCategorie() == "API"){
-          $curl = curl_init();
-
-          curl_setopt_array($curl, array(
-            CURLOPT_PORT => "9200",
-            CURLOPT_URL => $system->getUrl(),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => $system->getRequete(),
-            CURLOPT_HTTPHEADER => array(
-              "Cache-Control: no-cache",
-              "Content-Type: application/json",
-              "Postman-Token: a9414de1-6e95-fbc7-9c3c-94983fa42efb"
-            ),
-          ));
-          if(curl_exec($curl) === false)
-          {
-            curl_close($curl);
-            $system->setEtat("Offline (Serveur)");
-
-          }
-          else
-          {
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            curl_close($curl);
-            //Test résultat attendu
-            if(preg_match("#".$system->getResultatAttendu()."#",$response))
-            {
-              //Test requete JSON
-              if (preg_match("#error#",$response)) {
-                $system->setEtat('Offline (Requête JSON incorrecte)');
-              } else {
-                $system->setEtat('Online');
-              }
-            }
-            else {
-
-              $system->setEtat('Offline (Résultat attendu introuvable)');
-            }
-          }
-
-        }
-
-      }
-    }
-
-      return $this->render('system/consultation.html.twig', array(
+      return $this->render('system/read.html.twig', array(
         'systemListe' => $systemListe
       ));
       return new Response($system);
@@ -176,16 +91,16 @@ class SystemController extends Controller
 
 
   /**
-  * @Route("/system/suppression/{id}", name="system_suppression")
+  * @Route("/system/delete/{id}", name="system_delete")
   */
-  public function suppressionAction(Request $request,Systeme $systeme)
+  public function deleteAction(Request $request,Systeme $systeme)
   {
     $em = $this->getDoctrine()->getManager();
     $systeme->setActif(false);
     $em->persist($systeme);
     $em->flush();
 
-    return $this->redirectToRoute('system_consultation');
+    return $this->redirectToRoute('system_read');
 
   }
   /**
@@ -214,21 +129,21 @@ class SystemController extends Controller
   }
 
 /**
-  * @Route("/system/suppressionDef/{id}", name="system_suppressionDef")
+  * @Route("/system/deleteDef/{id}", name="system_deleteDef")
   */
-  public function suppressionDefAction(Request $request,Systeme $systeme)
+  public function deleteDefAction(Request $request,Systeme $systeme)
   {
     $em = $this->getDoctrine()->getManager();
     $em->remove($systeme);
     $em->flush();
 
-    return $this->redirectToRoute('system_consultation');
+    return $this->redirectToRoute('system_read');
 
   }
 /**
-     * @Route("/system/consultation/cron/linux/4530945389", name="system_consultation_cron")
+     * @Route("/system/read/cron/linux/4530945389", name="system_read_cron")
      */
-    public function consultationCron(Request $request)
+    public function readCron(Request $request)
     {
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       foreach($systemListe as $system){
@@ -323,9 +238,10 @@ class SystemController extends Controller
          $system->setDateOffline($date);
          $curl = curl_init();
          
-
+         $infoProtect = new InfoProtect();
+         $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
          curl_setopt_array($curl, array(
-           CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=".
+           CURLOPT_URL => "".$infoProtect->getUrl()."".
            urlencode($system->getCategSysteme()->getCategorie()." '".$system->getNom()."' est offline depuis le "
            .date_format($system->getDateOffline(),"Y-m-d H:i:s"))."&num=".$system->getUser()->getTel(),
            CURLOPT_RETURNTRANSFER => true,
@@ -333,9 +249,12 @@ class SystemController extends Controller
          ));
         curl_exec($curl);
         // Creation du transport
+        $infoProtect = new InfoProtect();
+        $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(2);
         $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
-        ->setUsername('noreply@nexus-creation.com')
-        ->setPassword('noreply60')
+        // Récupération des identifiant de connexion de l'email.
+        ->setUsername($infoProtect->getEmail())
+        ->setPassword($infoProtect->getIdentifiant())
         ;
 
         $mailer = new \Swift_Mailer($transport);

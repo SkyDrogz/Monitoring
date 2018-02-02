@@ -42,12 +42,12 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
+    $form['_username'] = 'Baptiste';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
     $crawler =$client->followRedirect();
-    $this->assertSame(1, $crawler->filter('div.97TIM98BAT')->count());
+    $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
   }
   public function testConnexionUser()
   {
@@ -56,12 +56,12 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'admin';
+    $form['_username'] = 'Baptiste';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
     $crawler =$client->followRedirect();
-    $this->assertSame(1, $crawler->filter('div.USER')->count());
+    $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
   }
   public function testDeconnexion()
       {
@@ -74,7 +74,6 @@ class AdminControllerTest extends WebTestCase
         $form['_password'] = 'admin';
 
         $crawler =$client->submit($form);
-        dump($crawler);
         $crawler = $client->click('deconnexion');
         $crawler = $client->followRedirect();
         $this->assertSame(

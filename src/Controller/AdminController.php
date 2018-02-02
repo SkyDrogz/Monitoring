@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\InfoProtect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -23,7 +24,7 @@ class AdminController extends Controller
 
     // last username entered by the user
     $lastUsername = $authUtils->getLastUsername();
-    $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+    // $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
     return $this->render('admin/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -52,34 +53,43 @@ class AdminController extends Controller
     public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-        $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
+
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
             $erreur = 0;
-            foreach($userListe as $unUser)
-            {
-              if($user->getIdentifiant() == $unUser->getIdentifiant())
+              if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant())!== null)
               {
-                $erreur = 1;
+                $erreur = $erreur +1;
               }
-            }
-            foreach($userListe as $unUser)
-            {
-              if($user->getEmail() == $unUser->getEmail())
+              if($this->getDoctrine()->getRepository(User::class)->findOneByEmail($user->getEmail()) !== null)
               {
-                $erreur = $erreur + 2;
+                $erreur = $erreur +2;
               }
-            }
+              if($erreur!=0){
+                switch($erreur)
+                {
+                 case 1:
+                  $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
+                  break;
+
+                 case 2:
+                  $request->getSession()->getFlashBag()->add('info', "L'email est déjà utilisé. Connectez-vous !");
+                  break;
+
+                 case 3:
+                  $request->getSession()->getFlashBag()->add('info', "Le pseudo et l'email sont déjà utilisés. Choisissez-en un autre !");
+                  break;
+                }
+                return $this->redirectToRoute('register');
+              }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encoded);
-
             if($erreur == 0)
             {
-              $today =new \datetime();
               $em = $this->getDoctrine()->getManager();
               $user->setActif(0);
               $em -> persist($user);
@@ -87,9 +97,11 @@ class AdminController extends Controller
               $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
 
                 // Creation du transport
+                $infoProtect = new InfoProtect();
+                $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
         $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
-        ->setUsername('noreply@nexus-creation.com')
-        ->setPassword('noreply60')
+        ->setUsername($infoProtect->getEmail())
+        ->setPassword($infoProtect->getIdentifiant())
         ;
 
         $mailer = new \Swift_Mailer($transport);
@@ -97,32 +109,18 @@ class AdminController extends Controller
         // Creation du message
         $message = (new \Swift_Message('Alerte enregistrement'))
           ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
-          ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
-        ->setBody('Un utilisateur à fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuer ou désapprouver cette demande.
+          // ->setTo(['valentin@nexus-creation.com' => 'Valentin'])
+          ->setTo(['timothee.nitharum@gmail.com' => 'Timothée'])
+        ->setBody('Un utilisateur a fait une demande de compte. Merci de vous rendre au lien ci-dessous afin de pouvoir approuver ou désapprouver cette demande.
         http://localhost:8070/my-project/public/index.php/user/approuve/')
         ;
         // Envoie du message
         $result = $mailer->send($message);
         return $this->redirectToRoute('login');
             }
-            else {
-              if($erreur == 1)
-              {
-                $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
-                return $this->redirectToRoute('login');
-              }
-              if($erreur == 2)
-              {
-                $request->getSession()->getFlashBag()->add('info', "L'email' est déjà utilisé. Connectez-vous !");
-                return $this->redirectToRoute('login');
-              }
-              if($erreur == 3)
-              {
-                $request->getSession()->getFlashBag()->add('info', "Le pseudo et l'email sont déjà utilisés. Connectez-vous !");
-                return $this->redirectToRoute('login');
-              }
+
             }
-          }
+
           return $this->render('admin/register.html.twig', array('form' =>$form->createView()));
         }
 }

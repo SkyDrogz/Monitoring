@@ -9,7 +9,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="DATABASE_URL" value="mysql://root:@127.0.0.1/ProjetTest" />
+        <env name="DATABASE_URL" value="mysql://root:@127.0.0.1/monitoring" />
         <env name="KERNEL_CLASS" value="App\Kernel" />
         <env name="APP_ENV" value="test" />
         <env name="APP_DEBUG" value="1" />

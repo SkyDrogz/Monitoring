@@ -29,13 +29,13 @@
                 <td><font color="red"><b>{{ system.etat }}</b></color></td>
                 {%endif%}
                 <td><a href="{{ path('system_edit', {'id' : system.id}) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                <td><a href="{{ path('system_suppression', {'id' : system.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a href="{{ path('system_delete', {'id' : system.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>
             {%endif%}
     {% endfor %}
     </tbody>
 
 </table>
-<a href="{{ path('system') }}" class="btn btn-default">Retour</a>
+<a href="{{ path('system_read') }}" class="btn btn-default">Retour</a>
 
 {%endblock%}

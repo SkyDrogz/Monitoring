@@ -56,33 +56,33 @@ class EntrepriseController extends Controller
                $em = $this->getDoctrine()->getManager();
                $em -> persist($entreprise);
                $em->flush();
-               return $this->redirectToRoute('entreprise_consultation');
+               return $this->redirectToRoute('entreprise_read');
       }
       return $this->render('entreprise/edit.html.twig', array('form' =>$form->createView()));
     }
     /**
-     * @Route("/entreprise/consultation", name="entreprise_consultation")
+     * @Route("/entreprise/read", name="entreprise_read")
      */
-    public function consultationAction()
+    public function readAction()
     {
         $entrepriseListe = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
-        return $this->render('entreprise/consultation.html.twig', array(
+        return $this->render('entreprise/read.html.twig', array(
             'entrepriseListe' => $entrepriseListe
         ));
 
     return new Response($entreprise);
     }
     /**
-     * @Route("/entreprise/suppression/{id}", name="entreprise_suppression")
+     * @Route("/entreprise/delete/{id}", name="entreprise_delete")
      */
-    public function suppressionAction(Request $request,Entreprise $entreprise)
+    public function deleteAction(Request $request,Entreprise $entreprise)
     {
         $em = $this->getDoctrine()->getManager();
         $entreprise->setActif(false);
         $em->persist($entreprise);
         $em->flush();
 
-        return $this->redirectToRoute('entreprise_consultation');
+        return $this->redirectToRoute('entreprise_read');
     }
       /**
      * @Route("/entreprise/active", name="entreprise_active")
@@ -109,14 +109,14 @@ class EntrepriseController extends Controller
       return $this->redirectToRoute('entreprise_active');
     }
      /**
-     * @Route("/entreprise/suppressionDef/{id}", name="entreprise_suppressionDef")
+     * @Route("/entreprise/deleteDef/{id}", name="entreprise_deleteDef")
      */
-    public function suppressionDefAction(Request $request,Entreprise $entreprise)
+    public function deleteDefAction(Request $request,Entreprise $entreprise)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($entreprise);
         $em->flush();
 
-        return $this->redirectToRoute('entreprise_consultation');
+        return $this->redirectToRoute('entreprise_read');
     }
 }
