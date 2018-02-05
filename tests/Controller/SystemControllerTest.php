@@ -7,7 +7,10 @@ class SystemControllerTest extends WebTestCase
 {
   public function testSystemRead()
   {
-    $client = static::createClient();
+    $client = static::createClient(array(), array(
+    'PHP_AUTH_USER' => 'Baptiste',
+    'PHP_AUTH_PW'   => 'admin',
+    ));
 
     $crawler = $client->request('GET', '/system/read');
 
@@ -15,7 +18,10 @@ class SystemControllerTest extends WebTestCase
   }
   public function testCreation()
   {
-    $client = static::createClient();
+    $client = static::createClient(array(), array(
+    'PHP_AUTH_USER' => 'Timothee',
+    'PHP_AUTH_PW'   => 'admin',
+    ));
 
     $crawler = $client->request('GET','/system/new');
     // echo $crawler -> html();
@@ -23,15 +29,12 @@ class SystemControllerTest extends WebTestCase
 
     $form['system[nom]'] = 'Richard';
     $form['system[url]'] = 'Url.url.url';
-    $form['system[categSysteme]'] = 1;
-    $form['system[user]'] = 3 ;
+    $form['system[categSysteme]'] = 2;
+    $form['system[user]'] = 1 ;
     $form['system[niveauUrgence]'] = 1;
     $form['system[repetition]'] = 2;
 
-
    $crawler=$client->submit($form);
-
-
-    $this->assertEquals(302, $client->getResponse()->getStatusCode());
+   $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
 }

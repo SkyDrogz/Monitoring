@@ -36,34 +36,54 @@ class AdminControllerTest extends WebTestCase
   //   $client->followRedirect();
   //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
   // }
-  // public function testConnexionAdmin()
-  // {
-  //   $client = static::createClient();
+  public function testConnexionAdmin()
+  {
+    $client = static::createClient();
+    $session = $client->getContainer()->get('session');
 
-  //   $crawler = $client->request('GET','/login');
+    // the firewall context defaults to the firewall name
+    $firewallContext = 'secured_area';
 
-  //   $form = $crawler->selectButton('Connexion')->form();
-  //   $form['_username'] = 'Baptiste';
-  //   $form['_password'] = 'admin';
+    $token = new UsernamePasswordToken('Baptiste', 'admin', $firewallContext, array('ROLE_SUPER_ADMIN'));
+    $session->set('_security_'.$firewallContext, serialize($token));
+    $session->save();
 
-  //   $crawler =$client->submit($form);
-  //   $crawler =$client->followRedirect();
-  //   $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
-  // }
-  // public function testConnexionUser()
-  // {
-  //   $client = static::createClient();
+    $cookie = new Cookie($session->getName(), $session->getId());
+    $client->getCookieJar()->set($cookie);
+    $crawler = $client->request('GET','/login');
 
-  //   $crawler = $client->request('GET','/login');
+    $form = $crawler->selectButton('Connexion')->form();
+    $form['_username'] = 'Baptiste';
+    $form['_password'] = 'admin';
 
-  //   $form = $crawler->selectButton('Connexion')->form();
-  //   $form['_username'] = 'Baptiste';
-  //   $form['_password'] = 'admin';
+    $crawler =$client->submit($form);
+    $crawler =$client->followRedirect();
+    $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
+  }
+  public function testConnexionUser()
+  {
+    $client = static::createClient();
+    $session = $client->getContainer()->get('session');
 
-  //   $crawler =$client->submit($form);
-  //   $crawler =$client->followRedirect();
-  //   $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
-  // }
+    // the firewall context defaults to the firewall name
+    $firewallContext = 'secured_area';
+
+    $token = new UsernamePasswordToken('Timothee', 'admin', $firewallContext, array('ROLE_ADMIN'));
+    $session->set('_security_'.$firewallContext, serialize($token));
+    $session->save();
+
+    $cookie = new Cookie($session->getName(), $session->getId());
+    $client->getCookieJar()->set($cookie);
+    $crawler = $client->request('GET','/login');
+
+    $form = $crawler->selectButton('Connexion')->form();
+    $form['_username'] = 'Timothee';
+    $form['_password'] = 'admin';
+
+    $crawler =$client->submit($form);
+    $crawler =$client->followRedirect();
+    $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
+  }
   // public function testDeconnexion()
   //     {
   //       $client = static::createClient();
