@@ -3,12 +3,9 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Controller\AdminControllerTest;
-<<<<<<< HEAD
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager; 
-=======
->>>>>>> 3936e37915b0cff84361bbab857af2f14abeb412
 use Symfony\Component\DomCrawler\Link;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\BrowserKit\Cookie;
