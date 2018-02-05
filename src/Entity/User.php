@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Persistence\ObjectManager;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -61,9 +63,13 @@ class User implements UserInterface, \Serializable
      */
     private $entreprise;
 
-    public function __construct(){
-        $this->actif = true;
-    }
+    private  $objectManager;
+
+    public function __construct()
+    {
+        $this->actif = true;        
+        $this->objectManager = null;
+    }      
     public function getId()
     {
         return $this->id;

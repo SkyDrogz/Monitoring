@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\InfoProtect;
+use App\Entity\infoProtect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -53,42 +53,26 @@ class AdminController extends Controller
     public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-
+       
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         //Submit
         if($form->isSubmitted() && $form->isValid()){
             $user = $form -> getData();
-            $erreur = 0;
-              if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant())!== null)
+            $userTest = $this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant());
+            $check = false;
+           
+              if($user->getIdentifiant() == $userTest->getIdentifiant())
               {
-                $erreur = $erreur +1;
-              }
-              if($this->getDoctrine()->getRepository(User::class)->findOneByEmail($user->getEmail()) !== null)
-              {
-                $erreur = $erreur +2;
-              }
-              if($erreur!=0){
-                switch($erreur)
-                {
-                 case 1:
-                  $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
-                  break;
-
-                 case 2:
-                  $request->getSession()->getFlashBag()->add('info', "L'email est déjà utilisé. Connectez-vous !");
-                  break;
-
-                 case 3:
-                  $request->getSession()->getFlashBag()->add('info', "Le pseudo et l'email sont déjà utilisés. Choisissez-en un autre !");
-                  break;
-                }
+                $check = true;
+                $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
                 return $this->redirectToRoute('register');
               }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
             $user->setPassword($encoded);
-            if($erreur == 0)
+
+            if($check == false)
             {
               $em = $this->getDoctrine()->getManager();
               $user->setActif(0);
@@ -118,9 +102,9 @@ class AdminController extends Controller
         $result = $mailer->send($message);
         return $this->redirectToRoute('login');
             }
-
+             
             }
-
+          
           return $this->render('admin/register.html.twig', array('form' =>$form->createView()));
         }
 }

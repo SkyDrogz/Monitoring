@@ -12,15 +12,11 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+use PHPUnit\Framework\TestCase;
 
 class UserControllerTest extends WebTestCase
-<<<<<<< HEAD
-{
-  
-
-=======
   {
->>>>>>> 5a11a30f2f5217a64f01f4927ce9941aa5b7ad6f
     public function testUserRead()
     {
       $client = static::createClient();
@@ -30,8 +26,23 @@ class UserControllerTest extends WebTestCase
       $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
     public function testCreation()
-    {
+    { 
+      $objectManager = $this->createMock(ObjectManager::class);
+      $userRepository = $this->createMock(ObjectRepository::class);
+      
+     
+     
+      $userRepository->expects($this->any())
+          ->method('find')
+          ->willReturn('Richard');
+     $objectManager->expects($this->any())
+     ->method('getRepository')
+     ->willReturn($userRepository);
+
+     $user = new User($objectManager);
+     
       $client = static::createClient();
+      $user->setIdentifiant('Richard');
 
       $crawler = $client->request('GET','/user/new');
       // echo $crawler -> html();
@@ -44,12 +55,9 @@ class UserControllerTest extends WebTestCase
       $form['user[entreprise]'] = 2;
       $form['user[role]'] = 2;
 
-
      $crawler=$client->submit($form);
 
-     if($this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant('Richard')!== null)
-     {
-       $this->assertEquals(302, $client->getResponse()->getStatusCode());
-     }
-  }
+    $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+     
 }

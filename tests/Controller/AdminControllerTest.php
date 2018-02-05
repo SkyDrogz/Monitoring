@@ -12,15 +12,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdminControllerTest extends WebTestCase
 {
-<<<<<<< HEAD
-  // public function testLoginPage()
-  // {
-  //   exit;
-=======
 
   // public function testLoginPage()
   // {
->>>>>>> 5a11a30f2f5217a64f01f4927ce9941aa5b7ad6f
   //   $client = static::createClient();
   //   $client->request('GET', '/login');
 
