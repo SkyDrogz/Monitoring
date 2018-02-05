@@ -1,6 +1,6 @@
- {# {% if app.user == null %} #}
- {# <script> window.location.pathname = "/my-project/public/index.php/login" </script> #}
-{# {% else %} #}
+{% if app.user.role.nomRole == null %}
+  <script> window.location.pathname = "/Monitoring/public/index.php/login" </script>
+{% else %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +14,9 @@
 <body>
 <script src="{{ asset('js/script.js') }}"></script>
 <div class="container">
-
 <div class="row" id="pwd-container">
 <div class="col-md-4"></div>
-                      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
         <div class="container">
             <div id="header" class="jumbotron">
                 <h2><a href="{{path('index')}}"><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
@@ -35,11 +34,11 @@
                             </ul>
                         </div>
                     </div>
-                    {# {% if app.user.role.nomRole =='ROLE_ADMIN'%} #}
+                    {% if app.user.role.nomRole =='ROLE_ADMIN' %}
                       <div class="TestRoleUSER">
                       </div>
-                    {# {%endif%} #}
-                    {# {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN'%} #}
+                    {%endif%}
+                    {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN' %}
                         <div class="TestRoleADMIN">
                         </div>
                     <div class="row">
@@ -62,7 +61,7 @@
                             </ul>
                         </div>
                     </div>
-                    {# {%endif%} #}
+                    {%endif%}
                 </div>
                 <div class="col-md-9">
                     {% block body %}
@@ -73,7 +72,6 @@
                     {%endblock%}
                 </div>
             </div>
-
 
 
 
@@ -91,4 +89,4 @@
                     {%endblock%}
     </body>
 </html>
-{# {%endif%} #}
+{%endif%}

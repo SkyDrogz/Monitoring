@@ -19,7 +19,7 @@ class SystemControllerTest extends WebTestCase
   public function testCreation()
   {
     $client = static::createClient(array(), array(
-    'PHP_AUTH_USER' => 'Timothee',
+    'PHP_AUTH_USER' => 'Baptiste',
     'PHP_AUTH_PW'   => 'admin',
     ));
 

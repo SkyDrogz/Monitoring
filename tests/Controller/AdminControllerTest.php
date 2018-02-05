@@ -86,22 +86,14 @@ class AdminControllerTest extends WebTestCase
   }
   // public function testDeconnexion()
   //     {
-  //       $client = static::createClient();
-
-  //       $crawler = $client->request('GET','/login');
-
-  //       $form = $crawler->selectButton('Connexion')->form();
-  //       $form['_username'] = 'Timothee';
-  //       $form['_password'] = 'admin';
-
-  //       $crawler =$client->submit($form);
-  //       // dump($crawler);
-  //       $crawler = $client->click('deconnexion');
-  //       $crawler = $client->followRedirect();
-  //       $this->assertSame(
-  //           1,
-  //           $crawler->filter('html:contains("Connexion")')->count()
-  //       );
+  //       $client = static::createClient(array(), array(
+  //       'PHP_AUTH_USER' => 'Baptiste',
+  //       'PHP_AUTH_PW'   => 'admin',
+  //       ));
+  //
+  //       $crawler = $client->request('GET', '/deconnexion');
+  //
+  //       $this->assertEquals(200, $client->getResponse()->getStatusCode());
   //      }
       // public function testRedirectLogin()
       // {
