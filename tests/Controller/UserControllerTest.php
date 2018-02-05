@@ -3,9 +3,12 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Controller\AdminControllerTest;
+<<<<<<< HEAD
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager; 
+=======
+>>>>>>> 3936e37915b0cff84361bbab857af2f14abeb412
 use Symfony\Component\DomCrawler\Link;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\BrowserKit\Cookie;
@@ -19,7 +22,10 @@ class UserControllerTest extends WebTestCase
   {
     public function testUserRead()
     {
-      $client = static::createClient();
+      $client = static::createClient(array(), array(
+      'PHP_AUTH_USER' => 'Baptiste',
+      'PHP_AUTH_PW'   => 'admin',
+      ));
 
       $crawler = $client->request('GET', '/user/read');
 
