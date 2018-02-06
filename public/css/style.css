@@ -6,7 +6,9 @@ over-ride "Weak" message, show font in dark grey
 .progress-bar {
     color: #333;
 } 
-
+.visibility {
+  visibility: hidden;
+}
 /*
 Reference:
 http://www.bootstrapzen.com/item/135/simple-login-form-logo/

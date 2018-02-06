@@ -5,7 +5,6 @@
 {%block body %}
 <link rel="stylesheet" href="{{ asset('css/test.css') }}">
 <h1><font color="white">Liste des entreprises</font></h1>
-
 <div class="widget stacked widget-table action-table">
 				<div class="widget-content">
 
@@ -31,6 +30,8 @@
     </tbody>
 
 </table>
+{% for testRead in app.flashes('testRead') %}
+  <div class="visibility">{{ testRead }}</div>
+{% endfor %}
 <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour</a>
-
 {%endblock%}

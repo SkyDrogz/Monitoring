@@ -63,8 +63,9 @@ class EntrepriseController extends Controller
     /**
      * @Route("/entreprise/read", name="entreprise_read")
      */
-    public function readAction()
+    public function readAction(Request $request)
     {
+      $request->getSession()->getFlashBag()->add('testRead', "testRead");
         $entrepriseListe = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
         return $this->render('entreprise/read.html.twig', array(
             'entrepriseListe' => $entrepriseListe
