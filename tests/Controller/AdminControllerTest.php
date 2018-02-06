@@ -36,36 +36,6 @@ class AdminControllerTest extends WebTestCase
   //   $client->followRedirect();
   //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
   // }
-<<<<<<< HEAD
-  // public function testConnexionAdmin()
-  // {
-  //   $client = static::createClient();
-
-  //   $crawler = $client->request('GET','/login');
-
-  //   $form = $crawler->selectButton('Connexion')->form();
-  //   $form['_username'] = 'admin';
-  //   $form['_password'] = 'admin';
-
-  //   $crawler =$client->submit($form);
-  //   $crawler =$client->followRedirect();
-  //   $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
-  // }
-  // public function testConnexionUser()
-  // {
-  //   $client = static::createClient();
-
-  //   $crawler = $client->request('GET','/login');
-
-  //   $form = $crawler->selectButton('Connexion')->form();
-  //   $form['_username'] = 'Baptiste';
-  //   $form['_password'] = 'admin';
-
-  //   $crawler =$client->submit($form);
-  //   $crawler =$client->followRedirect();
-  //   $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
-  // }
-=======
   public function testConnexionAdmin()
   {
     $client = static::createClient();
@@ -83,7 +53,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Baptiste';
+    $form['_username'] = 'Bapiste';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
@@ -114,7 +84,6 @@ class AdminControllerTest extends WebTestCase
     $crawler =$client->followRedirect();
     $this->assertSame(1, $crawler->filter('div.TestRoleUSER')->count());
   }
->>>>>>> 3936e37915b0cff84361bbab857af2f14abeb412
   // public function testDeconnexion()
   //     {
   //       $client = static::createClient(array(), array(

@@ -30,7 +30,7 @@ class SystemControllerTest extends WebTestCase
     $form['system[nom]'] = 'Richard';
     $form['system[url]'] = 'Url.url.url';
     $form['system[categSysteme]'] = 2;
-    $form['system[user]'] = 1 ;
+    $form['system[user]'] = 9;
     $form['system[niveauUrgence]'] = 1;
     $form['system[repetition]'] = 2;
 

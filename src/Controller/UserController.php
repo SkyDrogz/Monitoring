@@ -70,11 +70,11 @@ class UserController extends Controller
           $userTest = $this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant());
           $check = false;
          
-            if($user->getIdentifiant() == $userTest->getIdentifiant())
+            if($userTest !== null )
             {
               $check = true;
               $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
-              return $this->redirectToRoute('register');
+              return $this->redirectToRoute('user_new');
             }
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
