@@ -22,7 +22,7 @@ class EntrepriseControllerTest extends WebTestCase
     //Test pour savoir si la div cachée est récupèrée
     $this->assertSame(1, $crawler->filter('html:contains("testRead")')->count());
   }
-  public function testCreation()
+  public function testEntrepriseNew()
   {
     $client = static::createClient(array(), array(
     'PHP_AUTH_USER' => 'Baptiste',
@@ -39,8 +39,8 @@ class EntrepriseControllerTest extends WebTestCase
     $client->submit($form);
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
-  public function testSuppression()
-  { 
+  public function testEntrepriseDelete()
+  {
   // dump($user);exit;
 
    $client = static::createClient(array(), array(
@@ -53,8 +53,8 @@ class EntrepriseControllerTest extends WebTestCase
     // echo $crawler -> html();
   $this->assertTrue(true,$client->getResponse()->isRedirect('entreprise/read'));
   }
-  public function testReactivation()
-  { 
+  public function testEntrepriseReactivation()
+  {
   // dump($user);exit;
 
    $client = static::createClient(array(), array(
