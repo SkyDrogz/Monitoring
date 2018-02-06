@@ -1,4 +1,4 @@
-{% if app.user.role.nomRole == null %}
+{% if app.user == null %}
   <script> window.location.pathname = "/Monitoring/public/index.php/login" </script>
 {% else %}
 <!DOCTYPE html>
