@@ -81,6 +81,8 @@ class SystemController extends Controller
      */
     public function read(Request $request)
     {
+      //Flashbag pour tester si la consultation Entreprise s'affiche correctement
+      $request->getSession()->getFlashBag()->add('testRead', "testRead");
       $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
       return $this->render('system/read.html.twig', array(
         'systemListe' => $systemListe
@@ -237,7 +239,7 @@ class SystemController extends Controller
         $date = new \Datetime();
          $system->setDateOffline($date);
          $curl = curl_init();
-         
+
          $infoProtect = new InfoProtect();
          $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
          curl_setopt_array($curl, array(

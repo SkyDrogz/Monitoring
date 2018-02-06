@@ -13,8 +13,8 @@ class SystemControllerTest extends WebTestCase
     ));
 
     $crawler = $client->request('GET', '/system/read');
-
-    $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    //Test pour savoir si la div cachée est récupèrée
+    $this->assertSame(1, $crawler->filter('html:contains("testRead")')->count());
   }
   public function testCreation()
   {
