@@ -30,22 +30,28 @@ class UserControllerTest extends WebTestCase
     }
     public function testCreation()
     { 
-      $objectManager = $this->createMock(ObjectManager::class);
-      $userRepository = $this->createMock(ObjectRepository::class);
+    //   $objectManager = $this->createMock(ObjectManager::class);
+    //   $userRepository = $this->createMock(ObjectRepository::class);
       
      
+    //   $user = new User();
+    //   $user->setIdentifiant('Richard');
      
-      $userRepository->expects($this->any())
-          ->method('find')
-          ->willReturn('Richard');
-     $objectManager->expects($this->any())
-     ->method('getRepository')
-     ->willReturn($userRepository);
+    //   $userRepository->expects($this->any())
+    //       ->method('find')
+    //       ->willReturn($user);
+          
+    //  $objectManager->expects($this->any())
+    //  ->method('getRepository')
+    //  ->willReturn($userRepository);
 
-     $user = new User($objectManager);
-     
-      $client = static::createClient();
-      $user->setIdentifiant('Richard');
+    // dump($user);exit;
+
+     $client = static::createClient(array(), array(
+      'PHP_AUTH_USER' => 'Baptiste',
+      'PHP_AUTH_PW'   => 'admin',
+      ));
+      // $user->setIdentifiant('Richard');
 
       $crawler = $client->request('GET','/user/new');
       // echo $crawler -> html();
