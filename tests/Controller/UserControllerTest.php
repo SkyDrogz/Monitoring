@@ -66,7 +66,58 @@ class UserControllerTest extends WebTestCase
 
      $crawler=$client->submit($form);
 
-    $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    $this->assertTrue(true,$client->getResponse()->isRedirect('user/new'));
     }
+    public function testModification()
+      { 
+       $client = static::createClient(array(), array(
+        'PHP_AUTH_USER' => 'Baptiste',
+        'PHP_AUTH_PW'   => 'admin',
+        ));
+        // $user->setIdentifiant('Richard');
+  
+        $crawler = $client->request('GET','/user/edit/8');
+        // echo $crawler -> html();
+        $form = $crawler->selectButton("Confirmer la modification")->form();
+  
+        $form['user[identifiant]'] = 'Richou';
+        $form['user[password]'] = 'admin';
+        $form['user[email]'] = 'richou.bod60@gmail.com';
+        $form['user[tel]'] = '0680543004';
+        $form['user[entreprise]'] = 3;
+        $form['user[role]'] = 1;
+  
+       $crawler=$client->submit($form);
+  
+      $this->assertTrue(true,$client->getResponse()->isRedirect('user/read'));
+      }
+      public function testSuppression()
+      { 
+      // dump($user);exit;
+  
+       $client = static::createClient(array(), array(
+        'PHP_AUTH_USER' => 'Baptiste',
+        'PHP_AUTH_PW'   => 'admin',
+        ));
+        // $user->setIdentifiant('Richard');
+  
+        $crawler = $client->request('GET','/user/delete/8');
+        // echo $crawler -> html();
+      $this->assertTrue(true,$client->getResponse()->isRedirect('user/read'));
+      }
+      public function testReactivation()
+      { 
+      // dump($user);exit;
+  
+       $client = static::createClient(array(), array(
+        'PHP_AUTH_USER' => 'Baptiste',
+        'PHP_AUTH_PW'   => 'admin',
+        ));
+        // $user->setIdentifiant('Richard');
+  
+        $crawler = $client->request('GET','/user/reactive/8');
+        // echo $crawler -> html();
+      $this->assertTrue(true,$client->getResponse()->isRedirect('user/active'));
+      }
      
 }
