@@ -36,16 +36,21 @@ class AdminController extends Controller
      */
     public function deconnexion(AuthenticationUtils $authUtils,Request $request)
     {
-
-      $user = $this->getUser();
-      $date = date_create(date("Y-m-d H:i:s"));
-      $date = new \Datetime();
-      $em = $this->getDoctrine()->getManager();
-      $user->setDateDeconnexion($date);
-      $em->persist($user);
-      $em->flush();
-     session_destroy();
-      return $this->redirectToRoute('login');
+      if(empty($_SESSION))
+      {
+        return $this->redirectToRoute('login');
+      }
+      else {
+        $user = $this->getUser();
+        $date = date_create(date("Y-m-d H:i:s"));
+        $date = new \Datetime();
+        $em = $this->getDoctrine()->getManager();
+        $user->setDateDeconnexion($date);
+        $em->persist($user);
+        $em->flush();
+        session_destroy();
+        return $this->redirectToRoute('login');
+      }
   }
     /**
      * @Route("/register", name="register")
