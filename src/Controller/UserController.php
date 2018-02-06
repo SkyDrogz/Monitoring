@@ -123,8 +123,10 @@ class UserController extends Controller
     /**
      * @Route("/user/read", name="user_read")
      */
-    public function readAction()
+    public function readAction(Request $request)
     {
+      //Flashbag pour tester si la consultation Entreprise s'affiche correctement
+      $request->getSession()->getFlashBag()->add('testRead', "testRead");
         $userListe = $this->getDoctrine()->getRepository(User::class)->findAll();
         return $this->render('user/read.html.twig', array(
             'userListe' => $userListe

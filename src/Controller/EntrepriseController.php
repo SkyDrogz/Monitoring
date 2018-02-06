@@ -65,7 +65,8 @@ class EntrepriseController extends Controller
      */
     public function readAction(Request $request)
     {
-      $request->getSession()->getFlashBag()->add('testRead', "testRead");
+      //Flashbag pour tester si la consultation Entreprise s'affiche correctement
+        $request->getSession()->getFlashBag()->add('testRead', "testRead");
         $entrepriseListe = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
         return $this->render('entreprise/read.html.twig', array(
             'entrepriseListe' => $entrepriseListe

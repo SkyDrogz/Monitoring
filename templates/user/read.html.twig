@@ -97,4 +97,7 @@
                 {% endfor %}
 
             </table>
+            {% for testRead in app.flashes('testRead') %}
+              <div class="visibility">{{ testRead }}</div>
+            {% endfor %}
             {%endblock%}

@@ -36,6 +36,9 @@
     </tbody>
 
 </table>
+{% for testRead in app.flashes('testRead') %}
+  <div class="visibility">{{ testRead }}</div>
+{% endfor %}
 <a href="{{ path('system_read') }}" class="btn btn-default">Retour</a>
 
 {%endblock%}
