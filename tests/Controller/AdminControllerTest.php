@@ -12,30 +12,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdminControllerTest extends WebTestCase
 {
-
-  // public function testLoginPage()
-  // {
-  //   $client = static::createClient();
-  //   $client->request('GET', '/login');
-
-  //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
-  // }
-
-
-  // public function testConnexion()
-  // {
-  //   $client = static::createClient();
-
-  //   $crawler = $client->request('GET','/login');
-
-  //   $form = $crawler->selectButton('Connexion')->form();
-  //   $form['_username'] = 'admin';
-  //   $form['_password'] = 'admin';
-
-  //   $client->submit($form);
-  //   $client->followRedirect();
-  //   $this->assertEquals(200, $client->getResponse()->getStatusCode());
-  // }
   public function testConnexionAdmin()
   {
     $client = static::createClient();

@@ -35,7 +35,7 @@ class SystemType extends AbstractType
        'attr' => array(
          'required' => true,
            'value' => null,
-           'placeholder' => 'Répétition (temps en minutes)',
+           'placeholder' => 'Répétition des alertes en cas de dysfonctionnement (temps en minutes)',
       ),))
         -> add('categSysteme', EntityType::class, array(
             'required' => true,

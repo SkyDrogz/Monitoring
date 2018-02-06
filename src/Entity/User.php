@@ -63,13 +63,10 @@ class User implements UserInterface, \Serializable
      */
     private $entreprise;
 
-    private  $objectManager;
-
     public function __construct()
     {
-        $this->actif = true;        
-        $this->objectManager = null;
-    }      
+        $this->actif = true;
+    }
     public function getId()
     {
         return $this->id;

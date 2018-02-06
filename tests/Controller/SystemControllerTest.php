@@ -2,6 +2,10 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Link;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\BrowserKit\Client as BaseClient;
+use Symfony\Component\BrowserKit\Response;
 
 class SystemControllerTest extends WebTestCase
 {
@@ -16,7 +20,7 @@ class SystemControllerTest extends WebTestCase
     //Test pour savoir si la div cachée est récupèrée
     $this->assertSame(1, $crawler->filter('html:contains("testRead")')->count());
   }
-  public function testCreation()
+  public function testSystemNew()
   {
     $client = static::createClient(array(), array(
     'PHP_AUTH_USER' => 'Baptiste',
@@ -35,6 +39,6 @@ class SystemControllerTest extends WebTestCase
     $form['system[repetition]'] = 2;
 
    $crawler=$client->submit($form);
-   $this->assertEquals(302, $client->getResponse()->getStatusCode());
-  }
+   $this->assertTrue($client->getResponse()->isRedirect('/system/new'));
+ }
 }
