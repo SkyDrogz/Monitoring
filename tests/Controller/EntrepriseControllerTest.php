@@ -39,4 +39,32 @@ class EntrepriseControllerTest extends WebTestCase
     $client->submit($form);
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
+  public function testSuppression()
+  { 
+  // dump($user);exit;
+
+   $client = static::createClient(array(), array(
+    'PHP_AUTH_USER' => 'Baptiste',
+    'PHP_AUTH_PW'   => 'admin',
+    ));
+    // $user->setIdentifiant('Richard');
+
+    $crawler = $client->request('GET','/entreprise/delete/4');
+    // echo $crawler -> html();
+  $this->assertTrue(true,$client->getResponse()->isRedirect('entreprise/read'));
+  }
+  public function testReactivation()
+  { 
+  // dump($user);exit;
+
+   $client = static::createClient(array(), array(
+    'PHP_AUTH_USER' => 'Baptiste',
+    'PHP_AUTH_PW'   => 'admin',
+    ));
+    // $user->setIdentifiant('Richard');
+
+    $crawler = $client->request('GET','/entreprise/reactive/4');
+    // echo $crawler -> html();
+  $this->assertTrue(true,$client->getResponse()->isRedirect('entreprise/active'));
+  }
 }
