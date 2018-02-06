@@ -39,6 +39,23 @@ class EntrepriseControllerTest extends WebTestCase
     $client->submit($form);
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
+  public function testEdit()
+  {
+    $client = static::createClient(array(), array(
+    'PHP_AUTH_USER' => 'Baptiste',
+    'PHP_AUTH_PW'   => 'admin',
+    ));
+    $crawler = $client->request('GET','/entreprise/edit/4');
+    // echo $crawler -> html();
+    $form = $crawler->selectButton("Confirmer la modification")->form();
+
+    $form['entreprise[libelle]'] = 'Richou';
+
+   $crawler=$client->submit($form);
+
+    $client->submit($form);
+    $this->assertEquals(302, $client->getResponse()->getStatusCode());
+  }
   public function testSuppression()
   { 
   // dump($user);exit;

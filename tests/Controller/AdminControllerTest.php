@@ -53,7 +53,7 @@ class AdminControllerTest extends WebTestCase
     $crawler = $client->request('GET','/login');
 
     $form = $crawler->selectButton('Connexion')->form();
-    $form['_username'] = 'Bapiste';
+    $form['_username'] = 'Baptiste';
     $form['_password'] = 'admin';
 
     $crawler =$client->submit($form);
