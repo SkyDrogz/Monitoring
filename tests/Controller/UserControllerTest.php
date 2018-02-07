@@ -138,7 +138,7 @@ class UserControllerTest extends WebTestCase
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');        
         
         // echo $crawler -> html();if( $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou')== null)
-       if ($user->getActif(1))
+       if ($user->getActif()== true)
         {
       $this->assertTrue(true,$client->getResponse()->isRedirect('user/active'));
           
@@ -158,11 +158,9 @@ class UserControllerTest extends WebTestCase
         'PHP_AUTH_PW'   => 'admin',
         ));
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-
-        $crawler = $client->request('GET','/user/delete/'.$user->getId());
-        $crawler = $client->request('GET','/user/reactive/'.$user->getId());
-        $crawler = $client->request('GET','/user/deleteDef/'.$user->getId());
-        if( $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou')== null)
+        $crawler = $client->request('GET','/user/deleteDef/'.$user->getId());        
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
+        if($user == null)
         {
           $this->assertTrue(true,$client->getResponse()->isRedirect('user/read'));
         }else{
