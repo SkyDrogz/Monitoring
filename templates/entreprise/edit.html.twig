@@ -10,7 +10,7 @@
                   <section class="login-form">
                     {{form_start(form,{ 'attr': {'role': 'login'} })}}
                     {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
-                    <a href="{{ path('entreprise_consultation') }}" class="btn btn-default">Retour à la liste</a>
+                    <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
                     <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Modification</button>
                     <p>
                         {% for info in app.flashes('info') %}
