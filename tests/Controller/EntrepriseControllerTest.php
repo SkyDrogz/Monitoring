@@ -47,7 +47,7 @@ class EntrepriseControllerTest extends WebTestCase
     ));
     $crawler = $client->request('GET','/entreprise/edit/4');
     // echo $crawler -> html();
-    $form = $crawler->selectButton("Confirmer la modification")->form();
+    $form = $crawler->selectButton("Modification")->form();
 
     $form['entreprise[libelle]'] = 'Richou';
 
