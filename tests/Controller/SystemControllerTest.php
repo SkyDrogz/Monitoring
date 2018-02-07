@@ -114,7 +114,11 @@ class SystemControllerTest extends WebTestCase
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
         $crawler = $client->request('GET', '/system/delete/' . $systeme->getId());
-        $this->assertTrue(true, $client->getResponse()->isRedirect('system/read'));
+        if($entreprise->getActif()== false){
+            $this->assertTrue(true, $client->getResponse()->isRedirect('system/read'));
+        }else{
+            $this->assertTrue(false, $client->getResponse()->isRedirect('system/read'));            
+        }
     }
     //
     // Test réactivation d'un compte inactif
