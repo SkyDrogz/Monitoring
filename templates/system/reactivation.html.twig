@@ -1,40 +1,46 @@
 {% extends "base.html.twig" %}
 {%block title %}
-    {{parent()}} - Réactivation d'un système
-{%endblock%}
-{%block body %}
-<link rel="stylesheet" href="{{ asset('css/test.css') }}">
-<font color="white"><h1>Liste des systèmes</h1></font>
+    {{parent()}}
+    - Réactivation d'un système
+    {%endblock%}
+    {%block body %}
+        <link rel="stylesheet" href="{{ asset('css/test.css') }}">
+        <font color="white">
+            <h1>Liste des systèmes</h1>
+        </font>
 
-<div class="widget stacked widget-table action-table">
-				<div class="widget-content">
+        <div class="widget stacked widget-table action-table">
+            <div class="widget-content">
 
-					<table class="table table-striped table-bordered">
-						<thead>
-              <tr>
-                <th>Nom du système</th>
-                <th>URL</th>
-                <th>Etat</th>
-              </tr>
-           </thead>
-    <tbody>
-    {% for system in systemListe %}
-            {% if system.actif == false %}
-            <tr>
-                <td>{{ system.nom}}</td>
-                <td>{{ system.url }}</td>
-                {# {% if app.user.role.nomRole =="ROLE_SUPER_ADMIN" %} #}
-                
-                <td><a href="{{ path('system_active', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a></td>
-                <td><a href="{{ path('system_deleteDef', {'id' : system.id}) }}" class="btn btn-danger">Supprimer définitivement le système</a></td>
-            {# {% endif %} #}
-            </tr>
-            {% endif %}
-    {% endfor %}
-    </tbody>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom du système</th>
+                            <th>URL</th>
+                            <th>Etat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for system in systemListe %}
+                            {% if system.actif == false %}
+                                <tr>
+                                    <td>{{ system.nom}}</td>
+                                    <td>{{ system.url }}</td>
+                                    {# {% if app.user.role.nomRole =="ROLE_SUPER_ADMIN" %} #}
 
-</table>
+                                    <td>
+                                        <a href="{{ path('system_active', {'id' : system.id}) }}" class="btn btn-success">Réactiver le système</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('system_deleteDef', {'id' : system.id}) }}" class="btn btn-danger">Supprimer définitivement le système</a>
+                                    </td>
+                                    {# {% endif %} #}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
 
-<a href="{{ path('system') }}" class="btn btn-default">Retour</a>
-{% endblock %}
- 
+                </table>
+
+                <a href="{{ path('system') }}" class="btn btn-default">Retour</a>
+            {% endblock %}

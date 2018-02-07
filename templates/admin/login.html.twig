@@ -1,35 +1,41 @@
 <head>
-        <meta charset="UTF-8" />
-        <title>Nexus Création - Connexion</title>
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <meta charset="UTF-8"/>
+    <title>Nexus Création - Connexion</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-<script src="{{ asset('js/script.js') }}"></script>
-<div class="container">
+    <script src="{{ asset('js/script.js') }}"></script>
+    <div class="container">
 
-  <div class="row" id="pwd-container">
-    <div class="col-md-4"></div>
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
 
-    <div class="col-md-4">
-      <section class="login-form">
-        <form method="post" action="{{path('login')}}" role="login">
-                <h2><a href="https://www.nexus-creation.com"/><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
+            <div class="col-md-4">
+                <section class="login-form">
+                    <form method="post" action="{{path('login')}}" role="login">
+                        <h2><a href="https://www.nexus-creation.com"/><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a>
+                    </img>
+                </h2>
                 {% if error %}
-                {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
-                <div><font color="red"><b>Identifiant ou mot de passe invalide.</b></font></div>
+                    {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
+                        <div>
+                            <font color="red">
+                                <b>Identifiant ou mot de passe invalide.</b>
+                            </font>
+                        </div>
+                    {% endif %}
                 {% endif %}
-                 {% endif %}
-             <input type="text" id="username" value="{{last_username}}" name="_username" placeholder="Identifiant" required class="form-control input-lg"/>
+                <input type="text" id="username" value="{{last_username}}" name="_username" placeholder="Identifiant" required="required" class="form-control input-lg"/>
 
-          <input type="password" class="form-control input-lg" id="password" name="_password" placeholder="Mot de passe" required="" />
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
-          <div>
-            <a href="{{path('register')}}">Faire une demande de compte</a>
-          </div>
-        </form>
-      </section>
-      </div>
-  </div>
+                <input type="password" class="form-control input-lg" id="password" name="_password" placeholder="Mot de passe" required=""/>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
+                <div>
+                    <a href="{{path('register')}}">Faire une demande de compte</a>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
 </div>
 </body>

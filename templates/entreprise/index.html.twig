@@ -2,12 +2,17 @@
 
 {%block title %}
     {{parent()}}Accueil des entreprises
-{%endblock%}
-{%block body %}
-<center><b><h1>Accueil des entreprises</h1></b></center>
+    {%endblock%}
+    {%block body %}
+        <center>
+            <b>
+                <h1>Accueil des entreprises</h1>
+            </b>
+        </center>
 
-<a href="{{ path('entreprise_new') }}">Ajout d'un nouveau entreprise</a><br/>
-<a href="{{ path('entreprise_consultation') }}">Liste des entreprises</a>
-</br>
-<a href="{{path('entreprise_active')}}">Réactiver une entreprise</a>
-{%endblock%}
+        <a href="{{ path('entreprise_new') }}">Ajout d'un nouveau entreprise</a>
+        <br>
+            <a href="{{ path('entreprise_consultation') }}">Liste des entreprises</a>
+        </br>
+        <a href="{{path('entreprise_active')}}">Réactiver une entreprise</a>
+        {%endblock%}

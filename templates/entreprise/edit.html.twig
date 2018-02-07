@@ -1,29 +1,32 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {%block title %}
-    {{parent()}} - Modification d'une entreprise
-{%endblock%}
-{%block body %}
-<font color="white"><h1><b>Modification de l'entreprise</b></h1></font>
+    {{parent()}}
+    - Modification d'une entreprise
+    {%endblock%}
+    {%block body %}
+        <font color="white">
+            <h1>
+                <b>Modification de l'entreprise</b>
+            </h1>
+        </font>
 
-<body>
-                  <section class="login-form">
-                    {{form_start(form,{ 'attr': {'role': 'login'} })}}
-                    {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
-                    <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
-                    <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Modification</button>
-                    <p>
-                        {% for info in app.flashes('info') %}
-                            <div class="flash-notice">
-                                {{ info }}
-                            </div>
-                        {% endfor %}
-                     </p>
+        <body>
+            <section class="login-form">
+                {{form_start(form,{ 'attr': {'role': 'login'} })}}
+                {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
+                <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
+                <button type="submit" id="form_save" name="form[save]" class="btn btn-info ">Modification</button>
+                <p>
+                    {% for info in app.flashes('info') %}
+                        <div class="flash-notice">
+                            {{ info }}
+                        </div>
+                    {% endfor %}
+                </p>
 
-                    {{form_end(form)}}
-                    </section>
-      </body>
+                {{form_end(form)}}
+            </section>
+        </body>
 
-
-
-{%endblock%}
+        {%endblock%}
