@@ -79,7 +79,7 @@ class SystemControllerTest extends WebTestCase
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richard');
 
-        $crawler = $client->request('GET', '/system/edit/' . $systeme->getId());
+        $crawler = $client->request('GET', '/system/edit/'.$systeme->getId());
         // echo $crawler -> html();
         $form = $crawler->selectButton("Confirmer la modification")->form();
 
@@ -113,18 +113,19 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
-        $crawler = $client->request('GET', '/system/delete/' . $systeme->getId());
-        if($entreprise->getActif()== false){
+        $crawler = $client->request('GET', '/system/delete/'. $systeme->getId());
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');        
+        if($systeme->getActif()== false){
             $this->assertTrue(true, $client->getResponse()->isRedirect('system/read'));
         }else{
             $this->assertTrue(false, $client->getResponse()->isRedirect('system/read'));            
         }
     }
     //
-    // Test réactivation d'un compte inactif
+    // Test réactivation d'un compte inactif (passage actif)
     //
 
-    public function testUserReactivation()
+    public function testReactivation()
     {
 
         $client = static::createClient(array(), array(
@@ -132,7 +133,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
-        $crawler = $client->request('GET', '/system/reactive/' . $systeme->getId());
+        $crawler = $client->request('GET', '/system/reactive/'.$systeme->getId());
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
 
         if ($systeme->getActif() == true) {
@@ -153,7 +154,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
-        $crawler = $client->request('GET', '/system/deleteDef/' . $systeme->getId());
+        $crawler = $client->request('GET', '/system/deleteDef/'.$systeme->getId());
         $systeme = $this->_em->getRepository(Systeme::class)->findOneById($systeme->getId());
         if ($systeme == null) {
             $this->assertTrue(true, $client->getResponse()->isRedirect('system/read'));

@@ -40,7 +40,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(1, $crawler->filter('html:contains("testRead")')->count());
     }
     //
-    // Test d'ajout d'un utilisateur
+    // Test de création'ajout d'un utilisateur
     //
     public function testUserNew()
     {
@@ -72,7 +72,7 @@ class UserControllerTest extends WebTestCase
         }
     }
     //
-    // Test modification des paramètres d'un compte
+    // Test modification des paramètres d'un utilisateur
     //
     public function testUserEdit()
     {
@@ -82,7 +82,7 @@ class UserControllerTest extends WebTestCase
         ));
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richard');
 
-        $crawler = $client->request('GET', '/user/edit/' . $user->getId());
+        $crawler = $client->request('GET', '/user/edit/'.$user->getId());
         // echo $crawler -> html();
         $form = $crawler->selectButton("Confirmer la modification")->form();
 
@@ -115,7 +115,7 @@ class UserControllerTest extends WebTestCase
         $this->assertTrue(true, $client->getResponse()->isRedirect('user/read'));
     }
     //
-    // Test réactivation d'un compte inactif
+    // Test réactivation d'un compte inactif (passage actif)
     //
     public function testUserReactivation()
     {
@@ -125,7 +125,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-        $crawler = $client->request('GET', '/user/reactive/' . $user->getId());
+        $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
 
         if ($user->getActif() == true) {
@@ -146,7 +146,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-        $crawler = $client->request('GET', '/user/deleteDef/' . $user->getId());
+        $crawler = $client->request('GET', '/user/deleteDef/'.$user->getId());
         $user = $this->_em->clear();
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
 
