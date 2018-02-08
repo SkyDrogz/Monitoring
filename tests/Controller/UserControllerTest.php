@@ -30,11 +30,12 @@ class UserControllerTest extends WebTestCase
     //
     public function testUserRead()
     {
+      // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
-
+        // Récupération de la page de consultation
         $crawler = $client->request('GET', '/user/read');
         //Test pour savoir si la div cachée est récupèrée
         $this->assertSame(1, $crawler->filter('html:contains("testRead")')->count());
@@ -44,16 +45,18 @@ class UserControllerTest extends WebTestCase
     //
     public function testUserNew()
     {
+      // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
-        // $user->setIdentifiant('Richard');
+        // Récupération de la page d'ajout d'un utilisateur
         $crawler = $client->request('GET', '/user/new');
-        // echo $crawler -> html();
 
+        // Bouton submit du formulaire
         $form = $crawler->selectButton("Confirmer l'ajout")->form();
 
+        // Paramètres du formulaire
         $form['user[identifiant]'] = 'Richard';
         $form['user[password]'] = 'admin';
         $form['user[email]'] = 'richard.bod60@gmail.com';
@@ -61,12 +64,15 @@ class UserControllerTest extends WebTestCase
         $form['user[entreprise]'] = 2;
         $form['user[role]'] = 2;
 
+        // Submit du formulaire
         $crawler = $client->submit($form);
+        // Tentative de récupération de l'user Richard
         $user = $this->_em->getRepository(User::class)->findOneById('Richard');
-        $result = false;   
+        $result = false;
+        // Si l'user n'est pas trouvé, l'ajout peux donc se faire, le test est OK
         if($user == null){
             $result = true;
-        } 
+        }
         $this->assertEquals(true , $result);
 
     }
@@ -75,16 +81,20 @@ class UserControllerTest extends WebTestCase
     //
     public function testUserEdit()
     {
+      // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
+        // Récupération de l'utilisateur nommé Richard
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richard');
 
+        // Récupération de la page de modification avec l'id passé en paramètre
         $crawler = $client->request('GET', '/user/edit/'.$user->getId());
-        // echo $crawler -> html();
+        // Bouton submit du formulaire
         $form = $crawler->selectButton("Confirmer la modification")->form();
 
+        // Paramètres du formulaire
         $form['user[identifiant]'] = 'Richou';
         $form['user[password]'] = 'admin';
         $form['user[email]'] = 'richou.bod60@gmail.com';
@@ -92,12 +102,19 @@ class UserControllerTest extends WebTestCase
         $form['user[entreprise]'] = 2;
         $form['user[role]'] = 1;
 
+        // Submit du formulaire au crawler
         $crawler = $client->submit($form);
+
+        // Récupération de l'utilisateur
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
-        $result = false;   
+
+        //Initialisation du résultat à FALSE
+        $result = false;
+
+        // Si l'utilisateur s'est bien renommé en Richou, le test est OK
         if($user->getIdentifiant() == "Richou"){
             $result = true;
-        } 
+        }
         $this->assertEquals(true , $result);
 
     }
@@ -106,20 +123,23 @@ class UserControllerTest extends WebTestCase
     //
     public function testUserDelete()
     {
-        // dump($user);exit;
-
+        // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
+        // Récupération de l'utilisateur nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
 
+        // Récupération de la page de delete avec l'id passé en paramètres
         $crawler = $client->request('GET', '/user/delete/' . $user->getId());
-        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());    
-        $result = false;   
+        // Tentative de récupération de l'utilisateur avec l'id
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
+        $result = false;
+        // Si l'utilisateur est inactif, le test est OK
         if($user->getActif() == false){
             $result = true;
-        } 
+        }
         $this->assertEquals(true , $result);
     }
     //
@@ -127,39 +147,48 @@ class UserControllerTest extends WebTestCase
     //
     public function testUserReactivation()
     {
-
+        // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
+        // Récupération de l'identifiant nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        // Récupération de la page de reactive avec l'id de l'user passé en paramètre
         $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
-        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());    
-        $result = false;   
-        if($user->getActif() == false){
+        // Récupération de l'user
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
+        $result = false;
+        // Si l'utilisateur est actif, il a bien été réactivé et le test est OK
+        if($user->getActif() == true){
             $result = true;
-        } 
+        }
         $this->assertEquals(true , $result);
-        
+
     }
     //
     // Test suppression définitive
     //
     public function testDeleteDef()
     {
-
+        // Connexion à un compte Admin
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
+        // Récupération de l'user nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        // Récupération de la page deleteDef avec l'id passé en paramètre
         $crawler = $client->request('GET', '/user/deleteDef/'.$user->getId());
+        // Suppression de l'utilisateur
         $user = $this->_em->clear();
+        // Récupération de l'utilisateur nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-        $result = false;   
+        $result = false;
+        // Si l'utilisateur est null le test s'est bien passé et à donc bien supprimé l'utilisateur
         if($user == null){
             $result = true;
-        } 
+        }
         $this->assertEquals(true , $result);
     }
 }
