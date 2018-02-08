@@ -51,7 +51,6 @@ class UserControllerTest extends WebTestCase
         // $user->setIdentifiant('Richard');
         $crawler = $client->request('GET', '/user/new');
         // echo $crawler -> html();
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richard');
 
         $form = $crawler->selectButton("Confirmer l'ajout")->form();
 
@@ -63,13 +62,13 @@ class UserControllerTest extends WebTestCase
         $form['user[role]'] = 2;
 
         $crawler = $client->submit($form);
-        if ($user !== null) {
-            $this->assertTrue(false, $client->getResponse()->isRedirect('user/read'));
+        $user = $this->_em->getRepository(User::class)->findOneById('Richard');
+        $result = false;   
+        if($user == null){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
 
-        } else {
-            $this->assertTrue(true, $client->getResponse()->isRedirect('user/read'));
-
-        }
     }
     //
     // Test modification des paramètres d'un utilisateur
@@ -94,7 +93,12 @@ class UserControllerTest extends WebTestCase
         $form['user[role]'] = 1;
 
         $crawler = $client->submit($form);
-        $this->assertTrue(true, $client->getResponse()->isRedirect('user/new'));
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
+        $result = false;   
+        if($user->getIdentifiant() == "Richou"){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
 
     }
     //
@@ -111,8 +115,12 @@ class UserControllerTest extends WebTestCase
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
 
         $crawler = $client->request('GET', '/user/delete/' . $user->getId());
-        // echo $crawler -> html();
-        $this->assertTrue(true, $client->getResponse()->isRedirect('user/read'));
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());    
+        $result = false;   
+        if($user->getActif() == false){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
     }
     //
     // Test réactivation d'un compte inactif (passage actif)
@@ -126,14 +134,13 @@ class UserControllerTest extends WebTestCase
         ));
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
         $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-
-        if ($user->getActif() == true) {
-            $this->assertTrue(true, $client->getResponse()->isRedirect('user/active'));
-
-        } else {
-            $this->assertTrue(false, $client->getResponse()->isRedirect('user/active'));
-        }
+        $user = $this->_em->getRepository(User::class)->findOneById($user->getId());    
+        $result = false;   
+        if($user->getActif() == false){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
+        
     }
     //
     // Test suppression définitive
@@ -149,11 +156,10 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/user/deleteDef/'.$user->getId());
         $user = $this->_em->clear();
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
-
-        if ($user == null) {
-            $this->assertTrue(true, $client->getResponse()->isRedirect('user/read'));
-        } else {
-            $this->assertTrue(false, $client->getResponse()->isRedirect('user/read'));
-        }
+        $result = false;   
+        if($user == null){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
     }
 }

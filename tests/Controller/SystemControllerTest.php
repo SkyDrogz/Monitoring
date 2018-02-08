@@ -59,10 +59,12 @@ class SystemControllerTest extends WebTestCase
         $form['system[user]'] = 3;
         $form['system[niveauUrgence]'] = 1;
         $form['system[repetition]'] = 2;
+        $crawler = $client->submit($form);
+        
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richard');
 
         $result = false;
-        if($entreprise == null ){
+        if($systeme == null ){
             $result = true;
         }     
     $this->assertEquals(true, $result);
@@ -77,7 +79,6 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richard');
-
         $crawler = $client->request('GET', '/system/edit/'.$systeme->getId());
         // echo $crawler -> html();
         $form = $crawler->selectButton("Confirmer la modification")->form();
