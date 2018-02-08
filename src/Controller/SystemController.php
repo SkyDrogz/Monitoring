@@ -16,8 +16,7 @@ class SystemController extends Controller
      */
     public function index()
     {
-        // exit;
-        // replace this line with your own code!
+        // Retourne l'index des systèmes
         return $this->render('system/index.html.twig');
     }
 
@@ -30,12 +29,16 @@ class SystemController extends Controller
         $form = $this->createForm(SystemType::class, $systeme);
         $form->handleRequest($request);
 
+        // Si le formulaire est soumis et valide...
         if ($form->isSubmitted() && $form->isValid()) {
+          //Met les valeurs dans la BDD
             $systeme = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($systeme);
             $em->flush();
+            // Affichage d'un message FlashBag confirmant l'ajout du système
             $request->getSession()->getFlashBag()->add('info', "Le système à bien été rajouté.");
+            // Retourne la page d'ajout d'un système
             return $this->redirectToRoute('system_new');
         }
 
@@ -51,19 +54,24 @@ class SystemController extends Controller
         $em = $this->getDoctrine()->getManager();
         $systeme = $em->getRepository(Systeme::class)->find($id);
 
+        //Si le système existe, récupération du formulaire SystemType
         if ($systeme) {
             $form = $this->createForm(SystemType::class, $systeme);
             $form->handleRequest($request);
 
+            //Si le formulaire est soumis et validé..
             if ($form->isSubmitted() && $form->isValid()) {
+              // Données modifié enregistré dans la BDD
                 $systeme = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($systeme);
                 $em->flush();
+                // Redirection à la route System
                 return $this->redirectToRoute('system');
             }
             return $this->render('system/edit.html.twig', array('form' => $form->createView()));
         } else {
+          // Si le système n'est pas trouvé, redirection à la page consultation
             return $this->redirectToRoute('system_read');
         }
 
@@ -75,7 +83,9 @@ class SystemController extends Controller
     {
         //Flashbag pour tester si la consultation Entreprise s'affiche correctement
         $request->getSession()->getFlashBag()->add('testRead', "testRead");
+        // Met dans une liste tout les systèmes de la BDD
         $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
+        // Retourne la page de consultation
         return $this->render('system/read.html.twig', array(
             'systemListe' => $systemListe,
         ));
@@ -87,11 +97,13 @@ class SystemController extends Controller
      */
     public function deleteAction(Request $request, Systeme $systeme)
     {
+      // Met le système en non-actif
         $em = $this->getDoctrine()->getManager();
         $systeme->setActif(false);
         $em->persist($systeme);
         $em->flush();
 
+        //Retourne la page de consultation
         return $this->redirectToRoute('system_read');
 
     }
@@ -100,6 +112,7 @@ class SystemController extends Controller
      */
     public function active()
     {
+      // Recherche tout les systèmes
         $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
         return $this->render('system/reactivation.html.twig', array(
             'systemListe' => $systemListe,
@@ -112,11 +125,13 @@ class SystemController extends Controller
      */
     public function activeAction(Request $request, Systeme $systeme)
     {
+      // Met le système séléctionné en actif
         $em = $this->getDoctrine()->getManager();
         $systeme->setActif(true);
         $em->persist($systeme);
         $em->flush();
 
+        //Redirection à la page des systèmes non activés
         return $this->redirectToRoute('system_active');
     }
 
@@ -125,10 +140,12 @@ class SystemController extends Controller
  */
     public function deleteDefAction(Request $request, Systeme $systeme)
     {
+      // Supprime le système définitivement
         $em = $this->getDoctrine()->getManager();
         $em->remove($systeme);
         $em->flush();
 
+        // Retour à la page de système non actif
         return $this->redirectToRoute('system_active');
 
     }
