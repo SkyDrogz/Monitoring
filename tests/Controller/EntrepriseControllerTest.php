@@ -46,19 +46,21 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richard');        
-        $crawler = $client->request('GET', '/entreprise/new');
-        $form = $crawler->selectButton("Confirmer l'ajout")->form();
-
-        $form['entreprise[libelle]'] = 'Richard';
-
-        $crawler = $client->submit($form);
-
-        if($entreprise == null){
-        $this->assertTrue(true, $client->getResponse()->getStatusCode());            
-        }else{
-        $this->assertTrue(false, $client->getResponse()->getStatusCode());            
-        }
+       
+            $crawler = $client->request('GET', '/entreprise/new');
+            $form = $crawler->selectButton("Confirmer l'ajout")->form();
+    
+            $form['entreprise[libelle]'] = 'Richard';
+    
+            $crawler = $client->submit($form);
+            $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richard');
+            
+            $result = false;
+            if($entreprise == null ){
+                $result = true;
+            }     
+        $this->assertEquals(true, $result);
+      
     }
     //
     // Test de modification d'entreprise (passage inactif)
@@ -79,13 +81,13 @@ class EntrepriseControllerTest extends WebTestCase
         $form['entreprise[libelle]'] = 'Richou';
         $crawler = $client->submit($form);
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
-
-        if ($entreprise->getLibelle() == "Richou") {
-            $this->assertTrue(true, $client->getResponse()->isRedirect('entreprise/read'));
-        } else {
-            $this->assertTrue(false, $client->getResponse()->isRedirect('entreprise/read'));
-
+        $result = false;
+        if ($entreprise->getLibelle() == "Richou"){
+            $result = true;
         }
+       
+           $this->assertEquals(true , $result);
+       
 
     }
     //
@@ -100,12 +102,13 @@ class EntrepriseControllerTest extends WebTestCase
         ));
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');     
         $crawler = $client->request('GET', '/entreprise/delete/'.$entreprise->getId());
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());        
-        if($entreprise->getActif()==false){
-            $this->assertTrue(true, $client->getResponse()->isRedirect('entreprise/read'));
-        }else{
-             $this->assertTrue(false, $client->getResponse()->isRedirect('entreprise/read'));     
-        }
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());    
+        $result = false;   
+        if($entreprise->getActif() == false){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
+
     }
     //
     //  Test de reaction d'une entreprise (passage actif)
@@ -120,11 +123,12 @@ class EntrepriseControllerTest extends WebTestCase
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
         $crawler = $client->request('GET', '/entreprise/reactive/'.$entreprise->getId());
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());        
-        if($entreprise->getActif()==true){
-            $this->assertTrue(true, $client->getResponse()->isRedirect('entreprise/read'));
-        }else{
-             $this->assertTrue(false, $client->getResponse()->isRedirect('entreprise/read'));     
-        }
+        $result = false;   
+        if($entreprise->getActif() == true){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
+
     }
     //
     // Test suppression définitive
@@ -140,11 +144,10 @@ class EntrepriseControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/entreprise/deleteDef/'.$entreprise->getId());
         $entreprise = $this->_em->clear();
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
-
-        if ($entreprise == null) {
-            $this->assertTrue(true, $client->getResponse()->isRedirect('entreprise/active'));
-        } else {
-            $this->assertTrue(false, $client->getResponse()->isRedirect('entreprise/active'));
-        }
+        $result = false;   
+        if($entreprise == null){
+            $result = true;
+        } 
+        $this->assertEquals(true , $result);
     }
 }
