@@ -3,9 +3,6 @@
 .env
 /public/bundles/
 /var/
-/vendor/
-vendor/
-/vendor
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
