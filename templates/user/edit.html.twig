@@ -1,39 +1,41 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {%block title %}
-    {{parent()}} - Modifier l'utilisateur
-{%endblock%}
-{%block body %}
-<style>
-label
-{
-display: block;
-}
-</style>
-<h1><font color="white"><b>Modification d'un utilisateur</b></font></h1>
-<body>
-<section class="login-form">
-        {{form_start(form,{ 'attr': {'role': 'login'} })}}
-        {{form_row(form.identifiant,{ 'attr': {'class': 'form-control input-lg'} })}}
-        {{form_row(form.password,{ 'attr': {'class': 'form-control input-lg'} })}}
-        {{form_row(form.email,{ 'attr': {'class': 'form-control input-lg'} })}}
-        {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
-        {{form_row(form.entreprise,{ 'attr': {'class': 'form-control input-lg'} })}}
-        {{form_row(form.role,{ 'attr': {'class': 'form-control input-lg'} })}}
-        <a href="{{ path('user_read') }}" class="btn btn-default">Retour à la liste</a>
-        <button type="submit" id="form_save"  name="form[save]" class="btn btn-info">Confirmer la modification</button>
-        <p>
-            {% for info in app.flashes('info') %}
-                <div class="flash-notice">
-                    {{ info }}
-                </div>
-            {% endfor %}
-         </p>
-            
-        {{form_end(form)}}
-      </section>
-    </body>
+    {{parent()}}
+    - Modifier l'utilisateur
+    {%endblock%}
+    {%block body %}
+        <style>
+            label {
+                display: block;
+            }
+        </style>
+        <h1>
+            <font color="white">
+                <b>Modification d'un utilisateur</b>
+            </font>
+        </h1>
+        <body>
+            <section class="login-form">
+                {{form_start(form,{ 'attr': {'role': 'login'} })}}
+                {{form_row(form.identifiant,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.password,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.email,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.tel,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.entreprise,{ 'attr': {'class': 'form-control input-lg'} })}}
+                {{form_row(form.role,{ 'attr': {'class': 'form-control input-lg'} })}}
+                <a href="{{ path('user_read') }}" class="btn btn-default">Retour à la liste</a>
+                <button type="submit" id="form_save" name="form[save]" class="btn btn-info">Confirmer la modification</button>
+                <p>
+                    {% for info in app.flashes('info') %}
+                        <div class="flash-notice">
+                            {{ info }}
+                        </div>
+                    {% endfor %}
+                </p>
 
+                {{form_end(form)}}
+            </section>
+        </body>
 
-
-{%endblock%}
+        {%endblock%}

@@ -1,18 +1,22 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {%block title %}
-    {{parent()}} - Ajout d'un système
-{%endblock%}
-{%block body %}
-<script type= "text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
-<style>
-label
-{
-display: block;
-}
-</style>
-<font color="white"><h2><b>Ajout d'un système</b></h2></font>
-    <section class="login-form">
+    {{parent()}}
+    - Ajout d'un système
+    {%endblock%}
+    {%block body %}
+        <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+        <style>
+            label {
+                display: block;
+            }
+        </style>
+        <font color="white">
+            <h2>
+                <b>Ajout d'un système</b>
+            </h2>
+        </font>
+        <section class="login-form">
             {{form_start(form,{ 'attr': {'role': 'login'} })}}
             {{form_row(form.nom,{ 'attr': {'class': 'form-control input-lg'} })}}
             {{form_row(form.url,{ 'attr': {'class': 'form-control input-lg'} })}}
@@ -23,16 +27,16 @@ display: block;
             {{form_row(form.requete,{ 'attr': {'class': 'form-control input-lg'} })}}
             {{form_row(form.resultatAttendu,{ 'attr': {'class': 'form-control input-lg'} })}}
             <a href="{{ path('system_read') }}" class="btn btn-default">Retour à la liste</a>
-            <button type="submit" id="form_save"  name="form[save]" class="btn btn-info">Confirmer l'ajout</button>
+            <button type="submit" id="form_save" name="form[save]" class="btn btn-info">Confirmer l'ajout</button>
             <p>
                 {% for info in app.flashes('info') %}
                     <div class="flash-notice">
                         {{ info }}
                     </div>
                 {% endfor %}
-             </p>
+            </p>
 
             {{form_end(form)}}
-          </section>
-        </body>
-{%endblock%}
+        </section>
+    </body>
+    {%endblock%}

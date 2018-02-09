@@ -1,14 +1,19 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {%block title%}
-    {{parent()}} Acceuil des utilisateurs
-{%endblock%}
-{%block body %}
-<center><b><h1>Accueil des utilisateurs</h1></b></center>
-<a href="{{ path('user_new') }}">Créer un utilisateur</a>
-</br>
+    {{parent()}}
+    Acceuil des utilisateurs
+    {%endblock%}
+    {%block body %}
+        <center>
+            <b>
+                <h1>Accueil des utilisateurs</h1>
+            </b>
+        </center>
+        <a href="{{ path('user_new') }}">Créer un utilisateur</a>
+    </br>
 
-<a href="{{path('user_consultation')}}">Consulter un utilisateur</a>
+    <a href="{{path('user_consultation')}}">Consulter un utilisateur</a>
 </br>
 <a href="{{path('user_active')}}">Réactiver un utilisateur</a>
 </br>

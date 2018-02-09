@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "name": "behat/behat",
         "version": "v3.4.3",
         "version_normalized": "3.4.3.0",
@@ -209,6 +210,8 @@
         ]
     },
     {
+=======
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         "name": "behat/transliterator",
         "version": "v1.2.0",
         "version_normalized": "1.2.0.0",
@@ -255,6 +258,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "container-interop/container-interop",
         "version": "1.2.0",
         "version_normalized": "1.2.0.0",
@@ -288,6 +292,8 @@
         "homepage": "https://github.com/container-interop/container-interop"
     },
     {
+=======
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         "name": "doctrine/annotations",
         "version": "v1.6.0",
         "version_normalized": "1.6.0.0",
@@ -1644,6 +1650,7 @@
     },
     {
         "name": "ocramius/proxy-manager",
+<<<<<<< HEAD
         "version": "2.2.0",
         "version_normalized": "2.2.0.0",
         "source": {
@@ -1673,6 +1680,36 @@
             "phpstan/phpstan-phpunit": "dev-master#5629c0a1f4a9c417cb1077cf6693ad9753895761",
             "phpunit/phpunit": "^6.4.3",
             "squizlabs/php_codesniffer": "^2.9.1"
+=======
+        "version": "2.1.1",
+        "version_normalized": "2.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Ocramius/ProxyManager.git",
+            "reference": "e18ac876b2e4819c76349de8f78ccc8ef1554cd7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/e18ac876b2e4819c76349de8f78ccc8ef1554cd7",
+            "reference": "e18ac876b2e4819c76349de8f78ccc8ef1554cd7",
+            "shasum": ""
+        },
+        "require": {
+            "ocramius/package-versions": "^1.1.1",
+            "php": "^7.1.0",
+            "zendframework/zend-code": "^3.1.0"
+        },
+        "require-dev": {
+            "couscous/couscous": "^1.5.2",
+            "ext-phar": "*",
+            "humbug/humbug": "dev-master@DEV",
+            "nikic/php-parser": "^3.0.4",
+            "phpbench/phpbench": "^0.12.2",
+            "phpstan/phpstan": "^0.6.4",
+            "phpunit/phpunit": "^5.6.4",
+            "phpunit/phpunit-mock-objects": "^3.4.1",
+            "squizlabs/php_codesniffer": "^2.7.0"
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         },
         "suggest": {
             "ocramius/generated-hydrator": "To have very fast object to array to object conversion for ghost objects",
@@ -1680,7 +1717,11 @@
             "zendframework/zend-soap": "To have the Soap adapter (Remote Object feature)",
             "zendframework/zend-xmlrpc": "To have the XmlRpc adapter (Remote Object feature)"
         },
+<<<<<<< HEAD
         "time": "2017-11-16T23:22:31+00:00",
+=======
+        "time": "2017-05-04T11:12:50+00:00",
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3284,6 +3325,7 @@
     },
     {
         "name": "sensio/framework-extra-bundle",
+<<<<<<< HEAD
         "version": "v5.1.4",
         "version_normalized": "5.1.4.0",
         "source": {
@@ -3295,6 +3337,19 @@
             "type": "zip",
             "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/072c00c52b947e88a1e619e9ff426cee6c8c482b",
             "reference": "072c00c52b947e88a1e619e9ff426cee6c8c482b",
+=======
+        "version": "v5.1.5",
+        "version_normalized": "5.1.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+            "reference": "93ae48d5f4b567105bcc058c3a8ba506176eca8a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/93ae48d5f4b567105bcc058c3a8ba506176eca8a",
+            "reference": "93ae48d5f4b567105bcc058c3a8ba506176eca8a",
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
             "shasum": ""
         },
         "require": {
@@ -3324,7 +3379,11 @@
             "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
             "symfony/security-bundle": ""
         },
+<<<<<<< HEAD
         "time": "2018-01-12T13:08:16+00:00",
+=======
+        "time": "2018-02-06T19:53:10+00:00",
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
@@ -3666,6 +3725,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "symfony/class-loader",
         "version": "v3.4.4",
         "version_normalized": "3.4.4.0",
@@ -3724,6 +3784,8 @@
         "homepage": "https://symfony.com"
     },
     {
+=======
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         "name": "symfony/config",
         "version": "v4.0.4",
         "version_normalized": "4.0.4.0",

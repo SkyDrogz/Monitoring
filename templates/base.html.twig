@@ -1,92 +1,132 @@
 {% if app.user == null %}
-  <script> window.location.pathname = "/Monitoring/public/index.php/login" </script>
+<script>
+    window.location.pathname = "/Monitoring/public/index.php/login"
+</script>
 {% else %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Nexus Création{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {% endblock %}
+
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Nexus Création{% endblock %}</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% endblock %}
 </head>
+
 <body>
-<script src="{{ asset('js/script.js') }}"></script>
-<div class="container">
-<div class="row" id="pwd-container">
-<div class="col-md-4"></div>
-      <div class="col-md-4"></div>
-        <div class="container">
-            <div id="header" class="jumbotron">
-                <h2><a href="{{path('index')}}"><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a></img></h2>
-               <a href="{{path('deconnexion')}}" class="btn btn-danger" name="deconnexion">Deconnexion <span class="glyphicon glyphicon-off"/></a>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="row">
-                        <div id="menu" class="col-md-12">
-                            <h3><font color="white"><span class="glyphicon glyphicon-cog"></span> Systèmes</font></h3>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('system_read') }}" class="btn btn-default">Liste des systèmes</a></li>
-                                <li><a href="{{ path('system_new') }}" class="btn btn-default">Ajout d'un système</a></li>
-                                <li><a href="{{ path('system_active') }}" class="btn btn-default">Réactivation d'une surveillance</a></li>
-                            </ul>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <div class="container">
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="container">
+                <div id="header" class="jumbotron">
+                    <h2>
+                        <a href="{{path('index')}}">
+                            <img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png">
+                        </a>
+                        </img>
+                    </h2>
+                    <a href="{{path('deconnexion')}}" class="btn btn-danger" name="deconnexion">Deconnexion
+                        <span class="glyphicon glyphicon-off" />
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div id="menu" class="col-md-12">
+                                <h3>
+                                    <font color="white">
+                                        <span class="glyphicon glyphicon-cog"></span> Systèmes</font>
+                                </h3>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li>
+                                        <a href="{{ path('system_read') }}" class="btn btn-default">Liste des systèmes</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('system_new') }}" class="btn btn-default">Ajout d'un système</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('system_active') }}" class="btn btn-default">Réactivation d'une surveillance</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    {% if app.user.role.nomRole =='ROLE_ADMIN' %}
-                      <div class="TestRoleUSER">
-                      </div>
-                    {%endif%}
-                    {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN' %}
+                        {% if app.user.role.nomRole =='ROLE_ADMIN' %}
+                        <div class="TestRoleUSER">
+                        </div>
+                        {%endif%} {% if app.user.role.nomRole =='ROLE_SUPER_ADMIN' %}
                         <div class="TestRoleADMIN">
                         </div>
-                    <div class="row">
-                        <div id="menu" class="col-md-12">
-                            <h3><font color="white"><span class="glyphicon glyphicon-user"></span> Utilisateurs</font></h3>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('user_read') }}" class="btn btn-default">Liste des utilisateurs</a></li>
-                                <li><a href="{{ path('user_new') }}" class="btn btn-default">Ajout d'un utilisateur</a></li>
-                                <li><a href="{{ path('user_active') }}" class="btn btn-default">Réactivation d'un utilisateur</a></li>
-                            </ul>
+                        <div class="row">
+                            <div id="menu" class="col-md-12">
+                                <h3>
+                                    <font color="white">
+                                        <span class="glyphicon glyphicon-user"></span> Utilisateurs</font>
+                                </h3>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li>
+                                        <a href="{{ path('user_read') }}" class="btn btn-default">Liste des utilisateurs</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('user_new') }}" class="btn btn-default">Ajout d'un utilisateur</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('user_active') }}" class="btn btn-default">Réactivation d'un utilisateur</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div id="menu" class="col-md-12">
-                            <h3><font color="white"><span class="glyphicon glyphicon-briefcase"></span> Entreprises</font></h3>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{ path('entreprise_read') }}" class="btn btn-default">Liste des entreprises</a></li>
-                                <li><a href="{{ path('entreprise_new') }}" class="btn btn-default">Ajout d'une entreprise</a></li>
-                                <li><a href="{{ path('entreprise_active') }}" class="btn btn-default">Réactivation d'une entreprise</a></li>
-                            </ul>
+                        <div class="row">
+                            <div id="menu" class="col-md-12">
+                                <h3>
+                                    <font color="white">
+                                        <span class="glyphicon glyphicon-briefcase"></span> Entreprises</font>
+                                </h3>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li>
+                                        <a href="{{ path('entreprise_read') }}" class="btn btn-default">Liste des entreprises</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('entreprise_new') }}" class="btn btn-default">Ajout d'une entreprise</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('entreprise_active') }}" class="btn btn-default">Réactivation d'une entreprise</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        {%endif%}
                     </div>
-                    {%endif%}
+                    <div class="col-md-9">
+                        {% block body %}
+                        <font color="white">
+                            <h4>
+                                <b>{{ message }}</b>
+                            </h4>
+                            <a href="{{ path('system_read') }}">{{ messageBis }}</a>
+                        </font>
+                        {%endblock%}
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    {% block body %}
-                    <font color="white">
-                        <h4><b>{{ message }}</b></h4>
-                        <a href="{{ path('system_read') }}">{{ messageBis }}</a>
-                    </font>
-                    {%endblock%}
-                </div>
-            </div>
 
 
 
                 <footer>
-                   <font color="white"> <p>&copy; {{'now'|date('Y') }} Nexus Création</p></font>
+                    <font color="white">
+                        <p>&copy; {{'now'|date('Y') }} Nexus Création</p>
+                    </font>
                 </footer>
-        </div>
-      </head>
+            </div>
+            </head>
 
 
-                {% block javascripts %}
-                    {# lignes Javascript permettant d'utiliser des fonctionnalités du bootstrap twitter #}
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                    <script src="//maxcdn.boostrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                    {%endblock%}
-    </body>
+            {% block javascripts %} {# lignes Javascript permettant d'utiliser des fonctionnalités du bootstrap twitter #}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="//maxcdn.boostrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            {%endblock%}
+</body>
+
 </html>
 {%endif%}

@@ -1,39 +1,43 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {%block title %}
-    {{parent()}} - Ajout d'un entreprise
-{%endblock%}
-{%block body %}
-<style>
-label
-{
-display: block;
-}
-</style>
-<font color="white"><h2><b>Ajout d'un entreprise</b></h2></font>
-    <body>
+    {{parent()}}
+    - Ajout d'un entreprise
+    {%endblock%}
+    {%block body %}
+        <style>
+            label {
+                display: block;
+            }
+        </style>
+        <font color="white">
+            <h2>
+                <b>Ajout d'un entreprise</b>
+            </h2>
+        </font>
+        <body>
             <section class="login-form">
-              {{form_start(form,{ 'attr': {'role': 'login'} })}}
-              {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
-              <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
-              <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Confirmer l'ajout</button>
-              <p>
-                  {% for info in app.flashes('info') %}
-                      <div class="flash-notice">
-                          {{ info }}
-                      </div>
-                  {% endfor %}
-               </p>
+                {{form_start(form,{ 'attr': {'role': 'login'} })}}
+                {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
+                <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
+                <button type="submit" id="form_save" name="form[save]" class="btn btn-info ">Confirmer l'ajout</button>
+                <p>
+                    {% for info in app.flashes('info') %}
+                        <div class="flash-notice">
+                            {{ info }}
+                        </div>
+                    {% endfor %}
+                </p>
 
-              {{form_end(form)}}
-              </section>
-</body>
+                {{form_end(form)}}
+            </section>
+        </body>
 
-<p>
-{% for info in app.flashes('info') %}
-    <div class="flash-notice">
-        {{ info }}
-    </div>
-{% endfor %}
-</p>
-{%endblock%}
+        <p>
+            {% for info in app.flashes('info') %}
+                <div class="flash-notice">
+                    {{ info }}
+                </div>
+            {% endfor %}
+        </p>
+        {%endblock%}

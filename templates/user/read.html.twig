@@ -1,103 +1,120 @@
 {% extends "base.html.twig" %}
 {%block title %}
-    {{parent()}} - Liste des utilisateurs
-{%endblock%}
-{%block body%}
-<link rel="stylesheet" href="{{ asset('css/test.css') }}">
-<div class="span7">
+    {{parent()}}
+    - Liste des utilisateurs
+    {%endblock%}
+    {%block body%}
+        <link rel="stylesheet" href="{{ asset('css/test.css') }}">
+        <div class="span7">
 
-<h1><font color="white">Liste des utilisateurs actifs</font></h1>
-
-<div class="widget stacked widget-table action-table">
-				<div class="widget-content">
-
-					<table class="table table-striped table-bordered">
-						<thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Role</th>
-                <th>Téléphone</th>
-                <th>E-maill</th>
-                <th>Entreprise</th>
-                <th>Date connexion</th>
-                <th>Date deconnexion</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-						</thead>
-						<tbody>
-
-            {% for user in userListe %}
-                {% if user.actif == true and user.role != null%}
-                    <tr>
-
-                        <td>{{ user.identifiant}}</td>
-                        {% if user.role.nomRole == "ROLE_SUPER_ADMIN" %}
-                        <td>ADMIN</td>
-                        {%else%}
-                        <td>USER</td>
-                        {%endif%}
-                        <td>{{ user.Tel }}</td>
-                        <td>{{ user.email }}</td>
-                        {% if user.entreprise == null %}
-                        <td>{{ "Pas d'entreprise associée" }}</td>
-                        {% else %}
-                        <td>{{ user.entreprise.libelle }}</td>
-                        {% endif %}
-                        <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
-                        <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
-                        <td><a href="{{path('user_edit',{'id' : user.id}) }}"class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                        <td><a href="{{path('user_delete',{'id' : user.id}) }}"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
-
-                    </tr>
-                {% endif %}
-
-            {% endfor %}
-							</tbody>
-						</table>
-
-				</div> <!-- /widget-content -->
-
-			</div> <!-- /widget -->
-            </div>
-            <h1><font color="white">Liste des utilisateurs à approuver</font></h1>
+            <h1>
+                <font color="white">Liste des utilisateurs actifs</font>
+            </h1>
 
             <div class="widget stacked widget-table action-table">
-            				<div class="widget-content">
+                <div class="widget-content">
 
-            					<table class="table table-striped table-bordered">
-            						<thead>
-                        <tr>
-                            <th>Identifiant</th>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Identifiant</th>
+                                <th>Role</th>
+                                <th>Téléphone</th>
+                                <th>E-maill</th>
+                                <th>Entreprise</th>
+                                <th>Date connexion</th>
+                                <th>Date deconnexion</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                            <th>Téléphone</th>
-                            <th>E-maill</th>
+                            {% for user in userListe %}
+                                {% if user.actif == true and user.role != null%}
+                                    <tr>
 
-                            <th>Date connexion</th>
-                            <th>Date deconnexion</th>
-                        </tr>
-            						</thead>
-            						<tbody>
+                                        <td>{{ user.identifiant}}</td>
+                                        {% if user.role.nomRole == "ROLE_SUPER_ADMIN" %}
+                                            <td>ADMIN</td>
+                                            {%else%}
+                                            <td>USER</td>
+                                            {%endif%}
+                                            <td>{{ user.Tel }}</td>
+                                            <td>{{ user.email }}</td>
+                                            {% if user.entreprise == null %}
+                                                <td>{{ "Pas d'entreprise associée" }}</td>
+                                            {% else %}
+                                                <td>{{ user.entreprise.libelle }}</td>
+                                            {% endif %}
+                                            <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
+                                            <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
+                                            <td>
+                                                <a href="{{path('user_edit',{'id' : user.id}) }}" class="btn btn-warning">
+                                                    <span class="glyphicon glyphicon-pencil"></span></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{path('user_delete',{'id' : user.id}) }}" class="btn btn-danger">
+                                                    <span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>
 
-                        {% for user in userListe %}
-                            {% if user.actif == false and user.dateConnexion == null and user.dateDeconnexion == null %}
-                                <tr>
+                                        </tr>
+                                    {% endif %}
 
-                                    <td>{{ user.identifiant}}</td>
-                                    <td>{{ user.Tel }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
-                                    <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
-                                    <td><a href="{{ path('user_actApprouve', {'id' : user.id}) }}" class="btn btn-success">Activer</a></td>
-                                    <td><a href="{{ path('user_deleteDef', {'id' : user.id}) }}" class="btn btn-danger">Décliner</a></td>
+                                {% endfor %}
+                            </tbody>
+                        </table>
 
-                                </tr>
-                            {% endif %}
+                    </div>
+                    <!-- /widget-content -->
 
-                {% endfor %}
+                </div>
+                <!-- /widget -->
+            </div>
+            <h1>
+                <font color="white">Liste des utilisateurs à approuver</font>
+            </h1>
 
-            </table>
-            {% for testRead in app.flashes('testRead') %}
-              <div class="visibility">{{ testRead }}</div>
-            {% endfor %}
-            {%endblock%}
+            <div class="widget stacked widget-table action-table">
+                <div class="widget-content">
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Identifiant</th>
+
+                                <th>Téléphone</th>
+                                <th>E-maill</th>
+
+                                <th>Date connexion</th>
+                                <th>Date deconnexion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for user in userListe %}
+                                {% if user.actif == false and user.dateConnexion == null and user.dateDeconnexion == null %}
+                                    <tr>
+
+                                        <td>{{ user.identifiant}}</td>
+                                        <td>{{ user.Tel }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{user.dateConnexion|date("Y-m-d H:i:s")}}</td>
+                                        <td>{{user.dateDeconnexion|date("Y-m-d H:i:s")}}</td>
+                                        <td>
+                                            <a href="{{ path('user_actApprouve', {'id' : user.id}) }}" class="btn btn-success">Activer</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('user_deleteDef', {'id' : user.id}) }}" class="btn btn-danger">Décliner</a>
+                                        </td>
+
+                                    </tr>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </table>
+                        {% for testRead in app.flashes('testRead') %}
+                            <div class="visibility">{{ testRead }}</div>
+                        {% endfor %}
+                        {%endblock%}

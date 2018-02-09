@@ -1,37 +1,46 @@
 {% extends "base.html.twig" %}
 {%block title %}
-    {{parent()}} - Liste des entreprises
-{%endblock%}
-{%block body %}
-<link rel="stylesheet" href="{{ asset('css/test.css') }}">
-<h1><font color="white">Liste des entreprises</font></h1>
-<div class="widget stacked widget-table action-table">
-				<div class="widget-content">
+    {{parent()}}
+    - Liste des entreprises
+    {%endblock%}
+    {%block body %}
+        <link rel="stylesheet" href="{{ asset('css/test.css') }}">
+        <h1>
+            <font color="white">Liste des entreprises</font>
+        </h1>
+        <div class="widget stacked widget-table action-table">
+            <div class="widget-content">
 
-					<table class="table table-striped table-bordered">
-						<thead>
-              <tr>
-                <th>Nom de l'entreprise</th>
-                <th></th>
-                <th></th>
-              </tr>
-           </thead>
-    <tbody>
-    {% for entreprise in entrepriseListe %}
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'entreprise</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entreprise in entrepriseListe %}
 
-        {% if entreprise.actif == true %}
-        <tr>
-            <td>{{ entreprise.libelle}}</td>
-            <td><a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
-            <td><a href="{{path('entreprise_delete',{'id' : entreprise.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
-        </tr>
-            {%endif%}
-    {% endfor %}
-    </tbody>
+                            {% if entreprise.actif == true %}
+                                <tr>
+                                    <td>{{ entreprise.libelle}}</td>
+                                    <td>
+                                        <a href="{{ path('entreprise_edit', {'id' : entreprise.id}) }}" class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-pencil"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="{{path('entreprise_delete',{'id' : entreprise.id}) }}" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash"></span></a>
+                                    </td>
+                                </tr>
+                                {%endif%}
+                            {% endfor %}
+                        </tbody>
 
-</table>
-{% for testRead in app.flashes('testRead') %}
-  <div class="visibility">{{ testRead }}</div>
-{% endfor %}
-<a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour</a>
-{%endblock%}
+                    </table>
+                    {% for testRead in app.flashes('testRead') %}
+                        <div class="visibility">{{ testRead }}</div>
+                    {% endfor %}
+                    <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour</a>
+                    {%endblock%}

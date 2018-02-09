@@ -1,43 +1,50 @@
 {% extends "base.html.twig" %}
 {%block title %}
-    {{parent()}} - Réactivation d'une entreprise
-{%endblock%}
-{%block body %}
-<link rel="stylesheet" href="{{ asset('css/test.css') }}">
-<h1><font color="white">Liste des entreprises</font></h1>
+    {{parent()}}
+    - Réactivation d'une entreprise
+    {%endblock%}
+    {%block body %}
+        <link rel="stylesheet" href="{{ asset('css/test.css') }}">
+        <h1>
+            <font color="white">Liste des entreprises</font>
+        </h1>
 
-<div class="widget stacked widget-table action-table">
-				<div class="widget-content">
+        <div class="widget stacked widget-table action-table">
+            <div class="widget-content">
 
-					<table class="table table-striped table-bordered">
-						<thead>
-              <tr>
-                <th>Nom de l'entreprise</th>
-                <th></th>
-                <th></th>
-              </tr>
-           </thead>
-    <tbody>
-    {% for entreprise in entrepriseListe %}
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'entreprise</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entreprise in entrepriseListe %}
 
-        {% if entreprise.actif == false %}
-        <tr>
-            <td>{{ entreprise.libelle}}</td>
-              <td><a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a></td>
-              <td><a href="{{ path('entreprise_suppressionDef', {'id' : entreprise.id}) }}" class="btn btn-danger">Supprimer définitivement l'entreprise</a></td>
-        </tr>
-            {%endif%}
-    {% endfor %}
-    </tbody>
+                            {% if entreprise.actif == false %}
+                                <tr>
+                                    <td>{{ entreprise.libelle}}</td>
+                                    <td>
+                                        <a href="{{ path('entreprise_reactive', {'id' : entreprise.id}) }}" class="btn btn-success">Réactiver</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('entreprise_deleteDef', {'id' : entreprise.id}) }}" class="btn btn-danger">Supprimer définitivement l'entreprise</a>
+                                    </td>
+                                </tr>
+                                {%endif%}
+                            {% endfor %}
+                        </tbody>
 
-</table>
-<p>
-{% for info in app.flashes('info') %}
-    <div class="flash-notice">
-        {{ info }}
-    </div>
-{% endfor %}
-</p>
+                    </table>
+                    <p>
+                        {% for info in app.flashes('info') %}
+                            <div class="flash-notice">
+                                {{ info }}
+                            </div>
+                        {% endfor %}
+                    </p>
 
-<a href="{{ path('entreprise') }}" class="btn btn-default">Retour</a>
-{%endblock%}
+                    <a href="{{ path('entreprise') }}" class="btn btn-default">Retour</a>
+                    {%endblock%}

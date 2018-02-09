@@ -4,6 +4,7 @@ title: Changelog
 
 This is a list of changes/improvements that were introduced in ProxyManager
 
+<<<<<<< HEAD
 ## 2.2.0
 
 This release provides support for the PHP 7.2 `object` type hint, as
@@ -24,6 +25,8 @@ Total issues resolved: **11**
 - [392: PHPStan level 7 analysis](https://github.com/Ocramius/ProxyManager/pull/392) thanks to @snapshotpl
 - [393: remove inheritdoc &amp; body parsing from generated proxies](https://github.com/Ocramius/ProxyManager/pull/393) thanks to @Tobion
 
+=======
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 ## 2.1.1
 
 This release provides aggressive improvements in static introspection via
