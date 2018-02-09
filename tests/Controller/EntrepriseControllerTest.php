@@ -39,7 +39,7 @@ class EntrepriseControllerTest extends WebTestCase
     $client->submit($form);
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
-  public function testEdit()
+  public function testEntrepriseEdit()
   {
     $client = static::createClient(array(), array(
     'PHP_AUTH_USER' => 'Baptiste',
@@ -47,7 +47,7 @@ class EntrepriseControllerTest extends WebTestCase
     ));
     $crawler = $client->request('GET','/entreprise/edit/4');
     // echo $crawler -> html();
-    $form = $crawler->selectButton("Confirmer la modification")->form();
+    $form = $crawler->selectButton("Modification")->form();
 
     $form['entreprise[libelle]'] = 'Richou';
 
@@ -57,7 +57,7 @@ class EntrepriseControllerTest extends WebTestCase
     $this->assertEquals(302, $client->getResponse()->getStatusCode());
   }
   public function testSuppression()
-  { 
+  {
   // dump($user);exit;
 
    $client = static::createClient(array(), array(
