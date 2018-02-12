@@ -105,7 +105,10 @@ class UserControllerTest extends WebTestCase
 
         // Submit du formulaire au crawler
         $crawler = $client->submit($form);
+
+        // Actualisation de la BDD
         $this->setUp();
+        
         // Récupération de l'utilisateur
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
 
@@ -135,7 +138,9 @@ class UserControllerTest extends WebTestCase
         // Récupération de la page de delete avec l'id passé en paramètres
         $crawler = $client->request('GET', '/user/delete/' . $user->getId());
 
+        // Actualisation de la BDD
         $this->setUp();
+
         // Tentative de récupération de l'utilisateur avec l'id
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
         $result = false;
@@ -160,7 +165,9 @@ class UserControllerTest extends WebTestCase
         // Récupération de la page de reactive avec l'id de l'user passé en paramètre
         $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
 
+        // Actualisation de la BDD
         $this->setUp();
+
         // Récupération de l'user
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
         $result = false;
@@ -188,7 +195,9 @@ class UserControllerTest extends WebTestCase
         // Suppression de l'utilisateur
         $user = $this->_em->clear();
 
+        // Actualisation de la BDD
         $this->setUp();
+
         // Récupération de l'utilisateur nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Remi');
         $result = false;

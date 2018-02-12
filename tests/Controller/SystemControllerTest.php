@@ -104,6 +104,7 @@ class SystemControllerTest extends WebTestCase
         // Submit du formulaire dans le crawler
         $crawler = $client->submit($form);
 
+        // Actualisation de la BDD
         $this->setUp();
 
         // Récupération du système avec l'id
@@ -130,6 +131,7 @@ class SystemControllerTest extends WebTestCase
         // Récupération de la page delete avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/delete/'. $systeme->getId());
 
+        // Actualisation de la BDD
         $this->setUp();
 
         // Tentative de récupération du système nommé Richou
@@ -157,6 +159,7 @@ class SystemControllerTest extends WebTestCase
         // Récupération de la page reactive avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/reactive/'.$systeme->getId());
 
+        // Actualisation de la BDD
         $this->setUp();
 
         // Récupération du système Richou
@@ -184,7 +187,9 @@ class SystemControllerTest extends WebTestCase
         // Récupération de la page deleteDef avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/deleteDef/'.$systeme->getId());
 
+        // Actualisation de la BDD
         $this->setUp();
+
         // Tentative de récupération du système avec l'id
         $systeme = $this->_em->getRepository(Systeme::class)->findOneById($systeme->getId());
         $result = false;
