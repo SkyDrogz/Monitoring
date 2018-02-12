@@ -56,10 +56,10 @@ class SystemControllerTest extends WebTestCase
         $form = $crawler->selectButton("Confirmer l'ajout")->form();
 
         // Paramètres du formulaire
-        $form['system[nom]'] = 'EDF';
-        $form['system[url]'] = 'https://www.edf.fr/groupe-edf';
+        $form['system[nom]'] = 'Cora';
+        $form['system[url]'] = 'https://www.cora.fr';
         $form['system[categSysteme]'] = 3;
-        $form['system[user]'] = 10;
+        $form['system[user]'] = 3;
         $form['system[niveauUrgence]'] = 0;
         $form['system[repetition]'] = 5;
         $crawler = $client->submit($form);
@@ -85,7 +85,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération du système nommée "Richard"
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richard');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('EDF');
         // Récupération de la page de modification des systèmes
         $crawler = $client->request('GET', '/system/edit/'.$systeme->getId());
         // Submit du formulaire
@@ -95,7 +95,7 @@ class SystemControllerTest extends WebTestCase
         $form['system[nom]'] = 'Richou';
         $form['system[url]'] = 'url.test.test.com';
         $form['system[categSysteme]'] = 2;
-        $form['system[user]'] = 9;
+        $form['system[user]'] = 2;
         $form['system[niveauUrgence]'] = 0;
         $form['system[repetition]'] = 51;
         $form['system[requete]'] = null;
@@ -123,7 +123,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération du système nommé Richou
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Facebook');
         // Récupération de la page delete avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/delete/'. $systeme->getId());
         // Tentative de récupération du système nommé Richou
@@ -147,7 +147,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération du système Richou
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Norauto');
         // Récupération de la page reactive avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/reactive/'.$systeme->getId());
         // Récupération du système Richou
@@ -171,7 +171,7 @@ class SystemControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération du système nommé Richou
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Priceminister');
         // Récupération de la page deleteDef avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/deleteDef/'.$systeme->getId());
         // Tentative de récupération du système avec l'id

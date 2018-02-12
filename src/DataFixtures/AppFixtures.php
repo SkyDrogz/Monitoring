@@ -53,7 +53,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1 = new User();
         $user1->setIdentifiant('Timothee');
         $user1->setPassword('admin');
-        $user1->setRole($role1);
+        $user1->setRole($role);
         $plainPassword = $user1->getPassword();
         $encoded = $this->encoder->encodePassword($user1, $plainPassword);
         $user1->setPassword($encoded);

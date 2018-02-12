@@ -40,7 +40,6 @@ class AdminControllerTest extends WebTestCase
 
         // Suivre la redirection du crawler
         $crawler = $client->followRedirect();
-
         // S'il trouve la div caché dans la base uniquement visible en tant qu'ADMIN, le test est OK
         $this->assertSame(1, $crawler->filter('div.TestRoleADMIN')->count());
     }

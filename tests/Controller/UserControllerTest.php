@@ -129,7 +129,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'utilisateur nommé Richou
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Rachid');
 
         // Récupération de la page de delete avec l'id passé en paramètres
         $crawler = $client->request('GET', '/user/delete/' . $user->getId());
@@ -153,7 +153,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'identifiant nommé Richou
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Roger');
         // Récupération de la page de reactive avec l'id de l'user passé en paramètre
         $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
         // Récupération de l'user
@@ -177,13 +177,13 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'user nommé Richou
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Remi');
         // Récupération de la page deleteDef avec l'id passé en paramètre
         $crawler = $client->request('GET', '/user/deleteDef/'.$user->getId());
         // Suppression de l'utilisateur
         $user = $this->_em->clear();
         // Récupération de l'utilisateur nommé Richou
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richou');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Remi');
         $result = false;
         // Si l'utilisateur est null le test s'est bien passé et à donc bien supprimé l'utilisateur
         if($user == null){
