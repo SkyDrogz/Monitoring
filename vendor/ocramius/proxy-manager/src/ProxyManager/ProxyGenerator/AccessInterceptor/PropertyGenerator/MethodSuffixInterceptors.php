@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,12 +17,17 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
 namespace ProxyManager\ProxyGenerator\AccessInterceptor\PropertyGenerator;
 
+<<<<<<< HEAD
+use ProxyManager\Generator\Util\IdentifierSuffixer;
+=======
 use ProxyManager\Generator\Util\UniqueIdentifierGenerator;
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
@@ -38,7 +45,11 @@ class MethodSuffixInterceptors extends PropertyGenerator
      */
     public function __construct()
     {
+<<<<<<< HEAD
+        parent::__construct(IdentifierSuffixer::getIdentifier('methodSuffixInterceptors'));
+=======
         parent::__construct(UniqueIdentifierGenerator::getIdentifier('methodSuffixInterceptors'));
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
         $this->setDefaultValue([]);
         $this->setVisibility(self::VISIBILITY_PRIVATE);

@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -34,12 +37,15 @@ use Zend\Code\Reflection\MethodReflection;
 class LazyLoadingMethodInterceptor extends MethodGenerator
 {
     /**
+<<<<<<< HEAD
+=======
      * @param \Zend\Code\Reflection\MethodReflection $originalMethod
      * @param \Zend\Code\Generator\PropertyGenerator $initializerProperty
      * @param \Zend\Code\Generator\PropertyGenerator $valueHolderProperty
      *
      * @return self
      *
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      * @throws \Zend\Code\Generator\Exception\InvalidArgumentException
      */
     public static function generateMethod(
@@ -48,7 +54,11 @@ class LazyLoadingMethodInterceptor extends MethodGenerator
         PropertyGenerator $valueHolderProperty
     ) : self {
         /* @var $method self */
+<<<<<<< HEAD
+        $method            = static::fromReflectionWithoutBodyAndDocBlock($originalMethod);
+=======
         $method            = static::fromReflection($originalMethod);
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $initializerName   = $initializerProperty->getName();
         $valueHolderName   = $valueHolderProperty->getName();
         $parameters        = $originalMethod->getParameters();
@@ -73,7 +83,10 @@ class LazyLoadingMethodInterceptor extends MethodGenerator
                 $originalMethod
             )
         );
+<<<<<<< HEAD
+=======
         $method->setDocBlock('{@inheritDoc}');
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
         return $method;
     }

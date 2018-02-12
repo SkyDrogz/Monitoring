@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -24,9 +27,15 @@ use ProxyManager\Generator\MethodGenerator;
 use ProxyManager\ProxyGenerator\Util\Properties;
 use ProxyManager\ProxyGenerator\Util\UnsetPropertiesGenerator;
 use ReflectionClass;
+<<<<<<< HEAD
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Reflection\MethodReflection;
+use Zend\Code\Reflection\ParameterReflection;
+=======
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 use Zend\Code\Reflection\MethodReflection;
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 /**
  * The `__construct` implementation for lazy loading proxies
@@ -37,6 +46,8 @@ use Zend\Code\Reflection\MethodReflection;
 class Constructor extends MethodGenerator
 {
     /**
+<<<<<<< HEAD
+=======
      * Constructor
      *
      * @param ReflectionClass   $originalClass
@@ -44,17 +55,26 @@ class Constructor extends MethodGenerator
      *
      * @return self
      *
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      * @throws \Zend\Code\Generator\Exception\InvalidArgumentException
      */
     public static function generateMethod(ReflectionClass $originalClass, PropertyGenerator $valueHolder) : self
     {
         $originalConstructor = self::getConstructor($originalClass);
 
+<<<<<<< HEAD
+        /* @var $constructor self */
+        $constructor = $originalConstructor
+            ? self::fromReflectionWithoutBodyAndDocBlock($originalConstructor)
+            : new self('__construct');
+
+=======
         $constructor = $originalConstructor
             ? self::fromReflection($originalConstructor)
             : new self('__construct');
 
         $constructor->setDocBlock('{@inheritDoc}');
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $constructor->setBody(
             'static $reflection;' . "\n\n"
             . 'if (! $this->' . $valueHolder->getName() . ') {' . "\n"
@@ -64,13 +84,31 @@ class Constructor extends MethodGenerator
             . '    $this->' . $valueHolder->getName() . ' = $reflection->newInstanceWithoutConstructor();' . "\n"
             . UnsetPropertiesGenerator::generateSnippet(Properties::fromReflectionClass($originalClass), 'this')
             . '}'
+<<<<<<< HEAD
+            . ($originalConstructor ? self::generateOriginalConstructorCall($originalConstructor, $valueHolder) : '')
+=======
             . self::generateOriginalConstructorCall($originalClass, $valueHolder)
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         );
 
         return $constructor;
     }
 
     private static function generateOriginalConstructorCall(
+<<<<<<< HEAD
+        MethodReflection $originalConstructor,
+        PropertyGenerator $valueHolder
+    ) : string {
+        return "\n\n"
+            . '$this->' . $valueHolder->getName() . '->' . $originalConstructor->getName() . '('
+            . implode(
+                ', ',
+                array_map(
+                    function (ParameterReflection $parameter) : string {
+                        return ($parameter->isVariadic() ? '...' : '') . '$' . $parameter->getName();
+                    },
+                    $originalConstructor->getParameters()
+=======
         ReflectionClass $class,
         PropertyGenerator $valueHolder
     ) : string {
@@ -91,6 +129,7 @@ class Constructor extends MethodGenerator
                         return ($parameter->getVariadic() ? '...' : '') . '$' . $parameter->getName();
                     },
                     $constructor->getParameters()
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
                 )
             )
             . ');';

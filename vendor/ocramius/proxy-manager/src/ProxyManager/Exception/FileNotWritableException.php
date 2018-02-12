@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -42,10 +45,13 @@ class FileNotWritableException extends UnexpectedValueException implements Excep
 
     /**
      * @deprecated this method is unused, and will be removed in ProxyManager 3.0.0
+<<<<<<< HEAD
+=======
      *
      * @param string $path
      *
      * @return self
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public static function fromNonWritableLocation($path) : self
     {

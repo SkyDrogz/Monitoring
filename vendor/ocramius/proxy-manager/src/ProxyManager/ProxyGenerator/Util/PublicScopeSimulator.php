@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -50,8 +53,11 @@ class PublicScopeSimulator
      * @param string|null       $returnPropertyName name of the property to which we want to assign the result of
      *                                              the operation. Return directly if none provided
      *
+<<<<<<< HEAD
+=======
      * @return string
      *
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      * @throws \InvalidArgumentException
      */
     public static function getPublicAccessSimulationCode(
@@ -121,10 +127,13 @@ class PublicScopeSimulator
      * Note: if the object is a wrapper, the wrapped instance is accessed directly. If the object
      * is a ghost or the proxy has no wrapper, then an instance of the parent class is created via
      * on-the-fly unserialization
+<<<<<<< HEAD
+=======
      *
      * @param string $operationType
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     private static function getByRefReturnValue(string $operationType) : string
     {
@@ -148,6 +157,11 @@ class PublicScopeSimulator
     }
 
     /**
+<<<<<<< HEAD
+     * @throws \InvalidArgumentException
+     */
+    private static function getOperation(string $operationType, string $nameParameter, ?string $valueParameter) : string
+=======
      * @param string      $operationType
      * @param string      $nameParameter
      * @param string|null $valueParameter
@@ -157,12 +171,17 @@ class PublicScopeSimulator
      * @throws \InvalidArgumentException
      */
     private static function getOperation(string $operationType, string $nameParameter, $valueParameter) : string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
     {
         switch ($operationType) {
             case static::OPERATION_GET:
                 return 'return $targetObject->$' . $nameParameter . ';';
             case static::OPERATION_SET:
+<<<<<<< HEAD
+                if (null === $valueParameter) {
+=======
                 if (! $valueParameter) {
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
                     throw new \InvalidArgumentException('Parameter $valueParameter not provided');
                 }
 

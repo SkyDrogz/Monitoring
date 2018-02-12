@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -32,11 +35,14 @@ interface ClassSignatureGeneratorInterface
 {
     /**
      * Applies a signature to a given class generator
+<<<<<<< HEAD
+=======
      *
      * @param ClassGenerator $classGenerator
      * @param array          $parameters
      *
      * @return ClassGenerator
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function addSignature(ClassGenerator $classGenerator, array $parameters) : ClassGenerator;
 }

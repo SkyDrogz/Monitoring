@@ -60,7 +60,11 @@ class Configuration
     protected $generatorStrategy;
 
     /**
+<<<<<<< HEAD
+     * @var AutoloaderInterface|null
+=======
      * @var callable|null
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     protected $proxyAutoloader;
 

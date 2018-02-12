@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -43,7 +46,10 @@ class InitializeProxy extends MethodGenerator
     public function __construct(PropertyGenerator $initializerProperty, PropertyGenerator $valueHolderProperty)
     {
         parent::__construct('initializeProxy');
+<<<<<<< HEAD
+=======
         $this->setDocBlock('{@inheritDoc}');
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $this->setReturnType('bool');
 
         $initializer = $initializerProperty->getName();

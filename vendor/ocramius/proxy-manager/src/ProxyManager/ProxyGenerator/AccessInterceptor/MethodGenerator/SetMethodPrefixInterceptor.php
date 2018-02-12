@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -51,7 +54,10 @@ class SetMethodPrefixInterceptor extends MethodGenerator
         $interceptor->setDefaultValue(null);
         $this->setParameter(new ParameterGenerator('methodName', 'string'));
         $this->setParameter($interceptor);
+<<<<<<< HEAD
+=======
         $this->setDocBlock('{@inheritDoc}');
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $this->setBody('$this->' . $prefixInterceptor->getName() . '[$methodName] = $prefixInterceptor;');
     }
 }

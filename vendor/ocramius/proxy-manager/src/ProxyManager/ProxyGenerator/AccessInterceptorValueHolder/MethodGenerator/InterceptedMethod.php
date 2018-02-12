@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -34,6 +37,8 @@ use Zend\Code\Reflection\MethodReflection;
 class InterceptedMethod extends MethodGenerator
 {
     /**
+<<<<<<< HEAD
+=======
      * @param \Zend\Code\Reflection\MethodReflection $originalMethod
      * @param \Zend\Code\Generator\PropertyGenerator $valueHolderProperty
      * @param \Zend\Code\Generator\PropertyGenerator $prefixInterceptors
@@ -41,6 +46,7 @@ class InterceptedMethod extends MethodGenerator
      *
      * @return self
      *
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      * @throws \Zend\Code\Generator\Exception\InvalidArgumentException
      */
     public static function generateMethod(
@@ -50,14 +56,21 @@ class InterceptedMethod extends MethodGenerator
         PropertyGenerator $suffixInterceptors
     ) : self {
         /* @var $method self */
+<<<<<<< HEAD
+        $method          = static::fromReflectionWithoutBodyAndDocBlock($originalMethod);
+=======
         $method          = static::fromReflection($originalMethod);
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $forwardedParams = [];
 
         foreach ($originalMethod->getParameters() as $parameter) {
             $forwardedParams[] = ($parameter->isVariadic() ? '...' : '') . '$' . $parameter->getName();
         }
 
+<<<<<<< HEAD
+=======
         $method->setDocBlock('{@inheritDoc}');
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $method->setBody(InterceptorGenerator::createInterceptedMethodBody(
             '$returnValue = $this->' . $valueHolderProperty->getName() . '->'
             . $originalMethod->getName() . '(' . implode(', ', $forwardedParams) . ');',

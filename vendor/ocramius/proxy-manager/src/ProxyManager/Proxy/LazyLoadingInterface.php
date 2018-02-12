@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -59,8 +62,11 @@ interface LazyLoadingInterface extends ProxyInterface
 
     /**
      * Retrieves current initialization status of the proxy
+<<<<<<< HEAD
+=======
      *
      * @return bool
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function isProxyInitialized() : bool;
 }

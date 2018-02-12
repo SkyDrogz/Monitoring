@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,13 +17,18 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
 namespace ProxyManager\ProxyGenerator\NullObject\MethodGenerator;
 
 use ProxyManager\Generator\MethodGenerator;
+<<<<<<< HEAD
+use ProxyManager\Generator\Util\IdentifierSuffixer;
+=======
 use ProxyManager\Generator\Util\UniqueIdentifierGenerator;
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 use Zend\Code\Reflection\MethodReflection;
 
 /**
@@ -40,6 +47,16 @@ class NullObjectMethodInterceptor extends MethodGenerator
     public static function generateMethod(MethodReflection $originalMethod) : self
     {
         /* @var $method self */
+<<<<<<< HEAD
+        $method = static::fromReflectionWithoutBodyAndDocBlock($originalMethod);
+
+        if ($originalMethod->returnsReference()) {
+            $reference = IdentifierSuffixer::getIdentifier('ref');
+
+            $method->setBody("\$$reference = null;\nreturn \$$reference;");
+        }
+
+=======
         $method = static::fromReflection($originalMethod);
 
         if ('void' === (string) $originalMethod->getReturnType()) {
@@ -58,6 +75,7 @@ class NullObjectMethodInterceptor extends MethodGenerator
 
         $method->setBody('');
 
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         return $method;
     }
 }

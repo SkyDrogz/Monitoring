@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -35,10 +38,13 @@ interface ClassNameInflectorInterface
 
     /**
      * Retrieve the class name of a user-defined class
+<<<<<<< HEAD
+=======
      *
      * @param string $className
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function getUserClassName(string $className) : string;
 
@@ -47,17 +53,23 @@ interface ClassNameInflectorInterface
      *
      * @param string $className
      * @param array  $options   arbitrary options to be used for the generated class name
+<<<<<<< HEAD
+=======
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function getProxyClassName(string $className, array $options = []) : string;
 
     /**
      * Retrieve whether the provided class name is a proxy
+<<<<<<< HEAD
+=======
      *
      * @param string $className
      *
      * @return bool
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function isProxyClassName(string $className) : bool;
 }

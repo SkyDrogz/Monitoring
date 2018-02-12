@@ -22,6 +22,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
     public function load(ObjectManager $manager)
     {
+      //------------------------------ Role ---------------------------------//        
         // Role User
         $role = new Role();        
         $role->setNomRole('ROLE_ADMIN');
@@ -31,24 +32,28 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $role1 = new Role();       
         $role1->setNomRole('ROLE_SUPER_ADMIN');
         $manager->persist($role1);
-        $manager->flush();  
-        // User Admin
+        $manager->flush();
+
+        //-------------------------- Utilisateurs ----------------------------//
+
+        // Ajout de l'utilisateur en rôle Admin
         $user = new User();
         $user->setIdentifiant('Baptiste');
         $user->setPassword('admin');
-        $user->setRole( $role1);
+        $user->setRole($role2);
         $plainPassword = $user->getPassword();
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
         $user->setPassword($encoded);
-        $user->setEmail("Baptiste@lieu.com");
+        $user->setEmail("baptiste@lieu.com");
         $user->setTel('034232329504');
         $user->setActif(1);
         $manager->persist($user);
-        // User User
+
+        // Ajout de l'utilisateur en rôle Utilisateur
         $user1 = new User();
         $user1->setIdentifiant('Timothee');
         $user1->setPassword('admin');
-        $user1->setRole($role);
+        $user1->setRole($role1);
         $plainPassword = $user1->getPassword();
         $encoded = $this->encoder->encodePassword($user1, $plainPassword);
         $user1->setPassword($encoded);
@@ -56,18 +61,20 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setTel('0612992129');
         $user1->setActif(1);
         $manager->persist($user1);
-        // User Edit
-        $user1 = new User();
-        $user1->setIdentifiant('Richelieu');
-        $user1->setPassword('test');
-        $plainPassword = $user1->getPassword();
-        $encoded = $this->encoder->encodePassword($user1, $plainPassword);
-        $user1->setPassword($encoded);
-        $user1->setEmail("Riche@lieu.com");
-        $user1->setTel('0349504');
-        $user1->setActif(1);
-        $manager->persist($user1);
-        //User Delete (passage inactif)
+        
+        // Modification d'un utilisateur
+        $user2 = new User();
+        $user2->setIdentifiant('Richelieu');
+        $user2->setPassword('test');
+        $plainPassword = $user2->getPassword();
+        $encoded = $this->encoder->encodePassword($user2, $plainPassword);
+        $user2->setPassword($encoded);
+        $user2->setEmail("Riche@lieu.com");
+        $user2->setTel('0349504');
+        $user2->setActif(1);
+        $manager->persist($user2);
+
+        // Suppression logique d'un utilisateur
         $user3 = new User();
         $user3->setIdentifiant('Rachid');
         $user3->setPassword('test');
@@ -78,7 +85,8 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user3->setTel('0349504');
         $user3->setActif(1);
         $manager->persist($user3);
-        // User Reactivation (passage Actif)
+
+        // Réactivation d'un utilisateur
         $user4 = new User();
         $user4->setIdentifiant('Roger');
         $user4->setPassword('test');
@@ -89,7 +97,8 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user4->setTel('0349504');
         $user4->setActif(0);
         $manager->persist($user4);
-        // User Supression definitive
+
+        // Suppression définitive d'un utilisateur
         $user5 = new User();
         $user5->setIdentifiant('Remi');
         $user5->setPassword('test');
@@ -126,9 +135,8 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // ---------------------------- Systeme -----------------------------//
 
-        // Ajout Systeme (Je ne sais pas si l'ajout est nécéssaire dans les fixtures vu que le test l'ajoute lui-même)
+        // Ajout Systeme
         $systemAdd = new Systeme();
- 
         $systemAdd->setCategSysteme($categSysteme3);
         $systemAdd->setUser($user1);
         $systemAdd->setNom("EDF");
@@ -189,9 +197,8 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // -------------------------- Entreprise -----------------------------//
 
-        // Ajout entreprise (Je ne sais pas si l'ajout est nécéssaire dans les fixtures vu que le test l'ajoute lui-même)
+        // Ajout entreprise
         $entrepriseAdd = new Entreprise();
-        $entrepriseAdd->setId(1);
         $entrepriseAdd->setLibelle("EDF");
         $entrepriseAdd->setActif(1);
         $manager->persist($entrepriseAdd);

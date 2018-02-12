@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,16 +17,24 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
 namespace ProxyManager\ProxyGenerator\LazyLoadingGhost\MethodGenerator;
 
 use ProxyManager\Generator\MethodGenerator;
+<<<<<<< HEAD
+use ProxyManager\Generator\Util\IdentifierSuffixer;
+use ProxyManager\ProxyGenerator\Util\Properties;
+use ReflectionProperty;
+use Zend\Code\Generator\ParameterGenerator;
+=======
 use Zend\Code\Generator\ParameterGenerator;
 use ProxyManager\Generator\Util\UniqueIdentifierGenerator;
 use ProxyManager\ProxyGenerator\Util\Properties;
 use ReflectionProperty;
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
@@ -58,7 +68,11 @@ Triggers initialization logic for this ghost object
 DOCBLOCK;
 
         parent::__construct(
+<<<<<<< HEAD
+            IdentifierSuffixer::getIdentifier('callInitializer'),
+=======
             UniqueIdentifierGenerator::getIdentifier('callInitializer'),
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
             [
                 new ParameterGenerator('methodName'),
                 new ParameterGenerator('parameters', 'array'),
@@ -125,8 +139,11 @@ PHP;
 
     /**
      * @param ReflectionProperty[] $properties
+<<<<<<< HEAD
+=======
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     private function getPropertyDefaultsAssignments(array $properties) : string
     {

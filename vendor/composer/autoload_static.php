@@ -64,6 +64,7 @@ class ComposerStaticInitd8eb66703a900d30ec2b65e3ca1685d0
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
+            'Symfony\\Component\\ClassLoader\\' => 30,
             'Symfony\\Component\\Cache\\' => 24,
             'Symfony\\Component\\BrowserKit\\' => 29,
             'Symfony\\Component\\Asset\\' => 24,
@@ -87,6 +88,10 @@ class ComposerStaticInitd8eb66703a900d30ec2b65e3ca1685d0
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'PackageVersions\\' => 16,
+        ),
+        'I' => 
+        array (
+            'Interop\\Container\\' => 18,
         ),
         'E' => 
         array (
@@ -250,6 +255,10 @@ class ComposerStaticInitd8eb66703a900d30ec2b65e3ca1685d0
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
+        'Symfony\\Component\\ClassLoader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/class-loader',
+        ),
         'Symfony\\Component\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/cache',
@@ -329,6 +338,10 @@ class ComposerStaticInitd8eb66703a900d30ec2b65e3ca1685d0
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
+        ),
+        'Interop\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -442,6 +455,22 @@ class ComposerStaticInitd8eb66703a900d30ec2b65e3ca1685d0
             'Behat\\Transliterator' => 
             array (
                 0 => __DIR__ . '/..' . '/behat/transliterator/src',
+            ),
+            'Behat\\Testwork' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/behat/src',
+            ),
+            'Behat\\Symfony2Extension' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/symfony2-extension/src',
+            ),
+            'Behat\\Gherkin' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/gherkin/src',
+            ),
+            'Behat\\Behat' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/behat/src',
             ),
         ),
     );

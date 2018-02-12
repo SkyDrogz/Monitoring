@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -63,8 +66,11 @@ class MagicSet extends MagicMethodGenerator
         $valueHolder = $valueHolderProperty->getName();
         $callParent  = '';
 
+<<<<<<< HEAD
+=======
         $this->setDocBlock(($hasParent ? "{@inheritDoc}\n" : '') . "@param string \$name\n@param mixed \$value");
 
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         if (! $publicProperties->isEmpty()) {
             $callParent = 'if (isset(self::$' . $publicProperties->getName() . "[\$name])) {\n"
                 . '    return ($this->' . $valueHolder . '->$name = $value);'

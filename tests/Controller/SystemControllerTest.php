@@ -56,12 +56,12 @@ class SystemControllerTest extends WebTestCase
         $form = $crawler->selectButton("Confirmer l'ajout")->form();
 
         // Paramètres du formulaire
-        $form['system[nom]'] = 'Richard';
-        $form['system[url]'] = 'Url.url.url';
-        $form['system[categSysteme]'] = 2;
-        $form['system[user]'] = 3;
-        $form['system[niveauUrgence]'] = 1;
-        $form['system[repetition]'] = 2;
+        $form['system[nom]'] = 'EDF';
+        $form['system[url]'] = 'https://www.edf.fr/groupe-edf';
+        $form['system[categSysteme]'] = 3;
+        $form['system[user]'] = 10;
+        $form['system[niveauUrgence]'] = 0;
+        $form['system[repetition]'] = 5;
         $crawler = $client->submit($form);
 
         // Test pour savoir si le système est déjà dans la base de données

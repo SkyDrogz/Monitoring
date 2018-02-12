@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -53,8 +56,11 @@ class MagicGet extends MagicMethodGenerator
 
         $parent = GetMethodIfExists::get($originalClass, '__get');
 
+<<<<<<< HEAD
+=======
         $this->setDocBlock(($parent ? "{@inheritDoc}\n" : '') . '@param string $name');
 
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
         $callParent = '$returnValue = & parent::__get($name);';
 
         if (! $parent) {

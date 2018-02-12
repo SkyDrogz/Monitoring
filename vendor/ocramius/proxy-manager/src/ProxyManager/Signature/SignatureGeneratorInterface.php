@@ -1,4 +1,6 @@
 <?php
+<<<<<<< HEAD
+=======
 /*
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -15,6 +17,7 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the MIT license.
  */
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
 declare(strict_types=1);
 
@@ -30,19 +33,25 @@ interface SignatureGeneratorInterface
 {
     /**
      * Generates a signature to be used to verify generated code validity
+<<<<<<< HEAD
+=======
      *
      * @param array $parameters
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function generateSignature(array $parameters) : string;
 
     /**
      * Generates a signature key to be looked up when verifying generated code validity
+<<<<<<< HEAD
+=======
      *
      * @param array $parameters
      *
      * @return string
+>>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
      */
     public function generateSignatureKey(array $parameters) : string;
 }
