@@ -1,13 +1,11 @@
-systemReactive<?php
+<?php
 namespace App\DataFixtures;
 
 use App\Entity\User;
-<<<<<<< HEAD
 use App\Entity\Role;
-=======
 use App\Entity\CategSysteme;
 use App\Entity\Systeme;
->>>>>>> 08edb76f915d2b0ec4015b8074fe4b28ec84e072
+use App\Entity\Entreprise;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -28,7 +26,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $role = new Role();        
         $role->setNomRole('ROLE_ADMIN');
         $manager->persist($role);     
-        $manager->flush();
+        
         // Role Admin
         $role1 = new Role();       
         $role1->setNomRole('ROLE_SUPER_ADMIN');
@@ -59,16 +57,16 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setActif(1);
         $manager->persist($user1);
         // User Edit
-        $user2 = new User();
-        $user2->setIdentifiant('Richelieu');
-        $user2->setPassword('test');
-        $plainPassword = $user2->getPassword();
-        $encoded = $this->encoder->encodePassword($user2, $plainPassword);
-        $user2->setPassword($encoded);
-        $user2->setEmail("Riche@lieu.com");
-        $user2->setTel('0349504');
-        $user2->setActif(1);
-        $manager->persist($user2);
+        $user1 = new User();
+        $user1->setIdentifiant('Richelieu');
+        $user1->setPassword('test');
+        $plainPassword = $user1->getPassword();
+        $encoded = $this->encoder->encodePassword($user1, $plainPassword);
+        $user1->setPassword($encoded);
+        $user1->setEmail("Riche@lieu.com");
+        $user1->setTel('0349504');
+        $user1->setActif(1);
+        $manager->persist($user1);
         //User Delete (passage inactif)
         $user3 = new User();
         $user3->setIdentifiant('Rachid');
@@ -104,9 +102,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $manager->persist($user5);
 
         $manager->flush();
-<<<<<<< HEAD
-        
-=======
 
         // ------------------------ CategSystem ------------------------------//
 
@@ -133,7 +128,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Ajout Systeme (Je ne sais pas si l'ajout est nécéssaire dans les fixtures vu que le test l'ajoute lui-même)
         $systemAdd = new Systeme();
-        $systemAdd->setId(1);
+ 
         $systemAdd->setCategSysteme($categSysteme3);
         $systemAdd->setUser($user1);
         $systemAdd->setNom("EDF");
@@ -146,7 +141,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Modification Systeme
         $systemEdit = new Systeme();
-        $systemAdd->setId(2);
         $systemEdit->setCategSysteme($categSysteme3);
         $systemEdit->setUser($user1);
         $systemEdit->setNom("Facebook");
@@ -159,7 +153,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Suppression logique Systeme
         $systemDelete = new Systeme();
-        $systemAdd->setId(3);
         $systemDelete->setCategSysteme($categSysteme3);
         $systemDelete->setUser($user1);
         $systemDelete->setNom("Google");
@@ -172,7 +165,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Reactivation Systeme
         $systemReactive = new Systeme();
-        $systemAdd->setId(4);
         $systemReactive->setCategSysteme($categSysteme3);
         $systemReactive->setUser($user1);
         $systemReactive->setNom("Priceminister");
@@ -207,7 +199,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Modification entreprise
         $entrepriseEdit = new Entreprise();
-        $entrepriseEdit->setId(2);
         $entrepriseEdit->setLibelle("Facebook");
         $entrepriseAdd->setActif(1);
         $manager->persist($entrepriseEdit);
@@ -215,7 +206,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Suppression logique entreprise
         $entrepriseDelete = new Entreprise();
-        $entrepriseDelete->setId(3);
         $entrepriseDelete->setLibelle("Google");
         $entrepriseDelete->setActif(1);
         $manager->persist($entrepriseDelete);
@@ -223,7 +213,6 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Réactivation entreprise
         $entrepriseReactivation = new Entreprise();
-        $entrepriseReactivation->setId(4);
         $entrepriseReactivation->setLibelle("Priceminister");
         $entrepriseAdd->setActif(0);
         $manager->persist($entrepriseReactivation);
@@ -231,12 +220,10 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
         // Suppression définitive entreprise
         $entrepriseDeleteDef = new Entreprise();
-        $entrepriseDeleteDef->setId(5);
         $entrepriseDeleteDef->setLibelle("Norauto");
         $entrepriseAdd->setActif(0);
         $manager->persist($entrepriseDeleteDef);
         $manager->flush();
->>>>>>> 08edb76f915d2b0ec4015b8074fe4b28ec84e072
     }
 }
 ?>

@@ -30,11 +30,11 @@ class Role
     }
     public function setNomRole($nomRole)
     {
-        $this->$nomRole = $nomRole;
+        $this->nomRole = $nomRole;
     }
     public function setId($id)
     {
-        $this->$id = $id;
+        $this->id = $id;
     }
     // add your own fields
 }
