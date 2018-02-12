@@ -33,7 +33,42 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $role1->setNomRole('ROLE_SUPER_ADMIN');
         $manager->persist($role1);
         $manager->flush();
+ // -------------------------- Entreprise -----------------------------//
 
+        // Ajout entreprise
+        $entrepriseAdd = new Entreprise();
+        $entrepriseAdd->setLibelle("EDF");
+        $entrepriseAdd->setActif(1);
+        $manager->persist($entrepriseAdd);
+        $manager->flush();
+
+        // Modification entreprise
+        $entrepriseEdit = new Entreprise();
+        $entrepriseEdit->setLibelle("Facebook");
+        $entrepriseAdd->setActif(1);
+        $manager->persist($entrepriseEdit);
+        $manager->flush();
+
+        // Suppression logique entreprise
+        $entrepriseDelete = new Entreprise();
+        $entrepriseDelete->setLibelle("Google");
+        $entrepriseDelete->setActif(1);
+        $manager->persist($entrepriseDelete);
+        $manager->flush();
+
+        // Réactivation entreprise
+        $entrepriseReactivation = new Entreprise();
+        $entrepriseReactivation->setLibelle("Priceminister");
+        $entrepriseAdd->setActif(0);
+        $manager->persist($entrepriseReactivation);
+        $manager->flush();
+
+        // Suppression définitive entreprise
+        $entrepriseDeleteDef = new Entreprise();
+        $entrepriseDeleteDef->setLibelle("Norauto");
+        $entrepriseAdd->setActif(0);
+        $manager->persist($entrepriseDeleteDef);
+        $manager->flush();
         //-------------------------- Utilisateurs ----------------------------//
 
         // Ajout de l'utilisateur en rôle Admin
@@ -41,6 +76,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user->setIdentifiant('Baptiste');
         $user->setPassword('admin');
         $user->setRole($role1);
+        $user->setEntreprise($entrepriseAdd);
         $plainPassword = $user->getPassword();
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
         $user->setPassword($encoded);
@@ -54,6 +90,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setIdentifiant('Timothee');
         $user1->setPassword('admin');
         $user1->setRole($role);
+        $user1->setEntreprise($entrepriseAdd);        
         $plainPassword = $user1->getPassword();
         $encoded = $this->encoder->encodePassword($user1, $plainPassword);
         $user1->setPassword($encoded);
@@ -195,42 +232,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $manager->persist($systemDeleteDef);
         $manager->flush();
 
-        // -------------------------- Entreprise -----------------------------//
-
-        // Ajout entreprise
-        $entrepriseAdd = new Entreprise();
-        $entrepriseAdd->setLibelle("EDF");
-        $entrepriseAdd->setActif(1);
-        $manager->persist($entrepriseAdd);
-        $manager->flush();
-
-        // Modification entreprise
-        $entrepriseEdit = new Entreprise();
-        $entrepriseEdit->setLibelle("Facebook");
-        $entrepriseAdd->setActif(1);
-        $manager->persist($entrepriseEdit);
-        $manager->flush();
-
-        // Suppression logique entreprise
-        $entrepriseDelete = new Entreprise();
-        $entrepriseDelete->setLibelle("Google");
-        $entrepriseDelete->setActif(1);
-        $manager->persist($entrepriseDelete);
-        $manager->flush();
-
-        // Réactivation entreprise
-        $entrepriseReactivation = new Entreprise();
-        $entrepriseReactivation->setLibelle("Priceminister");
-        $entrepriseAdd->setActif(0);
-        $manager->persist($entrepriseReactivation);
-        $manager->flush();
-
-        // Suppression définitive entreprise
-        $entrepriseDeleteDef = new Entreprise();
-        $entrepriseDeleteDef->setLibelle("Norauto");
-        $entrepriseAdd->setActif(0);
-        $manager->persist($entrepriseDeleteDef);
-        $manager->flush();
+       
     }
 }
 ?>
