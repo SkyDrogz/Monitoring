@@ -66,7 +66,7 @@ class EntrepriseControllerTest extends WebTestCase
 
             $result = false;
             // Si l'entreprise n'est pas trouvé, variable result se verras attribuer TRUE, sinon FALSE
-            if($entreprise == null ){
+            if($entreprise->getLibelle() == 'Richard' ){
                 $result = true;
             }
             // Si l'entreprise n'est pas encore dans la BDD, le test est fonctionnel
@@ -97,10 +97,11 @@ class EntrepriseControllerTest extends WebTestCase
         // Soumission du formulaire
         $crawler = $client->submit($form);
         // Récupération de l'id de l'entreprise
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
+  
+        $entrepriseTest = $this->_em->getRepository(Entreprise::class)->findOneByIdentifiant($entreprise->getId());
         $result = false;
         // Si le libelle récupéré est similaire aux informations passés dans le formulaire, le test est correct
-        if ($entreprise->getLibelle() == "Richou"){
+        if ($entrepriseTest->getLibelle() == "Richou"){
             $result = true;
         }
         $this->assertEquals(true , $result);
