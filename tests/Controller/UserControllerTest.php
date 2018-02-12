@@ -66,11 +66,12 @@ class UserControllerTest extends WebTestCase
 
         // Submit du formulaire
         $crawler = $client->submit($form);
+
         // Tentative de récupération de l'user Richard
-        $user = $this->_em->getRepository(User::class)->findOneById('Richard');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richard');
         $result = false;
-        // Si l'user n'est pas trouvé, l'ajout peux donc se faire, le test est OK
-        if($user == null){
+        // Si l'user est trouvé, l'ajout s'est donc fait, le test est OK
+        if($user->getIdentifiant() == "Richard"){
             $result = true;
         }
         $this->assertEquals(true , $result);
@@ -104,7 +105,7 @@ class UserControllerTest extends WebTestCase
 
         // Submit du formulaire au crawler
         $crawler = $client->submit($form);
-
+        $this->setUp();
         // Récupération de l'utilisateur
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
 
@@ -133,6 +134,8 @@ class UserControllerTest extends WebTestCase
 
         // Récupération de la page de delete avec l'id passé en paramètres
         $crawler = $client->request('GET', '/user/delete/' . $user->getId());
+
+        $this->setUp();
         // Tentative de récupération de l'utilisateur avec l'id
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
         $result = false;
@@ -156,6 +159,8 @@ class UserControllerTest extends WebTestCase
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Roger');
         // Récupération de la page de reactive avec l'id de l'user passé en paramètre
         $crawler = $client->request('GET', '/user/reactive/'.$user->getId());
+
+        $this->setUp();
         // Récupération de l'user
         $user = $this->_em->getRepository(User::class)->findOneById($user->getId());
         $result = false;
@@ -182,6 +187,8 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/user/deleteDef/'.$user->getId());
         // Suppression de l'utilisateur
         $user = $this->_em->clear();
+
+        $this->setUp();
         // Récupération de l'utilisateur nommé Richou
         $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Remi');
         $result = false;

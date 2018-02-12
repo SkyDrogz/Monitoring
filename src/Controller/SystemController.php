@@ -240,7 +240,7 @@ class SystemController extends Controller
                 $infoProtect = new InfoProtect();
                 $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => "" . $infoProtect->getUrl() . "" .
+                    CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=" .
                     urlencode($system->getCategSysteme()->getCategorie() . " '" . $system->getNom() . "' est offline depuis le "
                         . date_format($system->getDateOffline(), "Y-m-d H:i:s")) . "&num=" . $system->getUser()->getTel(),
                     CURLOPT_RETURNTRANSFER => true,

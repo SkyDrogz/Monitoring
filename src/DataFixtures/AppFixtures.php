@@ -22,14 +22,23 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
     public function load(ObjectManager $manager)
     {
-      //------------------------------ Role ---------------------------------//        
-        // Role User
-        $role = new Role();        
-        $role->setNomRole('ROLE_ADMIN');
-        $manager->persist($role);     
+         //------------------------------ InfoProtect ---------------------------------//
+        // iP = infoProctect
+        $iP = new InfoProtect();
+        $iP->setURL("http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=");
+
+        $iP2 = new InfoProtect();
+        $iP2->setIdentifiant("noreply60");
+        $iP2->setEmail("noreply@nexus-creation.com");
         
+      //------------------------------ Role ---------------------------------//
+        // Role User
+        $role = new Role();
+        $role->setNomRole('ROLE_ADMIN');
+        $manager->persist($role);
+
         // Role Admin
-        $role1 = new Role();       
+        $role1 = new Role();
         $role1->setNomRole('ROLE_SUPER_ADMIN');
         $manager->persist($role1);
         $manager->flush();
@@ -90,7 +99,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setIdentifiant('Timothee');
         $user1->setPassword('admin');
         $user1->setRole($role);
-        $user1->setEntreprise($entrepriseAdd);        
+        $user1->setEntreprise($entrepriseAdd);
         $plainPassword = $user1->getPassword();
         $encoded = $this->encoder->encodePassword($user1, $plainPassword);
         $user1->setPassword($encoded);
@@ -98,10 +107,12 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setTel('0612992129');
         $user1->setActif(1);
         $manager->persist($user1);
-        
+
         // Modification d'un utilisateur
         $user2 = new User();
         $user2->setIdentifiant('Richelieu');
+        $user2->setRole($role);
+        $user2->setEntreprise($entrepriseAdd);
         $user2->setPassword('test');
         $plainPassword = $user2->getPassword();
         $encoded = $this->encoder->encodePassword($user2, $plainPassword);
@@ -114,6 +125,8 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         // Suppression logique d'un utilisateur
         $user3 = new User();
         $user3->setIdentifiant('Rachid');
+        $user3->setRole($role);
+        $user3->setEntreprise($entrepriseAdd);
         $user3->setPassword('test');
         $plainPassword = $user3->getPassword();
         $encoded = $this->encoder->encodePassword($user3, $plainPassword);
@@ -232,7 +245,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $manager->persist($systemDeleteDef);
         $manager->flush();
 
-       
+
     }
 }
 ?>
