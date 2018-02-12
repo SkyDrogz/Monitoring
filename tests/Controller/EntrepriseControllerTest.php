@@ -84,7 +84,7 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Tentative de récupération de l'entreprise nommée "Richard"
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richard');
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Facebook');
 
         // Récupération de la page de modification de l'entreprise
         $crawler = $client->request('GET', '/entreprise/edit/'.$entreprise->getId());
@@ -118,7 +118,7 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'entreprise nommée 'Richou'
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Google');
         // Récupération de la page Delete avec l'id récupéré auparavant
         $crawler = $client->request('GET', '/entreprise/delete/'.$entreprise->getId());
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
@@ -141,7 +141,7 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'entreprise
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('EDF');
         // Récupération de la page reactive avec l'id passée en paramètre dans le crawler
         $crawler = $client->request('GET', '/entreprise/reactive/'.$entreprise->getId());
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
@@ -164,7 +164,7 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'entreprise "Richou"
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Norauto');
         // Récupération de la page deleteDef avec l'id de l'entreprise passée en paramètre
         $crawler = $client->request('GET', '/entreprise/deleteDef/'.$entreprise->getId());
         // Suppression de l'entreprise

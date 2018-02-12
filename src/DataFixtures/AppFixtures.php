@@ -40,7 +40,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user = new User();
         $user->setIdentifiant('Baptiste');
         $user->setPassword('admin');
-        $user->setRole($role2);
+        $user->setRole($role1);
         $plainPassword = $user->getPassword();
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
         $user->setPassword($encoded);
@@ -53,7 +53,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1 = new User();
         $user1->setIdentifiant('Timothee');
         $user1->setPassword('admin');
-        $user1->setRole($role1);
+        $user1->setRole($role);
         $plainPassword = $user1->getPassword();
         $encoded = $this->encoder->encodePassword($user1, $plainPassword);
         $user1->setPassword($encoded);
