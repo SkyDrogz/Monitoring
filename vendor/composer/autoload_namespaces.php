@@ -14,11 +14,8 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
     'Behat\\Transliterator' => array($vendorDir . '/behat/transliterator/src'),
-<<<<<<< HEAD
     'Behat\\Testwork' => array($vendorDir . '/behat/behat/src'),
     'Behat\\Symfony2Extension' => array($vendorDir . '/behat/symfony2-extension/src'),
     'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
     'Behat\\Behat' => array($vendorDir . '/behat/behat/src'),
-=======
->>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 );

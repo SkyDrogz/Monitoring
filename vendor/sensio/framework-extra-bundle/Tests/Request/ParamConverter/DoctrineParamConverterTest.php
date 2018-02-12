@@ -485,8 +485,6 @@ class DoctrineParamConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($ret, 'Should be supported');
     }
 
-<<<<<<< HEAD
-=======
     public function testSupportsWithDifferentConfiguration()
     {
         $config = $this->createConfiguration('DateTime', array('format' => \DateTime::ISO8601));
@@ -507,7 +505,6 @@ class DoctrineParamConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($ret, 'Should not be supported');
     }
 
->>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
     /**
      * @expectedException \LogicException
      */
