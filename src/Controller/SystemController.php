@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Systeme;
 use App\Form\SystemType;
+use App\Entity\InfoProtect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,6 +155,8 @@ class SystemController extends Controller
  */
     public function readCron(Request $request)
     {
+        $var ="Test";
+        dump($var);
         $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
         foreach ($systemListe as $system) {
             if ($system->getActif() == 1) {
@@ -165,6 +168,8 @@ class SystemController extends Controller
                         $system->setEtat('Offline');
                     }
                 } elseif ($system->getCategSysteme()->getCategorie() == "Site internet") {
+        dump($var);
+                    
                     // Création d'une nouvelle ressource cURL
                     $curl = curl_init();
 
@@ -227,11 +232,13 @@ class SystemController extends Controller
                 }
 
             }
+            dump($var);
 
             $today = new \Datetime();
             $diff = $system->getDateOffline()->diff($today);
             // vérification de l'état du systeme, du delai de répétition par rapport à la dernière DateOffline enregistrée et récupération du niveau d'urgence. 
             if ($system->getEtat() !== "Online" && $diff->i >= $system->getRepetition() && $system->getNiveauUrgence() == 1) {
+                
                 $date = date_create(date("Y-m-d H:i:s"));
                 $date = new \Datetime();
                 $system->setDateOffline($date);
@@ -240,7 +247,7 @@ class SystemController extends Controller
                 $infoProtect = new InfoProtect();
                 $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => "http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=" .
+                    CURLOPT_URL => $infoProtect->getUrl().
                     urlencode($system->getCategSysteme()->getCategorie() . " '" . $system->getNom() . "' est offline depuis le "
                         . date_format($system->getDateOffline(), "Y-m-d H:i:s")) . "&num=" . $system->getUser()->getTel(),
                     CURLOPT_RETURNTRANSFER => true,
@@ -248,6 +255,7 @@ class SystemController extends Controller
                 ));
                 curl_exec($curl);
                 // Creation du transport
+                
                 $infoProtect = new InfoProtect();
                 $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(2);
                 $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
@@ -260,7 +268,7 @@ class SystemController extends Controller
 
                 // Creation du message
                 $message = (new \Swift_Message('Alerte Offline'))
-                    ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
+                    ->setFrom([$infoProtect->getEmail() => 'Nexus Création'])
                     ->setTo([$system->getUser()->getEmail() => $system->getUser()->getIdentifiant()])
                     ->setBody($system->getCategSysteme()->getCategorie() . " '" . $system->getNom() . "' est offline depuis le " . date_format($system->getDateOffline(), "Y-m-d H:i:s"))
                 ;
@@ -269,20 +277,24 @@ class SystemController extends Controller
                 $result = $mailer->send($message);
 
             } elseif ($system->getEtat() !== "Online" && $diff->i >= $system->getRepetition()) {
+                
+                $infoProtect = new InfoProtect();
+                $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(2);
+
                 $date = date_create(date("Y-m-d H:i:s"));
                 $date = new \Datetime();
                 $system->setDateOffline($date);
                 // Creation du transport
                 $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
-                    ->setUsername('noreply@nexus-creation.com')
-                    ->setPassword('noreply60')
+                     ->setUsername($infoProtect->getEmail())
+                    ->setPassword($infoProtect->getIdentifiant())
                 ;
 
                 $mailer = new \Swift_Mailer($transport);
 
                 // Creation du message
                 $message = (new \Swift_Message('Alerte Offline'))
-                    ->setFrom(['noreply@nexus-creation.com' => 'Nexus Création'])
+                    ->setFrom([$infoProtect->getEmail() => 'Nexus Création'])
                     ->setTo([$system->getUser()->getEmail() => $system->getUser()->getIdentifiant()])
                     ->setBody($system->getCategSysteme()->getCategorie() . " '" . $system->getNom() . "' est offline depuis le " . date_format($system->getDateOffline(), "Y-m-d H:i:s"))
                 ;
