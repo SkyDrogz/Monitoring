@@ -12,7 +12,7 @@ class EntrepriseControllerTest extends WebTestCase
      * @var EntityManager
      */
     private $_em;
-    // connection à la BBD
+    // connexion à la BBD
     protected function setUp()
     {
         $kernel = static::createKernel();
@@ -20,6 +20,7 @@ class EntrepriseControllerTest extends WebTestCase
         // récuperation de la fonction doctrine
         $this->_em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
         $this->_em->beginTransaction();
+
     }
     // exemple d'application pour la fonction
     // $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richard');
@@ -66,10 +67,10 @@ class EntrepriseControllerTest extends WebTestCase
 
             $result = false;
             // Si l'entreprise n'est pas trouvé, variable result se verras attribuer TRUE, sinon FALSE
-            if($entreprise == null ){
+            if($entreprise->getLibelle() == 'Richard' ){
                 $result = true;
             }
-            // Si l'entreprise n'est pas encore dans la BDD, le test est fonctionnel
+            // Si l'entreprise est dans la BDD, le test est fonctionnel
         $this->assertEquals(true, $result);
 
     }
@@ -83,29 +84,33 @@ class EntrepriseControllerTest extends WebTestCase
             'PHP_AUTH_USER' => 'Baptiste',
             'PHP_AUTH_PW' => 'admin',
         ));
-        // Tentative de récupération de l'entreprise nommée "Richard"
+        // Tentative de récupération de l'entreprise nommée "Facebook"
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Facebook');
 
         // Récupération de la page de modification de l'entreprise
         $crawler = $client->request('GET', '/entreprise/edit/'.$entreprise->getId());
 
-        // echo $crawler -> html();
+        // On récupère l'id
+        $idEntreprise = $entreprise->getId();
+
         // Au clique sur le bouton Modification, le formulaire avec les infos saisies sont transmises
         $form = $crawler->selectButton("Modification")->form();
 
         $form['entreprise[libelle]'] = 'Richou';
+
         // Soumission du formulaire
         $crawler = $client->submit($form);
-        // Récupération de l'id de l'entreprise
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
+
+        $this->setUp();
+
+        // Récupération de l'entreprise
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($idEntreprise);
         $result = false;
         // Si le libelle récupéré est similaire aux informations passés dans le formulaire, le test est correct
-        if ($entreprise->getLibelle() == "Richou"){
+        if ($entreprise->getLibelle() == 'Richou'){
             $result = true;
         }
         $this->assertEquals(true , $result);
-
-
     }
     //
     // Test de suppression logique d'une entreprise
@@ -121,6 +126,7 @@ class EntrepriseControllerTest extends WebTestCase
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Google');
         // Récupération de la page Delete avec l'id récupéré auparavant
         $crawler = $client->request('GET', '/entreprise/delete/'.$entreprise->getId());
+        $this->setUp();
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
         $result = false;
         // Si l'entreprise est non active, nous pouvons la supprimée et le test est fonctionnel
@@ -144,6 +150,7 @@ class EntrepriseControllerTest extends WebTestCase
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('EDF');
         // Récupération de la page reactive avec l'id passée en paramètre dans le crawler
         $crawler = $client->request('GET', '/entreprise/reactive/'.$entreprise->getId());
+        $this->setUp();
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
         $result = false;
         // Si l'entreprise est active, nous pouvons la réactiver
@@ -169,8 +176,10 @@ class EntrepriseControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/entreprise/deleteDef/'.$entreprise->getId());
         // Suppression de l'entreprise
         $entreprise = $this->_em->clear();
+
+        $this->setUp();
         // Tentative de récupération de l'entreprise "Richou"
-        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Richou');
+        $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Norauto');
         $result = false;
         // Si la tentative a échoué elle renverras null, la suppression sera donc bien effectuée
         if($entreprise == null){

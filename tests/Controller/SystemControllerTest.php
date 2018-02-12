@@ -65,11 +65,11 @@ class SystemControllerTest extends WebTestCase
         $crawler = $client->submit($form);
 
         // Test pour savoir si le système est déjà dans la base de données
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richard');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Cora');
 
         $result = false;
         // Si aucun système n'est trouvé, nous renvoyons TRUE et le test est fonctionnel
-        if($systeme == null ){
+        if($systeme->getNom() == 'Cora' ){
             $result = true;
         }
     $this->assertEquals(true, $result);
@@ -103,6 +103,9 @@ class SystemControllerTest extends WebTestCase
 
         // Submit du formulaire dans le crawler
         $crawler = $client->submit($form);
+
+        $this->setUp();
+
         // Récupération du système avec l'id
         $systeme = $this->_em->getRepository(Systeme::class)->findOneById($systeme->getId());
         $result = false;
@@ -126,8 +129,11 @@ class SystemControllerTest extends WebTestCase
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Facebook');
         // Récupération de la page delete avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/delete/'. $systeme->getId());
+
+        $this->setUp();
+
         // Tentative de récupération du système nommé Richou
-        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
+        $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Facebook');
         $result = false;
         // Si le système est non actif, il a bien été supprimé de manière logique, le test est donc fonctionnel
         if($systeme->getActif() == false){
@@ -150,6 +156,9 @@ class SystemControllerTest extends WebTestCase
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Norauto');
         // Récupération de la page reactive avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/reactive/'.$systeme->getId());
+
+        $this->setUp();
+
         // Récupération du système Richou
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Richou');
 
@@ -174,6 +183,8 @@ class SystemControllerTest extends WebTestCase
         $systeme = $this->_em->getRepository(Systeme::class)->findOneByNomSysteme('Priceminister');
         // Récupération de la page deleteDef avec l'id du système passé en paramètre
         $crawler = $client->request('GET', '/system/deleteDef/'.$systeme->getId());
+
+        $this->setUp();
         // Tentative de récupération du système avec l'id
         $systeme = $this->_em->getRepository(Systeme::class)->findOneById($systeme->getId());
         $result = false;
