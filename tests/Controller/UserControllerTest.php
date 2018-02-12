@@ -87,7 +87,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'admin',
         ));
         // Récupération de l'utilisateur nommé Richard
-        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richard');
+        $user = $this->_em->getRepository(User::class)->findOneByIdentifiant('Richelieu');
 
         // Récupération de la page de modification avec l'id passé en paramètre
         $crawler = $client->request('GET', '/user/edit/'.$user->getId());

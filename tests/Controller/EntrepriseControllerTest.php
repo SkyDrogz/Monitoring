@@ -52,7 +52,7 @@ class EntrepriseControllerTest extends WebTestCase
             // Récupération de la page entreprise/new
             $crawler = $client->request('GET', '/entreprise/new');
 
-            // Au clique sur le bouton, les entreprises ci-dessous seront saisite
+            // Au clique sur le bouton, les entreprises ci-dessous seront saisit
             $form = $crawler->selectButton("Confirmer l'ajout")->form();
 
             // Saisie des données

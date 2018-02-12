@@ -16,7 +16,7 @@ class Role
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="nom_role", type="string")
      */
     private $nomRole;
 
@@ -28,6 +28,13 @@ class Role
     {
         return $this->id;
     }
-
+    public function setNomRole($nomRole)
+    {
+        $this->$nomRole = $nomRole;
+    }
+    public function setId($id)
+    {
+        $this->$id = $id;
+    }
     // add your own fields
 }
