@@ -230,6 +230,7 @@ class SystemController extends Controller
 
             $today = new \Datetime();
             $diff = $system->getDateOffline()->diff($today);
+            // vérification de l'état du systeme, du delai de répétition par rapport à la dernière DateOffline enregistrée et récupération du niveau d'urgence. 
             if ($system->getEtat() !== "Online" && $diff->i >= $system->getRepetition() && $system->getNiveauUrgence() == 1) {
                 $date = date_create(date("Y-m-d H:i:s"));
                 $date = new \Datetime();
