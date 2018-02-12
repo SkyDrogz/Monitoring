@@ -101,6 +101,7 @@ class EntrepriseControllerTest extends WebTestCase
         // Soumission du formulaire
         $crawler = $client->submit($form);
 
+        // Actualisation de la BDD
         $this->setUp();
 
         // Récupération de l'entreprise
@@ -126,7 +127,10 @@ class EntrepriseControllerTest extends WebTestCase
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Google');
         // Récupération de la page Delete avec l'id récupéré auparavant
         $crawler = $client->request('GET', '/entreprise/delete/'.$entreprise->getId());
+
+        // Actualisation de la BDD
         $this->setUp();
+
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
         $result = false;
         // Si l'entreprise est non active, nous pouvons la supprimée et le test est fonctionnel
@@ -150,7 +154,10 @@ class EntrepriseControllerTest extends WebTestCase
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('EDF');
         // Récupération de la page reactive avec l'id passée en paramètre dans le crawler
         $crawler = $client->request('GET', '/entreprise/reactive/'.$entreprise->getId());
+
+        // Actualisation de la BDD
         $this->setUp();
+
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneById($entreprise->getId());
         $result = false;
         // Si l'entreprise est active, nous pouvons la réactiver
@@ -177,7 +184,9 @@ class EntrepriseControllerTest extends WebTestCase
         // Suppression de l'entreprise
         $entreprise = $this->_em->clear();
 
+        // Actualisation de la BDD
         $this->setUp();
+
         // Tentative de récupération de l'entreprise "Richou"
         $entreprise = $this->_em->getRepository(Entreprise::class)->findOneByLibelle('Norauto');
         $result = false;
