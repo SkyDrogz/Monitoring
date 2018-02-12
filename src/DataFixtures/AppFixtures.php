@@ -22,14 +22,14 @@ public function __construct(UserPasswordEncoderInterface $encoder)
 
     public function load(ObjectManager $manager)
     {
-      //------------------------------ Role ---------------------------------//        
+      //------------------------------ Role ---------------------------------//
         // Role User
-        $role = new Role();        
+        $role = new Role();
         $role->setNomRole('ROLE_ADMIN');
-        $manager->persist($role);     
-        
+        $manager->persist($role);
+
         // Role Admin
-        $role1 = new Role();       
+        $role1 = new Role();
         $role1->setNomRole('ROLE_SUPER_ADMIN');
         $manager->persist($role1);
         $manager->flush();
@@ -40,7 +40,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user = new User();
         $user->setIdentifiant('Baptiste');
         $user->setPassword('admin');
-        $user->setRole($role2);
+        $user->setRole($role);
         $plainPassword = $user->getPassword();
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
         $user->setPassword($encoded);
@@ -61,7 +61,7 @@ public function __construct(UserPasswordEncoderInterface $encoder)
         $user1->setTel('0612992129');
         $user1->setActif(1);
         $manager->persist($user1);
-        
+
         // Modification d'un utilisateur
         $user2 = new User();
         $user2->setIdentifiant('Richelieu');
