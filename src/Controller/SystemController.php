@@ -155,8 +155,6 @@ class SystemController extends Controller
  */
     public function readCron(Request $request)
     {
-        $var ="Test";
-        dump($var);
         $systemListe = $this->getDoctrine()->getRepository(Systeme::class)->findAll();
         foreach ($systemListe as $system) {
             if ($system->getActif() == 1) {
@@ -168,7 +166,6 @@ class SystemController extends Controller
                         $system->setEtat('Offline');
                     }
                 } elseif ($system->getCategSysteme()->getCategorie() == "Site internet") {
-        dump($var);
 
                     // Création d'une nouvelle ressource cURL
                     $curl = curl_init();
@@ -232,7 +229,6 @@ class SystemController extends Controller
                 }
 
             }
-            dump($var);
 
             $today = new \Datetime();
             $diff = $system->getDateOffline()->diff($today);

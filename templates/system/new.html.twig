@@ -29,9 +29,9 @@
             <a href="{{ path('system_read') }}" class="btn btn-default">Retour à la liste</a>
             <button type="submit" id="form_save" name="form[save]" class="btn btn-info">Confirmer l'ajout</button>
             <p>
-                {% for info in app.flashes('info') %}
+                {% for msg in app.flashes('msg') %}
                     <div class="flash-notice">
-                        {{ info }}
+                        {{ msg }}
                     </div>
                 {% endfor %}
             </p>
