@@ -33,14 +33,25 @@ class InfoProtect
     {
         return $this->identifiant;
     }
+    public function setIdentifiant($identifiant)
+    {
+        $this->identifiant=$identifiant;
+    }
     public function getEmail()
     {
         return $this->email;
+    }
+    public function setEmail($email)
+    {
+        $this->email=$email;
     }
     public function getUrl()
     {
         return $this->URL;
     }
-
+    public function setURL($URL)
+    {
+        $this->URL=$URL;
+    }
     // add your own fields
 }

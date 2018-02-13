@@ -6,6 +6,7 @@ use App\Entity\Role;
 use App\Entity\CategSysteme;
 use App\Entity\Systeme;
 use App\Entity\Entreprise;
+use App\Entity\InfoProtect;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,12 +26,12 @@ public function __construct(UserPasswordEncoderInterface $encoder)
          //------------------------------ InfoProtect ---------------------------------//
         // iP = infoProctect
         $iP = new InfoProtect();
+        $iP->setIdentifiant("noreply60");
+        $iP->setEmail("noreply@nexus-creation.com");
         $iP->setURL("http://www.isendpro.com/cgi-bin/?keyid=c3587be4e16f636a220c3ca07619911e&sms=");
+        $manager->persist($iP);
+        $manager->flush();
 
-        $iP2 = new InfoProtect();
-        $iP2->setIdentifiant("noreply60");
-        $iP2->setEmail("noreply@nexus-creation.com");
-        
       //------------------------------ Role ---------------------------------//
         // Role User
         $role = new Role();

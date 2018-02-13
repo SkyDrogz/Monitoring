@@ -17,6 +17,9 @@
                         <h2><a href="https://www.nexus-creation.com"/><img src="https://www.nexus-creation.com/wp-content/uploads/thegem-logos/logo_58484d0c49b49620464808e1247ba5f9_1x.png"></a>
                     </img>
                 </h2>
+                {% for msg in app.flashes('msg') %}
+                        {{ msg }}
+                {% endfor %}
                 {% if error %}
                     {% if error.messageKey|trans(error.messageData, 'admin') == "Invalid credentials."%}
                         <div>

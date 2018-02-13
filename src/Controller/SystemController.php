@@ -38,7 +38,7 @@ class SystemController extends Controller
             $em->persist($systeme);
             $em->flush();
             // Affichage d'un message FlashBag confirmant l'ajout du système
-            $request->getSession()->getFlashBag()->add('info', "Le système à bien été rajouté.");
+            $request->getSession()->getFlashBag()->add('msg', "Le système à bien été rajouté.");
             // Retourne la page d'ajout d'un système
             return $this->redirectToRoute('system_new');
         }
@@ -169,7 +169,7 @@ class SystemController extends Controller
                     }
                 } elseif ($system->getCategSysteme()->getCategorie() == "Site internet") {
         dump($var);
-                    
+
                     // Création d'une nouvelle ressource cURL
                     $curl = curl_init();
 
@@ -236,9 +236,9 @@ class SystemController extends Controller
 
             $today = new \Datetime();
             $diff = $system->getDateOffline()->diff($today);
-            // vérification de l'état du systeme, du delai de répétition par rapport à la dernière DateOffline enregistrée et récupération du niveau d'urgence. 
+            // vérification de l'état du systeme, du delai de répétition par rapport à la dernière DateOffline enregistrée et récupération du niveau d'urgence.
             if ($system->getEtat() !== "Online" && $diff->i >= $system->getRepetition() && $system->getNiveauUrgence() == 1) {
-                
+
                 $date = date_create(date("Y-m-d H:i:s"));
                 $date = new \Datetime();
                 $system->setDateOffline($date);
@@ -255,7 +255,7 @@ class SystemController extends Controller
                 ));
                 curl_exec($curl);
                 // Creation du transport
-                
+
                 $infoProtect = new InfoProtect();
                 $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(2);
                 $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
@@ -277,7 +277,7 @@ class SystemController extends Controller
                 $result = $mailer->send($message);
 
             } elseif ($system->getEtat() !== "Online" && $diff->i >= $system->getRepetition()) {
-                
+
                 $infoProtect = new InfoProtect();
                 $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(2);
 

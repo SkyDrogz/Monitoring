@@ -42,10 +42,6 @@ class EntrepriseController extends Controller
             // Redirection à la page de création de l'entreprise
             return $this->redirectToRoute('entreprise_new');
         }
-        else {
-          // Affichage d'un FlashBag pour affiché l'erreur d'ajout
-          $request->getSession()->getFlashBag()->add('info', "Une erreur s'est produite, veuillez réessayez.");
-        }
         // La page de création d'entreprise est retournée
         return $this->render('entreprise/new.html.twig', array('form' => $form->createView()));
     }

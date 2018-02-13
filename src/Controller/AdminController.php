@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\infoProtect;
+use App\Entity\InfoProtect;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,7 +66,7 @@ class AdminController extends Controller
             $userTest = $this->getDoctrine()->getRepository(User::class)->findOneByIdentifiant($user->getIdentifiant());
             $check = false;
             // Vérification si l'identifiant n'est pas déjà utilisé
-            if ($user->getIdentifiant() == $userTest->getIdentifiant()) {
+            if ($user->getIdentifiant() == $userTest) {
                 $check = true;
                 $request->getSession()->getFlashBag()->add('info', "Le pseudo est déjà utilisé. Choisissez-en un autre !");
                 return $this->redirectToRoute('register');
@@ -83,11 +83,11 @@ class AdminController extends Controller
                 $em->persist($user);
                 $em->flush();
                 // Affichage d'un flashbag annoncant la confirmation de la demande d'inscription
-                $request->getSession()->getFlashBag()->add('info', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
+                $request->getSession()->getFlashBag()->add('msg', "La demande à bien été effectuée, une réponse  vous seras communiqué par mail dans les plus bref délais");
 
                 // Creation du transport
                 $infoProtect = new InfoProtect();
-                $infoProtect = $this->getDoctrine()->getRepository(infoProtect::class)->findOneById(1);
+                $infoProtect = $this->getDoctrine()->getRepository(InfoProtect::class)->findOneById(1);
                 $transport = (new \Swift_SmtpTransport('ssl0.ovh.net', 465, 'ssl'))
                     ->setUsername($infoProtect->getEmail())
                     ->setPassword($infoProtect->getIdentifiant())

@@ -10,22 +10,6 @@
                 <b>Modification de l'entreprise</b>
             </h1>
         </font>
-
-<<<<<<< HEAD
-<body>
-                  <section class="login-form">
-                    {{form_start(form,{ 'attr': {'role': 'login'} })}}
-                    {{form_row(form.libelle,{ 'attr': {'class': 'form-control input-lg'} })}}
-                    <a href="{{ path('entreprise_read') }}" class="btn btn-default">Retour à la liste</a>
-                    <button type="submit" id="form_save"  name="form[save]" class="btn btn-info ">Modification</button>
-                    <p>
-                        {% for info in app.flashes('info') %}
-                            <div class="flash-notice">
-                                {{ info }}
-                            </div>
-                        {% endfor %}
-                     </p>
-=======
         <body>
             <section class="login-form">
                 {{form_start(form,{ 'attr': {'role': 'login'} })}}
@@ -39,7 +23,6 @@
                         </div>
                     {% endfor %}
                 </p>
->>>>>>> ab3d9a9318e69673c0df4c25f62c5b8952937440
 
                 {{form_end(form)}}
             </section>
